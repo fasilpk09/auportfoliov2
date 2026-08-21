@@ -1,0 +1,8954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fasil — A World in Frames</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- CJK faces for the hero name flip-board (Japanese / Korean / Chinese).
+     Loaded separately because CJK subsets are large — only the weights used. -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;600&family=Noto+Sans+KR:wght@500;600&family=Noto+Sans+SC:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   CORE
+========================================================= */
+
+:root {
+
+    --black: #070707;
+    --white: #f3f1e8;
+
+    --acid: #d9ff3e;
+
+
+    /* =====================================================
+       ACCENT ON LIGHT SECTIONS  —  CHANGE THIS ONE VALUE
+
+       --acid is built for the black ground. On the cream
+       (--white) sections it measures 1.01:1 against the
+       background — the two colours are almost identical in
+       brightness, so the word visually disappears.
+
+       --acid-ink is the accent used ONLY on those cream
+       sections. It is the same colour family walked down in
+       lightness until it reads cleanly.
+
+         --acid     on black : 17.58:1
+         --acid     on cream :  1.01:1   <- unreadable
+         --acid-ink on cream :  4.35:1   <- current value
+
+       TO RECOLOUR THE LIGHT-SECTION ACCENT LATER:
+       edit the one hex below — nothing else. It drives
+       "SEE." in the camera-roll heading, "SOMETHING" in the
+       contact heading, and the contact e-mail hover.
+
+       Keep it above roughly 3:1 on cream or it starts to
+       disappear again. Some alternatives that pass:
+         #4f7d0a  deep acid green   4.35:1  (current)
+         #557a00  olive-leaning     4.45:1
+         #3f6b12  dark moss         5.58:1
+         #5a7000  deep chartreuse   4.95:1
+    ===================================================== */
+
+    --acid-ink: #4f7d0a;
+
+
+    /* ---------------------------------------------------
+       PER-SECTION ACCENTS
+
+       The two cream sections each get their own accent, so
+       they can be tuned independently:
+
+         --ink-camera   "SEE."       camera-roll heading
+         --ink-contact  "SOMETHING"  contact heading
+
+       --ink-camera is pulled from the desert photograph
+       directly below that heading (its dominant tones sit in
+       a 26-37deg hue band), so the type and the image read as
+       one idea instead of two unrelated accents.
+
+       Edit either hex on its own — they are independent.
+
+         --ink-camera  #b8560f on cream : 4.24:1
+         --ink-contact #4f7d0a on cream : 4.35:1
+
+       Keep both above ~3:1 on cream. Alternatives that pass:
+         warm : #a54d10 (deeper) #c25c12 (brighter)
+                #9c4a14 (rust)   #8f4513 (deep rust)
+         green: #557a00  #3f6b12  #5a7000
+    --------------------------------------------------- */
+
+    --ink-camera:  #b8560f;   /* burnt orange, from the photo */
+    --ink-contact: var(--acid-ink);
+
+
+    /* Same story for the small grey labels and copy. --grey is
+       tuned for the black ground (5.42:1) but only manages
+       3.28:1 on cream, under the 4.5:1 that 8px text needs.
+       Edit this one hex to retune light-section greys. */
+
+    --grey-ink: #6b6b64;
+
+
+    /* Legacy alias. Highlight words used to be blue (#6877ff);
+       they now resolve to the same green as the rest of the page.
+       Kept as an alias so existing .blue selectors need no edits. */
+    --blue: var(--acid);
+
+
+    /* =====================================================
+       TYPE TRACKING — TUNE HERE
+
+       Every display heading pulls its letter-spacing from one
+       of these. Nudge a value and all headings at that level
+       update together. More negative = tighter.
+       Current values are ~.02em looser than the original.
+    ===================================================== */
+
+    --track-h1: -.085em;   /* hero name, contact title, loader, photo title */
+    --track-h2: -.065em;   /* section titles: intro, world, chapter, principles, testimonials, receipts, about */
+    --track-h3: -.045em;   /* project titles */
+    --track-h4: -.03em;    /* video names, principle names, quotes, contact email */
+
+    --track-body: 0em;     /* paragraph copy */
+    --track-mono: .13em;   /* small uppercase mono labels / eyebrows */
+
+
+    /* Leading for the big stacked headings. These sit under 1
+       on purpose — the lines are meant to nest tightly — but
+       going too low makes stacked lines collide. Raise a value
+       if a heading ever overlaps itself. */
+
+    --lead-display: .78;   /* multi-line display headings */
+    --lead-tight: .72;     /* two-line headings, more room to spare */
+
+
+    --grey: #85857e;
+    --dark-grey: #292925;
+
+    --line: rgba(243,241,232,.14);
+
+    --display: "Space Grotesk", sans-serif;
+    --body: "DM Sans", sans-serif;
+    --mono: "DM Mono", monospace;
+
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    background: var(--black);
+
+    color: var(--white);
+
+    font-family: var(--body);
+
+    overflow-x: hidden;
+
+}
+
+
+body.loading {
+    overflow: hidden;
+}
+
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button {
+    font: inherit;
+}
+
+
+::selection {
+    background: var(--acid);
+    color: #000;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    background: var(--acid);
+
+    color: #000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+
+}
+
+
+.loader.hide {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+}
+
+
+.loader-inner {
+
+    width: min(90vw, 1100px);
+
+}
+
+
+.loader-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .15em;
+
+}
+
+
+.loader-word {
+
+    margin: 25px 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(90px, 17vw, 240px);
+
+    line-height: .7;
+
+    letter-spacing: var(--track-h1);
+
+}
+
+
+.loader-track {
+
+    height: 2px;
+
+    background: rgba(0,0,0,.15);
+
+}
+
+
+.loader-progress {
+
+    width: 0;
+
+    height: 100%;
+
+    background: #000;
+
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 500;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 21px 25px;
+
+    mix-blend-mode: difference;
+
+    color: #fff;
+
+}
+
+
+.logo {
+
+    font-family: var(--display);
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    letter-spacing: -.07em;
+
+}
+
+
+.nav-center {
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .13em;
+
+}
+
+
+.nav-right {
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .13em;
+
+}
+
+
+/* =========================================================
+   HERO WORLD
+========================================================= */
+
+.hero {
+
+    height: 100svh;
+
+    min-height: 700px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #000;
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO IMAGE LAYER
+--------------------------------------------------------- */
+
+.hero-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    transform: scale(1.08);
+
+    transition:
+
+        opacity 1.8s cubic-bezier(.2,.7,.2,1),
+
+        transform 8s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+.hero-image.active {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+}
+
+
+.hero-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO GRADIENT
+--------------------------------------------------------- */
+
+.hero-gradient {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.73) 0%,
+            rgba(0,0,0,.35) 34%,
+            rgba(0,0,0,.03) 70%,
+            rgba(0,0,0,.2) 100%
+        ),
+
+        linear-gradient(
+            0deg,
+            rgba(0,0,0,.72) 0%,
+            transparent 45%,
+            rgba(0,0,0,.18) 100%
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO CONTENT
+--------------------------------------------------------- */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        100px
+        5vw
+        70px;
+
+}
+
+
+.hero-inner {
+
+    width: 100%;
+
+    position: relative;
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO EYEBROW
+--------------------------------------------------------- */
+
+.hero-eyebrow {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 35px;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .15em;
+
+    color: rgba(255,255,255,.72);
+
+}
+
+
+.hero-eyebrow-line {
+
+    width: 55px;
+
+    height: 1px;
+
+    background: var(--acid);
+
+}
+
+
+/* ---------------------------------------------------------
+   NAME
+--------------------------------------------------------- */
+
+/* ---------------------------------------------------------
+   GREETING — quiet line that sits above the name
+--------------------------------------------------------- */
+
+.hero-greeting {
+
+    margin-bottom: 14px;
+
+    font-family: var(--body);
+
+    font-size: clamp(15px, 2vw, 26px);
+
+    font-weight: 400;
+
+    letter-spacing: var(--track-body);
+
+    color: rgba(243,241,232,.55);
+
+}
+
+
+.hero-wave {
+
+    display: inline-block;
+
+    margin-left: 4px;
+
+    transform-origin: 70% 70%;
+
+    animation: wave 2.8s ease-in-out infinite;
+
+}
+
+
+@keyframes wave {
+
+    0%, 60%, 100% { transform: rotate(0deg); }
+
+    70%  { transform: rotate(14deg); }
+
+    80%  { transform: rotate(-8deg); }
+
+    90%  { transform: rotate(14deg); }
+
+}
+
+
+.hero-name-wrap {
+
+    position: relative;
+
+    width: max-content;
+
+}
+
+
+.hero-name {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(100px, 18vw, 280px);
+
+    font-weight: 600;
+
+    line-height: .67;
+
+    letter-spacing: var(--track-h1);
+
+    color: #fff;
+
+    text-shadow:
+        0 4px 35px rgba(0,0,0,.2);
+
+    transition:
+        opacity .5s ease,
+        transform .8s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+/* Split-flap: the name is rebuilt as one span per character
+   while shuffling, so each letter can flip independently. */
+
+.hero-name {
+
+    cursor: default;
+
+}
+
+
+.hero-name .flap {
+
+    display: inline-block;
+
+    min-width: .18em;
+
+    transition: none;
+
+}
+
+
+.hero-name .flap.is-spinning {
+
+    color: var(--acid);
+
+    opacity: .82;
+
+    transform: translateY(-2px) scaleY(.94);
+
+}
+
+
+.hero-name .flap.is-landed {
+
+    color: #fff;
+
+    opacity: 1;
+
+    transform: none;
+
+    animation: flapLand .26s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+@keyframes flapLand {
+
+    0%   { transform: translateY(-5px) scaleY(.8);  opacity: .5; }
+
+    60%  { transform: translateY(1px)  scaleY(1.04); opacity: 1; }
+
+    100% { transform: none;                          opacity: 1; }
+
+}
+
+
+/* ---------------------------------------------------------
+   NAME ACCENT
+--------------------------------------------------------- */
+
+/* The dot lives at the end of the settled name. While the
+   board is shuffling the text width changes constantly, so
+   instead of letting the dot chase it, we park it at a fixed
+   offset (measured from the settled name) and fling it out
+   and back over the length of the flip. */
+
+.hero-name-accent {
+
+    position: absolute;
+
+    left: var(--accent-x, 100%);
+
+    bottom: -8px;
+
+    width: 18px;
+
+    height: 18px;
+
+    margin-left: 25px;
+
+    border-radius: 50%;
+
+    background: var(--acid);
+
+    box-shadow:
+        0 0 35px rgba(217,255,62,.35);
+
+}
+
+
+/* SLINGSHOT
+   ---------
+   Three acts, each with its OWN easing — a single curve across
+   the whole path is what made the old version read as a wiggle.
+
+     1. wind-up   — loads backwards into the name, compressing
+     2. launch    — fires far right, fast, smearing into a streak
+     3. return    — comes home long and eased, overshoots once
+
+   Travel is an absolute --sling-throw (not a % of anything), so
+   the distance never depends on how wide the current glyphs are.
+   The whole thing runs on transform + filter only: no layout,
+   no reflow, so it stays fluid next to 6 flapping characters. */
+
+.hero-name-accent {
+
+    /* .hero has overflow:hidden, so the throw is capped to the
+       space actually left to the dot's right. JS measures that
+       gap and writes --sling-room; the clamp keeps the launch
+       punchy on wide screens and safely inside on narrow ones. */
+
+    --sling-throw:
+        clamp(140px, var(--sling-room, 340px), 420px);
+
+    transform-origin: 50% 50%;
+
+}
+
+
+.hero-name-accent.is-slung {
+
+    animation:
+        accentSling
+        var(--sling-duration, 1430ms)
+        linear
+        both,
+
+        accentGlow
+        var(--sling-duration, 1430ms)
+        ease-in-out
+        both;
+
+}
+
+
+/* Glow rides the speed — brightest through the launch, so the
+   dot looks charged rather than merely displaced. */
+
+@keyframes accentGlow {
+
+    0% {
+        box-shadow: 0 0 35px rgba(217,255,62,.35);
+    }
+
+    18% {
+        box-shadow: 0 0 18px rgba(217,255,62,.7);
+    }
+
+    46% {
+        box-shadow:
+            0 0 70px rgba(217,255,62,.95),
+            0 0 130px rgba(217,255,62,.45);
+    }
+
+    76% {
+        box-shadow: 0 0 48px rgba(217,255,62,.5);
+    }
+
+    100% {
+        box-shadow: 0 0 35px rgba(217,255,62,.35);
+    }
+
+}
+
+
+/* The streak. A second, wider ellipse pinned behind the dot
+   that only becomes visible at speed — this is what turns the
+   movement into an acid smear instead of a sliding circle. */
+
+.hero-name-accent::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 100%;
+
+    height: 100%;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(217,255,62,0) 0%,
+            rgba(217,255,62,.85) 45%,
+            var(--acid) 100%
+        );
+
+    transform:
+        translate(-50%, -50%)
+        scaleX(1);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+.hero-name-accent.is-slung::after {
+
+    animation:
+        accentStreak
+        var(--sling-duration, 1430ms)
+        linear
+        both;
+
+}
+
+
+@keyframes accentSling {
+
+    /* wind-up: pulls back into the word, squashing */
+
+    0% {
+        transform: translateX(0) scale(1);
+        animation-timing-function: cubic-bezier(.4,0,.7,.2);
+    }
+
+    18% {
+        transform:
+            translateX(calc(var(--sling-throw) * -.12))
+            scale(.72, 1.14);
+        animation-timing-function: cubic-bezier(.85,0,.15,1);
+    }
+
+    /* launch: the long fast leg, stretched by the streak */
+
+    46% {
+        transform:
+            translateX(var(--sling-throw))
+            scale(1.5, .58);
+        animation-timing-function: cubic-bezier(.3,0,.2,1);
+    }
+
+    /* return: long glide back, page's signature curve */
+
+    76% {
+        transform:
+            translateX(calc(var(--sling-throw) * -.07))
+            scale(1.16, .9);
+        animation-timing-function: cubic-bezier(.2,.7,.2,1);
+    }
+
+    /* one small overshoot, then rest */
+
+    89% {
+        transform: translateX(5px) scale(.94, 1.06);
+        animation-timing-function: cubic-bezier(.2,.7,.2,1);
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+    }
+
+}
+
+
+@keyframes accentStreak {
+
+    0%, 12% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scaleX(1);
+    }
+
+    /* smear trails BEHIND the direction of travel */
+
+    22% {
+        opacity: .5;
+        transform: translate(-30%, -50%) scaleX(4);
+    }
+
+    46% {
+        opacity: .9;
+        transform: translate(-72%, -50%) scaleX(11);
+    }
+
+    62% {
+        opacity: .55;
+        transform: translate(-24%, -50%) scaleX(7);
+    }
+
+    82% {
+        opacity: .16;
+        transform: translate(-46%, -50%) scaleX(2.4);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scaleX(1);
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-name-accent.is-slung,
+    .hero-name-accent.is-slung::after {
+
+        animation: none;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO DESCRIPTION
+--------------------------------------------------------- */
+
+.hero-description {
+
+    max-width: 460px;
+
+    margin-top: 70px;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+.hero-description strong {
+
+    color: #fff;
+
+    font-weight: 500;
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO FOOTER
+--------------------------------------------------------- */
+
+.hero-bottom {
+
+    position: absolute;
+
+    left: 5vw;
+
+    right: 5vw;
+
+    bottom: 28px;
+
+    z-index: 7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.hero-location {
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .12em;
+
+    color: rgba(255,255,255,.55);
+
+}
+
+
+.hero-location span {
+
+    color: var(--acid);
+
+}
+
+
+.hero-counter {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    color: rgba(255,255,255,.65);
+
+}
+
+
+.hero-dash {
+
+    width: 90px;
+
+    height: 1px;
+
+    background: rgba(255,255,255,.25);
+
+    position: relative;
+
+}
+
+
+.hero-dash-progress {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    width: 0;
+
+    height: 100%;
+
+    background: var(--acid);
+
+}
+
+
+/* ---------------------------------------------------------
+   HERO SIDE STATEMENT
+--------------------------------------------------------- */
+
+.hero-side-note {
+
+    position: absolute;
+
+    right: 5vw;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    max-width: 170px;
+
+    color: rgba(255,255,255,.62);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    line-height: 1.7;
+
+    text-transform: uppercase;
+
+    letter-spacing: .09em;
+
+}
+
+
+.hero-side-note strong {
+
+    display: block;
+
+    color: #fff;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+
+    min-height: 100vh;
+
+    padding:
+        150px
+        5vw;
+
+    display: flex;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.intro-inner {
+
+    max-width: 1300px;
+
+    position: relative;
+
+}
+
+
+/* ---------------------------------------------------------
+   INTRO WORKING PHOTOS
+
+   Sit behind the headline as faint texture. The type stays
+   the focus — these never compete with it.
+--------------------------------------------------------- */
+
+.intro-photo {
+
+    position: absolute;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    border-radius: 2px;
+
+    pointer-events: none;
+
+    will-change: transform;
+
+}
+
+
+.intro-photo img {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(1) contrast(1.05);
+
+}
+
+
+/* Placement notes: the headline lines are short and sit to
+   the LEFT of the block, so the right third and the outer
+   margins stay open. Every photo below is parked in one of
+   those gaps — the scatter reads as random, but nothing
+   lands on top of a line of type. Sizes and angles are all
+   slightly different so no two feel like a matched pair. */
+
+.intro-photo-1 {
+
+    top: -70px;
+
+    right: 2%;
+
+    width: 210px;
+
+    aspect-ratio: 3 / 4;
+
+    opacity: .2;
+
+    transform: rotate(3.5deg);
+
+}
+
+
+.intro-photo-2 {
+
+    bottom: -40px;
+
+    right: 16%;
+
+    width: 165px;
+
+    aspect-ratio: 4 / 3;
+
+    opacity: .16;
+
+    transform: rotate(-4.5deg);
+
+}
+
+
+.intro-photo-3 {
+
+    top: 42%;
+
+    left: -60px;
+
+    width: 150px;
+
+    aspect-ratio: 1 / 1;
+
+    opacity: .13;
+
+    transform: rotate(6deg);
+
+}
+
+
+/* Right-hand column, tucked between photo 1 and photo 2. */
+
+.intro-photo-4 {
+
+    top: 30%;
+
+    right: -40px;
+
+    width: 175px;
+
+    aspect-ratio: 4 / 5;
+
+    opacity: .17;
+
+    transform: rotate(-7deg);
+
+}
+
+
+/* Far left, high — sits beside the label, above the type. */
+
+.intro-photo-5 {
+
+    top: -30px;
+
+    left: 6%;
+
+    width: 130px;
+
+    aspect-ratio: 1 / 1;
+
+    opacity: .12;
+
+    transform: rotate(-3deg);
+
+}
+
+
+/* Bottom left, below the last line of the headline. */
+
+.intro-photo-6 {
+
+    bottom: -75px;
+
+    left: 14%;
+
+    width: 185px;
+
+    aspect-ratio: 3 / 2;
+
+    opacity: .15;
+
+    transform: rotate(5.5deg);
+
+}
+
+
+/* Mid-right, small — fills the gap the short lines leave. */
+
+.intro-photo-7 {
+
+    top: 62%;
+
+    right: 30%;
+
+    width: 120px;
+
+    aspect-ratio: 3 / 4;
+
+    opacity: .11;
+
+    transform: rotate(-9deg);
+
+}
+
+
+/* The two innermost photos are the most likely to crowd the
+   type on a mid-size screen, so they drop out first. */
+
+@media (max-width: 1250px) {
+
+    .intro-photo-7,
+    .intro-photo-5 {
+
+        display: none;
+
+    }
+
+}
+
+
+/* Keep the headline above the photographs. */
+
+.intro-title,
+.intro-inner .label {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.label {
+
+    margin-bottom: 55px;
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .14em;
+
+}
+
+
+.intro-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(52px, 8.5vw, 135px);
+
+    line-height: .84;
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.intro-title .dim {
+
+    color: #3d3d39;
+
+}
+
+
+.intro-title .blue {
+
+    color: var(--blue);
+
+}
+
+
+/* =========================================================
+   WORLD INTRO
+========================================================= */
+
+.world {
+
+    padding:
+        150px
+        5vw;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.world-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 10vw;
+
+    align-items: end;
+
+}
+
+
+.world-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(70px, 12vw, 190px);
+
+    line-height: var(--lead-tight);
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.world-copy {
+
+    max-width: 470px;
+
+    color: var(--grey);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   HOW I SEE THINGS
+========================================================= */
+
+.seeing {
+
+    padding:
+        150px
+        5vw;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.seeing-title {
+
+    margin:
+        0
+        0
+        40px;
+
+    font-family: var(--display);
+
+    font-size: clamp(48px, 7.5vw, 118px);
+
+    /* Three lines, so this needs more leading than the
+       two-line titles elsewhere or the rows collide. */
+    line-height: .88;
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.seeing-intro {
+
+    max-width: 480px;
+
+    margin:
+        0
+        0
+        90px;
+
+    color: #898982;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+.seeing-row {
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        1fr
+        1fr;
+
+    gap: 30px;
+
+    padding:
+        30px
+        0;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+.seeing-row:last-child {
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.seeing-number {
+
+    color: var(--acid);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+}
+
+
+.seeing-name {
+
+    font-family: var(--display);
+
+    font-size: clamp(24px, 3.4vw, 48px);
+
+    line-height: .9;
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.seeing-copy {
+
+    max-width: 390px;
+
+    margin: 0;
+
+    color: #777770;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+.seeing-pair {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+
+    margin-top: 90px;
+
+}
+
+
+.seeing-frame {
+
+    margin: 0;
+
+    overflow: hidden;
+
+}
+
+
+.seeing-frame img {
+
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    filter: grayscale(.55);
+
+    transition:
+        transform .8s cubic-bezier(.2,.7,.2,1),
+        filter .6s ease;
+
+}
+
+
+.seeing-frame:hover img {
+
+    transform: scale(1.03);
+
+    filter: grayscale(0);
+
+}
+
+
+.seeing-frame figcaption {
+
+    margin-top: 14px;
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--track-mono);
+
+}
+
+
+/* =========================================================
+   CLIENTS
+========================================================= */
+
+.clients {
+
+    padding:
+        80px
+        5vw;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.clients-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        3fr;
+
+    gap: 50px;
+
+}
+
+
+.clients-label {
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .13em;
+
+}
+
+
+.client-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(150px, 1fr));
+
+    gap: 10px;
+
+}
+
+
+/* Logos are forced to flat white regardless of their source
+   colours, so a wall of mismatched brand assets reads evenly.
+   They sit back at 45% opacity and come forward on hover. */
+
+.client-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 70px;
+
+    padding:
+        0
+        18px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 4px;
+
+    transition:
+        border-color .25s ease,
+        background .25s ease;
+
+}
+
+
+.client-logo img {
+
+    max-width: 100%;
+
+    max-height: 34px;
+
+    object-fit: contain;
+
+    /* Keeps the alt text tidy while the real logo files
+       are still missing — it reads as a small label
+       rather than overflowing the tile. */
+
+    font-family: var(--display);
+
+    font-size: 11px;
+
+    text-align: center;
+
+    color: var(--white);
+
+    overflow: hidden;
+
+    opacity: .45;
+
+    filter: grayscale(1) brightness(0) invert(1);
+
+    transition:
+        opacity .25s ease,
+        filter .25s ease;
+
+}
+
+
+.client-logo:hover {
+
+    border-color: rgba(217,255,62,.4);
+
+    background: rgba(217,255,62,.04);
+
+}
+
+
+.client-logo:hover img {
+
+    opacity: 1;
+
+}
+
+
+/* Pill style — still used by the stock-footage marketplaces. */
+
+.client {
+
+    padding:
+        9px
+        13px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 100px;
+
+    font-family: var(--display);
+
+    font-size: 11px;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+
+}
+
+
+.client:hover {
+
+    background: var(--acid);
+
+    color: #000;
+
+    border-color: var(--acid);
+
+}
+
+
+/* =========================================================
+   WORK CHAPTER
+========================================================= */
+
+/* CHAPTER
+
+   Two-column editorial layout, matching .world-grid and
+   .photo-header: heading holds the left column, supporting copy
+   sits in the right and bottom-aligns to the heading's last
+   line.
+
+   Replaces a flat stack whose copy was offset by
+   margin-left:25% — a slice of the VIEWPORT, unrelated to the
+   type above it, which is why the space to its left read as a
+   hole instead of a column. */
+
+.chapter {
+
+    padding:
+        160px
+        5vw
+        90px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr;
+
+    column-gap: 70px;
+
+    align-items: end;
+
+}
+
+
+/* The section number spans both columns and sits above them. */
+
+.chapter-num {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.chapter-num {
+
+    color: var(--acid);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    letter-spacing: .14em;
+
+    margin-bottom: 35px;
+
+}
+
+
+.chapter-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(75px, 12vw, 190px);
+
+    line-height: var(--lead-display);
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.chapter-copy {
+
+    /* Lives in the right column now — no margin offset. The
+       small bottom margin is optical: it lifts the last line
+       clear of the heading's descenders so both columns settle
+       on a shared visual baseline. */
+
+    max-width: 520px;
+
+    margin: 0 0 .6em;
+
+    color: var(--grey);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ---------------------------------------------------------
+   CHAPTER COPY — THE LIST
+
+   The four items are what the chapter is actually about, so
+   they sit a step above the sentence that follows them:
+   brighter, slightly larger, with real space between lines.
+   The trailing prose stays at --grey as a quiet footnote.
+
+   Hover is deliberately small — the page's vocabulary is
+   opacity and colour on .25s ease, not movement. Each item
+   lifts to white, nudges a few px right, and lights an acid
+   marker in the margin. Hovering one dims its siblings so the
+   focused line separates without anything jumping.
+--------------------------------------------------------- */
+
+.copy-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: .55em;
+
+    /* Gap is set on the list, so it scales with the 15px list
+       type rather than the 14px sentence underneath it. */
+
+    margin-bottom: 1.45em;
+
+    /* Hanging markers: the dashes sit OUT in the margin so the
+       text edge of the list lines up exactly with the prose
+       below it. Without this the list is pushed 18px right of
+       the paragraph and the block reads as two ragged edges. */
+
+    margin-left: -18px;
+
+}
+
+
+.copy-item {
+
+    position: relative;
+
+    width: fit-content;
+
+    padding-left: 18px;
+
+    color: #b9b9b0;
+
+    font-size: 15px;
+
+    line-height: 1.45;
+
+    cursor: default;
+
+    transition:
+        color .25s ease,
+        opacity .25s ease,
+        transform .25s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+/* The marker: an acid dash that draws itself on hover. */
+
+/* The marker is ALWAYS drawn — it is what earns the 18px
+   indent. At rest it is a short, dim grey dash so the list
+   reads as a list even untouched; on hover it lengthens and
+   turns acid. Previously it was opacity:0 at rest, which left
+   the items indented past the prose below with nothing in the
+   gap to explain why — the alignment only resolved while
+   hovering. */
+
+.copy-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: .62em;
+
+    width: 9px;
+
+    height: 1px;
+
+    background: currentColor;
+
+    opacity: .5;
+
+    transform: scaleX(.55);
+
+    transform-origin: left center;
+
+    transition:
+        transform .25s cubic-bezier(.2,.7,.2,1),
+        opacity .25s ease,
+        background .25s ease;
+
+}
+
+
+/* Dim the siblings so the hovered line reads as the focus. */
+
+.copy-list:hover .copy-item {
+
+    opacity: .45;
+
+}
+
+
+.copy-list:hover .copy-item:hover {
+
+    opacity: 1;
+
+    color: var(--white);
+
+    transform: translateX(4px);
+
+}
+
+
+.copy-list:hover .copy-item:hover::before {
+
+    background: var(--acid);
+
+    transform: scaleX(1);
+
+    opacity: 1;
+
+}
+
+
+/* The closing sentence — quieter than the list above it. */
+
+/* The closing sentence.
+
+   It is a block, so it starts on the paragraph's own left edge
+   — the same edge the list's TEXT sits on, since the list hangs
+   its markers out into the margin. Being a block also drops the
+   stray leading space the source newline would otherwise render
+   between the list and this sentence. */
+
+.copy-tail {
+
+    display: block;
+
+    max-width: 34ch;
+
+    color: var(--grey);
+
+    line-height: 1.7;
+
+}
+
+
+@media (hover: none) {
+
+    /* No hover on touch: keep every item at full strength. */
+
+    .copy-list:hover .copy-item {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================================
+   VIDEO INDEX
+========================================================= */
+
+.video-index {
+
+    padding:
+        0
+        5vw
+        150px;
+
+}
+
+
+.video-row {
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        1fr
+        220px
+        30px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding:
+        23px
+        0;
+
+    border-top: 1px solid var(--line);
+
+    transition:
+        background .35s ease,
+        padding .35s ease;
+
+}
+
+
+.video-row:last-child {
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.video-row:hover {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+    background: #10100e;
+
+}
+
+
+.video-number {
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+}
+
+
+.video-name {
+
+    font-family: var(--display);
+
+    font-size: clamp(21px, 3vw, 43px);
+
+    line-height: .9;
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.video-client {
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .11em;
+
+}
+
+
+.video-arrow {
+
+    color: var(--acid);
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.video-row:hover .video-arrow {
+
+    transform:
+        translate(4px,-4px);
+
+}
+
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+.project {
+
+    padding:
+        60px
+        5vw
+        170px;
+
+}
+
+
+.project-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 60px;
+
+    margin-bottom: 35px;
+
+}
+
+
+.project-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(45px, 7vw, 105px);
+
+    line-height: .77;
+
+    letter-spacing: var(--track-h3);
+
+}
+
+
+.project-meta {
+
+    max-width: 300px;
+
+    color: var(--grey);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+/* ---------------------------------------------------------
+   SPLIT PROJECT LAYOUT
+
+   Scoped to sections that opt in with .project-split.
+   Video on the left, details alongside it on the right.
+--------------------------------------------------------- */
+
+.project-split {
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr
+        1fr;
+
+    gap: 50px;
+
+    align-items: center;
+
+}
+
+
+.project-split .project-title {
+
+    margin-bottom: 35px;
+
+}
+
+
+.project-meta-rows {
+
+    margin-bottom: 35px;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+.project-meta-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: baseline;
+
+    gap: 20px;
+
+    padding:
+        14px
+        0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.project-meta-label {
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--track-mono);
+
+}
+
+
+.project-meta-value {
+
+    font-family: var(--display);
+
+    font-size: 13px;
+
+    text-align: right;
+
+}
+
+
+.project-split .project-description {
+
+    margin: 0;
+
+}
+
+
+.video-player {
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    position: relative;
+
+    background: #111;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+}
+
+
+.video-player.featured {
+
+    aspect-ratio: 21 / 9;
+
+}
+
+
+.video-player img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 1s cubic-bezier(.2,.7,.2,1),
+        filter .6s ease;
+
+}
+
+
+.video-player:hover img {
+
+    transform: scale(1.035);
+
+    filter: saturate(1.08);
+
+}
+
+
+.video-player iframe {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+
+}
+
+
+.video-play {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: var(--acid);
+
+    transform:
+        translate(-50%,-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+.video-play::after {
+
+    content: "";
+
+    margin-left: 5px;
+
+    border-top:
+        9px solid transparent;
+
+    border-bottom:
+        9px solid transparent;
+
+    border-left:
+        13px solid #000;
+
+}
+
+
+.video-player:hover .video-play {
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.1);
+
+}
+
+
+.project-description {
+
+    max-width: 620px;
+
+    margin:
+        30px
+        0
+        0
+        auto;
+
+    color: var(--grey);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+.video-pair {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 20px;
+
+    margin-top: 35px;
+
+}
+
+
+.video-pair-label {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-top: 12px;
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+}
+
+
+/* =========================================================
+   PERSONAL FILMS
+========================================================= */
+
+.personal {
+
+    background: #11110f;
+
+}
+
+
+.personal .chapter {
+
+    padding-top: 160px;
+
+}
+
+
+.personal-project {
+
+    padding:
+        0
+        5vw
+        160px;
+
+}
+
+
+.personal-project + .personal-project {
+
+    padding-top: 30px;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+/* =========================================================
+   PHOTOGRAPHY WORLD
+========================================================= */
+
+/* Inside the cream sections, the shared --grey token points at
+   its light-ground counterpart, so .label / .photo-copy and any
+   other --grey consumer corrects automatically instead of each
+   rule needing its own override. */
+
+.photography,
+.contact {
+
+    --grey: var(--grey-ink);
+
+}
+
+
+.photography {
+
+    background: var(--white);
+
+    color: #090909;
+
+    /* Bottom padding was 200px, which left a bare cream band
+       under the scattered cards before the dark section began.
+       The cards already fill the stage to its last pixel, so
+       this only needs enough room to breathe, not a second
+       empty screen. */
+
+    padding:
+        160px
+        0
+        90px;
+
+    overflow: hidden;
+
+}
+
+
+.photo-header {
+
+    padding:
+        0
+        5vw;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 100px;
+
+}
+
+
+.photo-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(80px, 13vw, 200px);
+
+    line-height: var(--lead-tight);
+
+    letter-spacing: var(--track-h1);
+
+}
+
+
+/* "SEE." is filled with the desert photograph that sits
+   directly below it, rather than a flat accent colour — the
+   heading and the image become one idea.
+
+   How it works: the image is painted as the span's background,
+   then background-clip:text confines that paint to the glyph
+   shapes and the text colour is made transparent so the photo
+   shows through.
+
+   --ink-camera stays as the fallback: it is the declared
+   colour, and only gets overridden inside the @supports block
+   below. Any browser without background-clip:text simply keeps
+   the solid burnt orange. */
+
+.photo-title span {
+
+    /* Cream background — see --ink-camera in :root. */
+    color: var(--ink-camera);
+
+}
+
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+    .photo-title span {
+
+        /* Sized and positioned so the crop landing inside the
+           letters is the warm dune area, not the pale sky. */
+
+        background-image: url("assets/visual-01.jpg");
+
+        /* Zoomed well into the dune band (roughly y 40-75% of
+           the photo). The full-frame crop put the pale sky in
+           the tops of the letters, where it fell to about the
+           same value as the cream page and the glyph edges
+           dissolved. This crop stays in the warm mid-tones. */
+
+        background-size: 400% auto;
+
+        background-position: 40% 66%;
+
+        background-repeat: no-repeat;
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        color: transparent;
+
+        -webkit-text-fill-color: transparent;
+
+    }
+
+}
+
+
+.photo-copy {
+
+    max-width: 340px;
+
+    color: #666660;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   PANORAMIC IMAGE
+========================================================= */
+
+.panorama {
+
+    position: relative;
+
+    width: 100%;
+
+    padding:
+        0
+        5vw;
+
+    margin-bottom: 120px;
+
+}
+
+
+.panorama-frame {
+
+    width: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ddd;
+
+}
+
+
+.panorama-frame img {
+
+    width: 100%;
+
+    aspect-ratio: 2.55 / 1;
+
+    object-fit: cover;
+
+    transition:
+        transform 1.4s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+.panorama-frame:hover img {
+
+    transform: scale(1.025);
+
+}
+
+
+.panorama-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.18),
+            transparent 30%,
+            transparent 70%,
+            rgba(0,0,0,.15)
+        );
+
+}
+
+
+.panorama-caption {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 13px;
+
+    font-family: var(--mono);
+
+    font-size: 7px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .12em;
+
+    color: #77776f;
+
+}
+
+
+.panorama-note {
+
+    position: absolute;
+
+    left: 8vw;
+
+    bottom: 50px;
+
+    color: #fff;
+
+    font-family: var(--display);
+
+    font-size: clamp(30px, 5vw, 70px);
+
+    line-height: .8;
+
+    letter-spacing: -.07em;
+
+    text-shadow:
+        0 3px 30px rgba(0,0,0,.4);
+
+}
+
+
+/* =========================================================
+   SCATTERED PHOTO WALL
+========================================================= */
+
+.photo-stage {
+
+    position: relative;
+
+    /* Was a hard height:900px. The cards are absolutely
+       positioned by percentage inside this box, but their
+       WIDTH scales with the viewport (clamp 190-330px) while
+       this height did not — so on wide screens the cards
+       finished well short of 900px and the leftover box
+       rendered as an empty cream band under the collage.
+
+       aspect-ratio ties the stage's height to its own width,
+       so the box and the artwork inside it scale together and
+       there is nothing left over. */
+
+    aspect-ratio: 16 / 8.2;
+
+    min-height: 560px;
+
+    max-height: 900px;
+
+    overflow: hidden;
+
+    cursor: crosshair;
+
+}
+
+
+.photo-stage::before {
+
+    content:
+        "THE REST OF THE ROLL";
+
+    position: absolute;
+
+    left: 5vw;
+
+    top: 5px;
+
+    color: #9b9b94;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    letter-spacing: .13em;
+
+    z-index: 100;
+
+}
+
+
+.photo-stage::after {
+
+    content:
+        "MOVE / HOVER / LOOK CLOSER";
+
+    position: absolute;
+
+    right: 5vw;
+
+    bottom: 8px;
+
+    color: #9b9b94;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    letter-spacing: .13em;
+
+    z-index: 100;
+
+}
+
+
+.photo-cursor {
+
+    position: absolute;
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: var(--blue);
+
+    /* Black, not white — the accent is a light green now,
+       so white text on it would be unreadable. */
+    color: #000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    font-family: var(--mono);
+
+    font-size: 7px;
+
+    text-transform: uppercase;
+
+    line-height: 1.4;
+
+    pointer-events: none;
+
+    z-index: 200;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.7);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+
+}
+
+
+.photo-stage.active .photo-cursor {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+
+}
+
+
+.photo-card {
+
+    position: absolute;
+
+    width: clamp(190px, 24vw, 330px);
+
+    padding: 9px;
+
+    background: #eee;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.2);
+
+    transform:
+        rotate(var(--rotation));
+
+    transition:
+        transform .6s cubic-bezier(.2,.7,.2,1),
+        box-shadow .5s ease,
+        filter .4s ease;
+
+    z-index: var(--z);
+
+}
+
+
+.photo-card:hover {
+
+    z-index: 500;
+
+    transform:
+        rotate(0)
+        translateY(-15px)
+        scale(1.12);
+
+    box-shadow:
+        0 50px 100px rgba(0,0,0,.32);
+
+}
+
+
+.photo-card img {
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+}
+
+
+.photo-card-caption {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        10px
+        2px
+        2px;
+
+    font-family: var(--mono);
+
+    font-size: 7px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+    color: #66665f;
+
+}
+
+
+/* ---------------------------------------------------------
+   CARD POSITIONS
+--------------------------------------------------------- */
+
+.photo-1 {
+
+    left: 6%;
+
+    top: 17%;
+
+    --rotation: -7deg;
+
+    --z: 4;
+
+}
+
+
+.photo-2 {
+
+    left: 31%;
+
+    top: 8%;
+
+    --rotation: 4deg;
+
+    --z: 8;
+
+}
+
+
+.photo-3 {
+
+    right: 8%;
+
+    top: 17%;
+
+    --rotation: -5deg;
+
+    --z: 5;
+
+}
+
+
+.photo-4 {
+
+    left: 17%;
+
+    top: 50%;
+
+    --rotation: 5deg;
+
+    --z: 9;
+
+}
+
+
+.photo-5 {
+
+    left: 49%;
+
+    top: 44%;
+
+    --rotation: -3deg;
+
+    --z: 7;
+
+}
+
+
+.photo-6 {
+
+    right: 8%;
+
+    top: 48%;
+
+    --rotation: 7deg;
+
+    --z: 3;
+
+}
+
+
+.photo-7 {
+
+    left: 3%;
+
+    bottom: 4%;
+
+    --rotation: 3deg;
+
+    --z: 6;
+
+}
+
+
+.photo-8 {
+
+    right: 28%;
+
+    bottom: 2%;
+
+    --rotation: -6deg;
+
+    --z: 2;
+
+}
+
+
+/* =========================================================
+   STOCK FOOTAGE
+========================================================= */
+
+.stock {
+
+    padding:
+        150px
+        5vw;
+
+    border-top: 1px solid var(--line);
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.stock-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 10vw;
+
+    align-items: end;
+
+    margin-bottom: 90px;
+
+}
+
+
+.stock-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(44px, 6.5vw, 104px);
+
+    /* Three lines — same leading treatment as .seeing-title. */
+    line-height: .88;
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.stock-copy {
+
+    max-width: 460px;
+
+    margin:
+        0
+        0
+        30px;
+
+    color: #898982;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+.stock-markets {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+.stock-collage {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid var(--line);
+
+    /* Holds the shape while the collage file is missing,
+       so the placeholder reads as intentional space.
+       Once assets/stock-collage.jpg exists the image
+       sets the height and this does nothing. */
+
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.stock-collage img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    transition:
+        transform 1s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+.stock-collage:hover img {
+
+    transform: scale(1.02);
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about {
+
+    padding:
+        170px
+        5vw;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.about-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        .7fr
+        1.3fr;
+
+    gap: 100px;
+
+    align-items: center;
+
+}
+
+
+.about-photo {
+
+    width: min(100%, 350px);
+
+    aspect-ratio: 1;
+
+    justify-self: center;
+
+    overflow: hidden;
+
+    border-radius:
+        48% 52% 55% 45%
+        /
+        45% 48% 52% 55%;
+
+    transform: rotate(-4deg);
+
+    background: #151513;
+
+}
+
+
+.about-photo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: scale(1.04);
+
+}
+
+
+.about-label {
+
+    color: var(--acid);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .14em;
+
+    margin-bottom: 40px;
+
+}
+
+
+.about-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(60px, 8vw, 120px);
+
+    line-height: .75;
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.about-title span {
+
+    color: var(--blue);
+
+}
+
+
+.about-copy {
+
+    max-width: 620px;
+
+    margin-top: 55px;
+
+    color: #898982;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   PRINCIPLES
+========================================================= */
+
+.principles {
+
+    padding:
+        150px
+        5vw;
+
+    background: #11110f;
+
+}
+
+
+.principles-title {
+
+    margin:
+        0
+        0
+        90px;
+
+    font-family: var(--display);
+
+    font-size: clamp(70px, 11vw, 170px);
+
+    line-height: var(--lead-display);
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.principle {
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        1fr
+        1fr
+        200px;
+
+    gap: 30px;
+
+    padding:
+        30px
+        0;
+
+    border-top: 1px solid var(--line);
+
+    align-items: start;
+
+}
+
+
+/* ---------------------------------------------------------
+   BEHIND THE SCENES THUMBNAILS
+
+   Quiet by default — grayscale and faded back. Hovering the
+   principle row brings its photo to life.
+--------------------------------------------------------- */
+
+.principle-bts {
+
+    margin: 0;
+
+}
+
+
+.principle-bts img {
+
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border-radius: 2px;
+
+    opacity: .35;
+
+    filter: grayscale(1);
+
+    transition:
+        opacity .45s ease,
+        filter .45s ease,
+        transform .6s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+.principle:hover .principle-bts img {
+
+    opacity: 1;
+
+    filter: grayscale(0);
+
+    transform: scale(1.03);
+
+}
+
+
+.principle-bts figcaption {
+
+    margin-top: 10px;
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 7px;
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--track-mono);
+
+    opacity: .55;
+
+    transition: opacity .45s ease;
+
+}
+
+
+.principle:hover .principle-bts figcaption {
+
+    opacity: 1;
+
+}
+
+
+.principle:last-child {
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.principle-number {
+
+    color: var(--acid);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+}
+
+
+.principle-name {
+
+    font-family: var(--display);
+
+    font-size: clamp(28px, 4vw, 58px);
+
+    line-height: .9;
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.principle-copy {
+
+    max-width: 390px;
+
+    color: #777770;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   TESTIMONIALS
+========================================================= */
+
+.testimonials {
+
+    padding:
+        160px
+        5vw;
+
+    background: var(--acid);
+
+    color: #000;
+
+}
+
+
+.testimonials-title {
+
+    margin:
+        0
+        0
+        90px;
+
+    font-family: var(--display);
+
+    font-size: clamp(75px, 12vw, 185px);
+
+    line-height: var(--lead-display);
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.testimonial {
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        1fr
+        240px;
+
+    gap: 30px;
+
+    padding:
+        35px
+        0;
+
+    border-top: 1px solid #000;
+
+}
+
+
+.testimonial:last-child {
+
+    border-bottom: 1px solid #000;
+
+}
+
+
+.testimonial-number {
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+}
+
+
+.testimonial-quote {
+
+    margin: 0;
+
+    max-width: 900px;
+
+    font-family: var(--display);
+
+    font-size: clamp(25px, 3vw, 42px);
+
+    line-height: 1.03;
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.testimonial-person {
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.testimonial-person span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================================
+   VIDEO TESTIMONIALS
+========================================================= */
+
+.video-testimonials {
+
+    padding:
+        160px
+        5vw;
+
+    background: #0b0b09;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.vt-title {
+
+    margin:
+        0
+        0
+        80px;
+
+    font-family: var(--display);
+
+    font-size: clamp(48px, 7.5vw, 118px);
+
+    line-height: .82;
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.vt-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 30px;
+
+    align-items: start;
+
+}
+
+
+/* The vertical short is twice as tall as the wide cards,
+   so it spans two rows and they sit neatly beside it. */
+
+.vt-card-vertical {
+
+    grid-row: span 2;
+
+}
+
+
+.vt-card-vertical .video-player {
+
+    aspect-ratio: 9 / 16;
+
+}
+
+
+.vt-meta {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 16px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+.vt-client {
+
+    color: var(--acid);
+
+    font-family: var(--display);
+
+    font-size: 14px;
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.vt-business,
+.vt-location {
+
+    color: var(--grey);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--track-mono);
+
+}
+
+
+/* =========================================================
+   RECEIPTS
+========================================================= */
+
+.receipts {
+
+    padding:
+        160px
+        5vw
+        200px;
+
+    overflow: hidden;
+
+}
+
+
+.receipts-head {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 60px;
+
+    margin-bottom: 100px;
+
+}
+
+
+.receipts-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(80px, 12vw, 185px);
+
+    line-height: var(--lead-tight);
+
+    letter-spacing: var(--track-h2);
+
+}
+
+
+.receipts-copy {
+
+    max-width: 430px;
+
+    align-self: end;
+
+    color: var(--grey);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+
+.receipts-wall {
+
+    position: relative;
+
+    max-width: 1250px;
+
+    min-height: 850px;
+
+    margin: auto;
+
+}
+
+
+.receipt-primary {
+
+    position: absolute;
+
+    left: 4%;
+
+    top: 25px;
+
+    width: 57%;
+
+    padding: 10px;
+
+    background: #111;
+
+    border: 1px solid #292925;
+
+    transform: rotate(-1deg);
+
+    z-index: 3;
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.3);
+
+    transition:
+        transform .6s ease;
+
+}
+
+
+.receipt-primary:hover {
+
+    transform:
+        rotate(0)
+        translateY(-10px);
+
+}
+
+
+.receipt-primary img {
+
+    width: 100%;
+
+}
+
+
+.receipt-card {
+
+    position: absolute;
+
+    width: 280px;
+
+    padding: 9px;
+
+    background: #f2f0e8;
+
+    color: #111;
+
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.4);
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.receipt-card img {
+
+    width: 100%;
+
+}
+
+
+.receipt-card:hover {
+
+    z-index: 100;
+
+    transform:
+        rotate(0)
+        translateY(-15px)
+        scale(1.07);
+
+}
+
+
+.receipt-card-2 {
+
+    right: 5%;
+
+    top: 30px;
+
+    transform: rotate(6deg);
+
+}
+
+
+.receipt-card-3 {
+
+    right: 3%;
+
+    top: 350px;
+
+    transform: rotate(-5deg);
+
+}
+
+
+.receipt-card-4 {
+
+    left: 55%;
+
+    bottom: 15px;
+
+    transform: rotate(4deg);
+
+}
+
+
+.receipt-card-5 {
+
+    left: 10%;
+
+    bottom: 15px;
+
+    transform: rotate(-5deg);
+
+}
+
+
+.receipt-caption {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        10px
+        3px
+        2px;
+
+    color: #676760;
+
+    font-family: var(--mono);
+
+    font-size: 7px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+
+    min-height: 100svh;
+
+    padding:
+        150px
+        5vw;
+
+    background: var(--white);
+
+    color: #080808;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.contact-bg {
+
+    position: absolute;
+
+    right: -4vw;
+
+    bottom: -10vw;
+
+    font-family: var(--display);
+
+    font-size: 50vw;
+
+    line-height: .6;
+
+    letter-spacing: -.13em;
+
+    color: #e1e0d8;
+
+    pointer-events: none;
+
+}
+
+
+.contact-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.contact-label {
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .13em;
+
+    margin-bottom: 40px;
+
+}
+
+
+.contact-title {
+
+    margin: 0;
+
+    font-family: var(--display);
+
+    font-size: clamp(85px, 16vw, 240px);
+
+    line-height: var(--lead-tight);
+
+    letter-spacing: var(--track-h1);
+
+}
+
+
+.contact-title span {
+
+    /* Cream background — see --ink-contact in :root. */
+    color: var(--ink-contact);
+
+}
+
+
+.contact-email {
+
+    display: inline-block;
+
+    margin-top: 80px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 2px solid #000;
+
+    font-family: var(--display);
+
+    font-size: clamp(20px, 3vw, 38px);
+
+    letter-spacing: var(--track-h4);
+
+}
+
+
+.contact-email:hover {
+
+    /* Cream background — see --ink-contact in :root. */
+    color: var(--ink-contact);
+
+    border-color: var(--ink-contact);
+
+}
+
+
+.contact-meta {
+
+    position: absolute;
+
+    right: 5vw;
+
+    bottom: 30px;
+
+    color: #74746d;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .12em;
+
+}
+
+
+/* =========================================================
+   BACK TO INDEX BUTTON
+========================================================= */
+
+.back-to-index {
+
+    position: fixed;
+
+    right: 30px;
+
+    bottom: 30px;
+
+    z-index: 60;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        14px
+        20px;
+
+    border-radius: 100px;
+
+    background: var(--acid);
+
+    color: #000;
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--track-mono);
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 30px rgba(217,255,62,.25);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity .45s ease,
+        transform .45s cubic-bezier(.2,.7,.2,1),
+        box-shadow .3s ease;
+
+}
+
+
+.back-to-index.is-visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
+
+}
+
+
+.back-to-index:hover {
+
+    box-shadow:
+        0 10px 40px rgba(217,255,62,.45);
+
+}
+
+
+.bti-arrow {
+
+    font-size: 12px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        28px 25px;
+
+    background: #080808;
+
+    color: #666660;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width: 900px) {
+
+
+    .nav-center {
+
+        display: none;
+
+    }
+
+
+    /* Scattered overlays don't survive narrow screens. */
+
+    .intro-photo {
+
+        display: none;
+
+    }
+
+
+    /* Button shrinks to an icon-only circle on small screens. */
+
+    .back-to-index {
+
+        right: 18px;
+
+        bottom: 18px;
+
+        padding: 0;
+
+        width: 46px;
+
+        height: 46px;
+
+        justify-content: center;
+
+        gap: 0;
+
+    }
+
+
+    .bti-text {
+
+        display: none;
+
+    }
+
+
+    .project-split {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+
+    .stock-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+    }
+
+
+    .seeing-row {
+
+        grid-template-columns:
+            45px
+            1fr;
+
+    }
+
+
+    .seeing-copy {
+
+        grid-column: 2;
+
+    }
+
+
+    .seeing-pair {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .vt-card-vertical {
+
+        grid-row: auto;
+
+    }
+
+
+    .hero-side-note {
+
+        display: none;
+
+    }
+
+
+    .hero {
+
+        min-height: 680px;
+
+    }
+
+
+    .hero-gradient {
+
+        background:
+
+            linear-gradient(
+                0deg,
+                rgba(0,0,0,.78),
+                rgba(0,0,0,.15) 65%,
+                rgba(0,0,0,.35)
+            );
+
+    }
+
+
+    .hero-content {
+
+        align-items: flex-end;
+
+        padding:
+            100px
+            20px
+            90px;
+
+    }
+
+
+    .hero-name {
+
+        font-size: 27vw;
+
+    }
+
+
+    .hero-description {
+
+        margin-top: 45px;
+
+        max-width: 380px;
+
+    }
+
+
+    .hero-bottom {
+
+        left: 20px;
+
+        right: 20px;
+
+    }
+
+
+    .intro {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .world {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .world-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+    }
+
+
+    .clients {
+
+        padding:
+            70px
+            20px;
+
+    }
+
+
+    .clients-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+
+    .chapter {
+
+        padding:
+            120px
+            20px
+            70px;
+
+        /* Collapse to one column: copy stacks under the heading. */
+
+        grid-template-columns: 1fr;
+
+        row-gap: 45px;
+
+    }
+
+
+    .chapter-copy {
+
+        /* Nothing to clear once stacked. */
+
+        margin-bottom: 0;
+
+    }
+
+
+    .video-index {
+
+        padding:
+            0
+            20px
+            110px;
+
+    }
+
+
+    .video-row {
+
+        grid-template-columns:
+            35px
+            1fr
+            20px;
+
+        gap: 12px;
+
+    }
+
+
+    .video-client {
+
+        display: none;
+
+    }
+
+
+    .project {
+
+        padding:
+            50px
+            20px
+            110px;
+
+    }
+
+
+    .project-head {
+
+        display: block;
+
+    }
+
+
+    .project-meta {
+
+        margin-top: 25px;
+
+    }
+
+
+    .video-player.featured {
+
+        aspect-ratio: 16 / 9;
+
+    }
+
+
+    .video-pair {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .personal-project {
+
+        padding:
+            0
+            20px
+            110px;
+
+    }
+
+
+    .photo-header {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .photo-stage {
+
+        /* Stacked grid below this width: clear the desktop
+           aspect-ratio box so the stage sizes to its rows. */
+
+        aspect-ratio: auto;
+
+        max-height: none;
+
+        height: auto;
+
+        min-height: 0;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap: 25px 14px;
+
+        padding:
+            45px
+            20px
+            80px;
+
+        overflow: visible;
+
+        cursor: default;
+
+    }
+
+
+    .photo-stage::before,
+    .photo-stage::after {
+
+        position: relative;
+
+        left: auto;
+
+        right: auto;
+
+        top: auto;
+
+        bottom: auto;
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .photo-card {
+
+        position: relative;
+
+        left: auto;
+
+        right: auto;
+
+        top: auto;
+
+        bottom: auto;
+
+        width: 100%;
+
+    }
+
+
+    .photo-2,
+    .photo-5,
+    .photo-8 {
+
+        margin-top: 40px;
+
+    }
+
+
+    .photo-3,
+    .photo-6 {
+
+        margin-top: -15px;
+
+    }
+
+
+    .photo-cursor {
+
+        display: none;
+
+    }
+
+
+    .panorama {
+
+        padding:
+            0
+            20px;
+
+    }
+
+
+    .panorama-frame img {
+
+        aspect-ratio: 1.5 / 1;
+
+    }
+
+
+    .panorama-note {
+
+        left: 35px;
+
+        bottom: 40px;
+
+    }
+
+
+    .about {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .about-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 70px;
+
+    }
+
+
+    .about-photo {
+
+        width: min(70vw,350px);
+
+    }
+
+
+    .principles {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .principle {
+
+        grid-template-columns:
+            45px
+            1fr;
+
+    }
+
+
+    .principle-copy {
+
+        grid-column: 2;
+
+    }
+
+
+    /* BTS photo drops below the copy and goes full width. */
+
+    .principle-bts {
+
+        grid-column: 2;
+
+        margin-top: 6px;
+
+    }
+
+
+    .principle-bts img {
+
+        opacity: .75;
+
+        filter: grayscale(.3);
+
+    }
+
+
+    .testimonials {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .testimonial {
+
+        grid-template-columns:
+            40px
+            1fr;
+
+    }
+
+
+    .testimonial-person {
+
+        grid-column: 2;
+
+        margin-top: 15px;
+
+    }
+
+
+    .receipts {
+
+        padding:
+            120px
+            20px
+            150px;
+
+    }
+
+
+    .receipts-head {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+
+    .receipts-wall {
+
+        min-height: auto;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 40px;
+
+    }
+
+
+    .receipt-primary,
+    .receipt-card {
+
+        position: relative;
+
+        left: auto;
+
+        right: auto;
+
+        top: auto;
+
+        bottom: auto;
+
+        width: 100%;
+
+    }
+
+
+    .receipt-card-2 {
+
+        transform:
+            rotate(4deg);
+
+    }
+
+
+    .receipt-card-3 {
+
+        transform:
+            rotate(-4deg);
+
+    }
+
+
+    .receipt-card-4 {
+
+        transform:
+            rotate(3deg);
+
+    }
+
+
+    .receipt-card-5 {
+
+        transform:
+            rotate(-3deg);
+
+    }
+
+
+    .contact {
+
+        padding:
+            120px
+            20px;
+
+    }
+
+
+    .contact-title {
+
+        font-size: 27vw;
+
+    }
+
+
+    .contact-meta {
+
+        left: 20px;
+
+        right: auto;
+
+    }
+
+
+    .footer {
+
+        display: block;
+
+    }
+
+
+    .footer div + div {
+
+        margin-top: 10px;
+
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+
+    .hero {
+
+        min-height: 700px;
+
+    }
+
+
+    .hero-content {
+
+        padding-bottom: 95px;
+
+    }
+
+
+    .hero-name {
+
+        font-size: 29vw;
+
+    }
+
+
+    .hero-description {
+
+        font-size: 13px;
+
+    }
+
+
+    .hero-greeting {
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .photo-title {
+
+        font-size: 27vw;
+
+    }
+
+
+    .panorama-frame img {
+
+        aspect-ratio: 1.15 / 1;
+
+    }
+
+
+    .panorama-note {
+
+        font-size: 30px;
+
+    }
+
+
+    .photo-stage {
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        padding:
+            40px
+            12px
+            60px;
+
+    }
+
+
+    .photo-card {
+
+        padding: 6px;
+
+    }
+
+
+    .photo-card-caption {
+
+        font-size: 6px;
+
+        padding-top: 7px;
+
+    }
+
+
+    .about-title {
+
+        font-size: 18vw;
+
+    }
+
+
+    .principles-title {
+
+        font-size: 21vw;
+
+    }
+
+
+    .testimonials-title {
+
+        font-size: 21vw;
+
+    }
+
+
+    .receipts-title {
+
+        font-size: 23vw;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="loading">
+
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div class="loader" id="loader">
+
+    <div class="loader-inner">
+
+        <div class="loader-top">
+
+            <span>
+                HAVE A SEAT TO MY WORLD
+            </span>
+
+            <span id="loaderPercent">
+                0%
+            </span>
+
+        </div>
+
+
+        <div class="loader-word">
+            HI I'M FASIL
+        </div>
+
+
+        <div class="loader-track">
+
+            <div
+                class="loader-progress"
+                id="loaderProgress"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NAV
+===================================================== -->
+
+<nav class="nav">
+
+    <a
+        href="#top"
+        class="logo"
+    >
+        FASIL.
+    </a>
+
+
+    <div class="nav-center">
+        A world in frames
+    </div>
+
+
+    <div class="nav-right">
+        Bengaluru / India
+    </div>
+
+</nav>
+
+
+<main id="top">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+    <!-- HERO 01 -->
+
+    <div
+        class="hero-image active"
+        data-hero="0"
+    >
+
+        <img
+            src="assets/fasil-hero-01.jpg"
+            alt="A glimpse into Fasil's world"
+        >
+
+    </div>
+
+
+    <!-- HERO 02 -->
+
+    <div
+        class="hero-image"
+        data-hero="1"
+    >
+
+        <img
+            src="assets/fasil-hero-02.jpg"
+            alt="A glimpse into Fasil's world"
+        >
+
+    </div>
+
+
+    <!-- HERO 03 -->
+
+    <div
+        class="hero-image"
+        data-hero="2"
+    >
+
+        <img
+            src="assets/fasil-hero-03.jpg"
+            alt="A glimpse into Fasil's world"
+        >
+
+    </div>
+
+
+    <div class="hero-gradient"></div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-inner">
+
+
+            <div class="hero-eyebrow">
+
+                <span class="hero-eyebrow-line"></span>
+
+                Media / Film / Stories
+
+            </div>
+
+
+            <div class="hero-greeting">
+
+                Hi, I'm
+
+                <span class="hero-wave">👋</span>
+
+            </div>
+
+
+            <div class="hero-name-wrap">
+
+                <!-- Hover this to run the split-flap language shuffle.
+                     Language list lives in the HERO NAME FLIP script below. -->
+                <h1
+                    class="hero-name"
+                    id="heroName"
+                    aria-label="Fasil"
+                >
+                    Fasil
+                </h1>
+
+                <span class="hero-name-accent"></span>
+
+            </div>
+
+
+            <p class="hero-description">
+
+                <strong>
+                    This is my corner of the internet.
+                </strong>
+
+                <br><br>
+
+                A collection of films, photographs,
+                places I've been, things I've built,
+                and a little bit of what goes on
+                between the finished pieces.
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-side-note">
+
+        <strong>
+            You're not looking at a résumé.
+        </strong>
+
+        You're looking at the things
+        that shaped how I see.
+
+    </div>
+
+
+    <div class="hero-bottom">
+
+        <div class="hero-location">
+
+            Currently
+
+            <span>
+                Bengaluru
+            </span>
+
+            · India
+
+        </div>
+
+
+        <div class="hero-counter">
+
+            <span id="heroCount">
+                01 / 03
+            </span>
+
+            <span class="hero-dash">
+
+                <span
+                    class="hero-dash-progress"
+                    id="heroProgress"
+                ></span>
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="intro">
+
+
+    <div class="intro-inner">
+
+
+        <!-- Working photos, scattered behind the type.
+             Deliberately faint — they read as texture, not content.
+             Hidden entirely below 900px.
+
+             These are the "me behind the camera over the years"
+             slots. Drop your own shots at the paths below —
+             assets/working-01.jpg … working-04.jpg — and they
+             appear automatically. Until those files exist the
+             four new frames fall back to existing visuals via
+             the onerror handler, so nothing renders broken.
+
+             Each data-depth is the parallax drift in px; mixing
+             signs makes the group feel layered rather than flat. -->
+
+        <div class="intro-photo intro-photo-1" data-depth="14">
+            <img src="assets/visual-02.jpg" alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-2" data-depth="-20">
+            <img src="assets/visual-05.jpg" alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-3" data-depth="9">
+            <img src="assets/visual-07.jpg" alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-4" data-depth="-13">
+            <img
+                src="assets/working-01.jpg"
+                onerror="this.src='assets/visual-01.jpg'"
+                alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-5" data-depth="18">
+            <img
+                src="assets/working-02.jpg"
+                onerror="this.src='assets/visual-04.jpg'"
+                alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-6" data-depth="-9">
+            <img
+                src="assets/working-03.jpg"
+                onerror="this.src='assets/visual-06.jpg'"
+                alt="">
+        </div>
+
+        <div class="intro-photo intro-photo-7" data-depth="22">
+            <img
+                src="assets/working-04.jpg"
+                onerror="this.src='assets/proof-03.jpg'"
+                alt="">
+        </div>
+
+
+        <div class="label">
+            00 / BEFORE THE WORK
+        </div>
+
+
+        <h2 class="intro-title">
+
+            I've always been
+            more interested in
+            <span class="blue">
+                how things feel
+            </span>
+
+            than how they're
+            supposed to look.
+
+            <br><br>
+
+            <span class="dim">
+                That's probably why I ended up
+                with a camera in one hand
+                and a timeline in the other.
+            </span>
+
+        </h2>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WORLD
+===================================================== -->
+
+<section class="world">
+
+
+    <div class="world-grid">
+
+
+        <h2 class="world-title">
+
+            THIS IS<br>
+            MY WORLD.
+
+        </h2>
+
+
+        <p class="world-copy">
+
+            I'm a media consultant, filmmaker,
+            editor and photographer.
+
+            <br><br>
+
+            Some days I'm sitting in front of
+            a timeline cutting a SaaS product film.
+
+            Other days I'm somewhere in the middle
+            of nowhere trying to make sense of
+            a few hours of footage.
+
+            <br><br>
+
+            The work changes.
+
+            The way I look at things doesn't.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PHOTOGRAPHY
+========================================================= -->
+
+<section
+    class="photography"
+    id="photography"
+>
+
+
+    <div class="photo-header">
+
+
+        <div>
+
+            <div class="label">
+                01 / THE CAMERA ROLL
+            </div>
+
+
+            <h2 class="photo-title">
+
+                HOW<br>
+                I <span>SEE.</span>
+
+            </h2>
+
+        </div>
+
+
+        <p class="photo-copy">
+
+            This is probably the closest thing
+            to seeing the world through my eyes.
+
+            <br><br>
+
+            Some of these became films.
+
+            Some became memories.
+
+            Some just stayed on the hard drive
+            because I liked the frame.
+
+        </p>
+
+
+    </div>
+
+
+    <!-- =================================================
+         PANORAMIC HERO PHOTO
+    ================================================= -->
+
+    <div class="panorama">
+
+
+        <div class="panorama-frame">
+
+            <img
+                src="assets/visual-01.jpg"
+                alt="Fasil panoramic photograph"
+            >
+
+
+            <div class="panorama-overlay"></div>
+
+
+            <div class="panorama-note">
+
+                one frame<br>
+                worth keeping
+
+            </div>
+
+        </div>
+
+
+        <div class="panorama-caption">
+
+            <span>
+                01 / PANORAMA
+            </span>
+
+            <span>
+                Shot by Fasil
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SCATTERED REST OF ROLL
+    ================================================= -->
+
+    <div
+        class="photo-stage"
+        id="photoStage"
+    >
+
+
+        <div
+            class="photo-cursor"
+            id="photoCursor"
+        >
+            look<br>
+            closer
+        </div>
+
+
+        <article class="photo-card photo-1">
+
+            <img
+                src="assets/visual-02.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    02
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-2">
+
+            <img
+                src="assets/visual-03.webp"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    03
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-3">
+
+            <img
+                src="assets/visual-04.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    04
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-4">
+
+            <img
+                src="assets/visual-04b.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    05
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-5">
+
+            <img
+                src="assets/visual-05.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    06
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-6">
+
+            <img
+                src="assets/visual-06.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    07
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-7">
+
+            <img
+                src="assets/visual-07.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Frame
+                </span>
+
+                <span>
+                    08
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-8">
+
+            <img
+                src="assets/visual-02.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    Archive
+                </span>
+
+                <span>
+                    09
+                </span>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CLIENTS
+========================================================= -->
+
+<section class="clients">
+
+
+    <div class="clients-grid">
+
+
+        <div class="clients-label">
+
+            Along the way
+
+        </div>
+
+
+        <!-- ==========================================================
+             CLIENT LOGOS
+
+             Drop the files into  assets/logos/  using these exact
+             filenames and they'll appear automatically.
+
+             RECOMMENDED SPEC FOR EACH LOGO:
+               Format  : PNG with a transparent background (SVG also fine)
+               Size    : 400px wide x 200px tall  (2:1), logo centred
+                         with a little padding inside the canvas
+               Colour  : Doesn't matter — CSS converts every logo to
+                         flat white automatically, so they all match
+               Weight  : Under 50KB each
+
+             The alt text is the client name, so if a file is missing
+             the name still shows up rather than a blank gap.
+        ========================================================== -->
+
+        <div class="client-list">
+
+            <div class="client-logo">
+                <img src="assets/logos/adobe.png" alt="Adobe">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/sp-global.png" alt="S&amp;P Global">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/nasscom.png" alt="Nasscom Foundation">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/siemens.png" alt="Siemens">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/codedesign.png" alt="CodeDesign.ai">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/forest-to-fork.png" alt="Forest to Fork">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/japm.png" alt="JAPM">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/rally-range.png" alt="Rally &amp; Range">
+            </div>
+
+            <div class="client-logo">
+                <img src="assets/logos/codilar.png" alt="Codilar">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WORK
+========================================================= -->
+
+<section
+    class="chapter"
+    id="work"
+>
+
+
+    <div class="chapter-num">
+        02 / THINGS I'VE MADE
+    </div>
+
+
+    <h2 class="chapter-title">
+
+        STORIES<br>
+        WORTH<br>
+        WATCHING.
+
+    </h2>
+
+
+    <p class="chapter-copy">
+
+        <span class="copy-list">
+            <span class="copy-item">Commercial films.</span>
+            <span class="copy-item">Social impact documentaries.</span>
+            <span class="copy-item">Product stories.</span>
+            <span class="copy-item">Personal films.</span>
+        </span>
+
+        <span class="copy-tail">
+            Sometimes carefully planned.
+            Sometimes discovered in the edit.
+        </span>
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     VIDEO INDEX
+========================================================= -->
+
+<section class="video-index">
+
+
+    <a class="video-row" href="#forest">
+
+        <span class="video-number">01</span>
+
+        <span class="video-name">
+            Living the Hunter Lifestyle
+        </span>
+
+        <span class="video-client">
+            Forest to Fork
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#bow">
+
+        <span class="video-number">02</span>
+
+        <span class="video-name">
+            Bow Hunting in State Forest
+        </span>
+
+        <span class="video-client">
+            Diary of a Hunting Guide
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#fallow">
+
+        <span class="video-number">03</span>
+
+        <span class="video-name">
+            2 Fallow Deer in 1 Arvo
+        </span>
+
+        <span class="video-client">
+            Diary of a Hunting Guide
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#spiti">
+
+        <span class="video-number">04</span>
+
+        <span class="video-name">
+            Spiti Valley Through My Eyes
+        </span>
+
+        <span class="video-client">
+            Personal Film
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#kashmir">
+
+        <span class="video-number">05</span>
+
+        <span class="video-name">
+            Kashmir: Heaven on Earth
+        </span>
+
+        <span class="video-client">
+            Personal Film
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#kurunji">
+
+        <span class="video-number">06</span>
+
+        <span class="video-name">
+            The Kurunji Blooms
+        </span>
+
+        <span class="video-client">
+            Western Ghats
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#delhi">
+
+        <span class="video-number">07</span>
+
+        <span class="video-name">
+            Chasing Delhi
+        </span>
+
+        <span class="video-client">
+            Personal Film
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#siemens">
+
+        <span class="video-number">08</span>
+
+        <span class="video-name">
+            Siemens Hackathon
+        </span>
+
+        <span class="video-client">
+            Siemens × Nasscom
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#codedesign">
+
+        <span class="video-number">09</span>
+
+        <span class="video-name">
+            CodeDesign.ai
+        </span>
+
+        <span class="video-client">
+            Product Film
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+    <a class="video-row" href="#cwarmer">
+
+        <span class="video-number">10</span>
+
+        <span class="video-name">
+            cWarmer
+        </span>
+
+        <span class="video-client">
+            Codilar
+        </span>
+
+        <span class="video-arrow">↗</span>
+
+    </a>
+
+
+</section>
+
+
+<!-- =====================================================
+     FOREST
+========================================================= -->
+
+<section
+    class="project"
+    id="forest"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            LIVING THE<br>
+            HUNTER<br>
+            LIFESTYLE
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Forest to Fork
+
+            <br><br>
+
+            Edit / Story / Remote Direction
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player featured"
+        data-video="temqJ2R7SfU"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg"
+            alt="Living the Hunter Lifestyle"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        Years of footage.
+
+        Different cameras.
+
+        Different resolutions.
+
+        No obvious narrative.
+
+        <br><br>
+
+        I went through the archive, found the story,
+        then directed a new piece of performance
+        to give the film a beginning.
+
+        <br><br>
+
+        The goal wasn't to make an outfitter montage.
+
+        It was to let someone who had never met Luke
+        understand what spending a few days with him
+        might actually feel like.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     BOW
+========================================================= -->
+
+<section
+    class="project"
+    id="bow"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            BOW HUNTING<br>
+            IN STATE<br>
+            FOREST
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Diary of a Hunting Guide / E04
+
+            <br><br>
+
+            Edit / Story / Sound / Colour
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player"
+        data-video="AfLIuyh_7Vg"
+        data-start="69"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/AfLIuyh_7Vg/maxresdefault.jpg"
+            alt="Bow Hunting in State Forest"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        No deer.
+
+        No conventional payoff.
+
+        <br><br>
+
+        The challenge was making an anticlimactic hunting
+        trip enjoyable anyway.
+
+        <br><br>
+
+        Rather than manufacture a bigger ending,
+        I leaned into the uncertainty that makes
+        bow hunting interesting in the first place.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     FALLOW
+========================================================= -->
+
+<section
+    class="project"
+    id="fallow"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            2 FALLOW<br>
+            DEER IN<br>
+            1 ARVO
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Diary of a Hunting Guide / E03
+
+            <br><br>
+
+            Edit / Story / Sound / Colour
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player"
+        data-video="9TbWkg43MzE"
+        data-start="115"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/9TbWkg43MzE/maxresdefault.jpg"
+            alt="2 Fallow Deer in 1 Arvo"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        A successful public-land hunt shaped almost entirely
+        around what the camera managed to capture.
+
+        <br><br>
+
+        Missing pieces were reconstructed through a recap
+        recorded by the guide.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     PERSONAL FILMS
+========================================================= -->
+
+<section class="personal">
+
+
+<section class="chapter">
+
+    <div class="chapter-num">
+        03 / PLACES I'VE BEEN
+    </div>
+
+
+    <h2 class="chapter-title">
+
+        BEFORE<br>
+        IT WAS<br>
+        A JOB.
+
+    </h2>
+
+
+    <p class="chapter-copy">
+
+        These came from curiosity more than briefs.
+
+        <br><br>
+
+        Travel.
+
+        Mountains.
+
+        Cities.
+
+        Long drives.
+
+        A camera.
+
+        <br><br>
+
+        They taught me how I like to see.
+
+    </p>
+
+</section>
+
+
+<!-- SPITI -->
+
+<section
+    class="personal-project"
+    id="spiti"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            SPITI VALLEY<br>
+            THROUGH<br>
+            MY EYES
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Personal Film
+
+            <br><br>
+
+            Shoot / Edit / Grade
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player featured"
+        data-video="Y1zgWoNAOok"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/Y1zgWoNAOok/maxresdefault.jpg"
+            alt="Spiti Valley Through My Eyes"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <div class="video-pair">
+
+        <div>
+
+            <div
+                class="video-player"
+                data-video="vuCSyuaT2wk"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/vuCSyuaT2wk/maxresdefault.jpg"
+                    alt="Spiti Valley short cut"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+
+            <div class="video-pair-label">
+
+                <span>
+                    Alternate Cut
+                </span>
+
+                <span>
+                    02
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        A solo trip through the Himalayas,
+        shot on a Sony A6300.
+
+        <br><br>
+
+        The entire journey became a personal memoir.
+
+    </p>
+
+</section>
+
+
+<!-- KASHMIR -->
+
+<section
+    class="personal-project"
+    id="kashmir"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            KASHMIR:<br>
+            HEAVEN<br>
+            ON EARTH
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Personal Film
+
+            <br><br>
+
+            Shoot / Edit / Grade
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player"
+        data-video="J2AqZM6kB60"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/J2AqZM6kB60/maxresdefault.jpg"
+            alt="Kashmir Heaven on Earth"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        A film about contrast.
+
+        Srinagar's movement.
+
+        Dal Lake's quiet.
+
+        The warmth of being welcomed somewhere
+        as a stranger.
+
+    </p>
+
+</section>
+
+
+<!-- KURUNJI -->
+
+<section
+    class="personal-project"
+    id="kurunji"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            THE<br>
+            KURUNJI<br>
+            BLOOMS
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Western Ghats / 2018
+
+            <br><br>
+
+            Shoot / Edit / Grade
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player"
+        data-video="3jvZYztGy90"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/3jvZYztGy90/maxresdefault.jpg"
+            alt="The Kurunji Blooms"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        The Neelakurunji blooms once every twelve years.
+
+        <br><br>
+
+        I went to the Nilgiris with a camera,
+        a gimbal and very little money.
+
+        <br><br>
+
+        I sat down for one long stretch and built
+        the film around the landscape.
+
+    </p>
+
+</section>
+
+
+<!-- DELHI -->
+
+<section
+    class="personal-project"
+    id="delhi"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            CHASING<br>
+            DELHI
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Personal Film
+
+            <br><br>
+
+            Edit experiment
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player"
+        data-video="DAIN06KxDts"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/DAIN06KxDts/maxresdefault.jpg"
+            alt="Chasing Delhi"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        A track I loved.
+
+        A folder full of footage.
+
+        One city.
+
+        <br><br>
+
+        I cut Delhi around its rhythm.
+
+    </p>
+
+</section>
+
+
+</section>
+
+
+
+
+<!-- =====================================================
+     COMMERCIAL
+========================================================= -->
+
+<section class="chapter">
+
+
+    <div class="chapter-num">
+        04 / WHEN THE WORLD BECAME WORK
+    </div>
+
+
+    <h2 class="chapter-title">
+
+        THEN<br>
+        BUSINESSES<br>
+        FOUND ME.
+
+    </h2>
+
+
+    <p class="chapter-copy">
+
+        <span class="copy-list">
+            <span class="copy-item">Product films.</span>
+            <span class="copy-item">Corporate stories.</span>
+            <span class="copy-item">Social impact.</span>
+            <span class="copy-item">SaaS.</span>
+        </span>
+
+        <span class="copy-tail">
+            The medium changed.
+            The obsession didn't.
+        </span>
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     SIEMENS
+========================================================= -->
+
+<section
+    class="project"
+    id="siemens"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            SIEMENS<br>
+            HACKATHON
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Siemens × Nasscom Foundation
+
+            <br><br>
+
+            Shoot / Direction / Edit / Grade
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="video-player featured"
+        data-video="bZUmqKFzAyc"
+    >
+
+        <img
+            src="https://img.youtube.com/vi/bZUmqKFzAyc/maxresdefault.jpg"
+            alt="Siemens Hackathon"
+        >
+
+        <div class="video-play"></div>
+
+    </div>
+
+
+    <p class="project-description">
+
+        Three days.
+
+        A room full of young makers.
+
+        <br><br>
+
+        The objective was to capture the energy
+        of the participants while still communicating
+        the impact behind the event.
+
+        <br><br>
+
+        Shot by me and an associate.
+        Directed, edited and coloured by me.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     CODEDESIGN
+========================================================= -->
+
+<section
+    class="project"
+    id="codedesign"
+>
+
+
+    <div class="project-head">
+
+        <h3 class="project-title">
+
+            CODEDESIGN<br>
+            .AI
+
+        </h3>
+
+
+        <div class="project-meta">
+
+            Product Video
+
+            <br><br>
+
+            Concept / Edit / Motion /
+            Stock / Adaptation
+
+        </div>
+
+    </div>
+
+
+    <div class="video-pair">
+
+
+        <div>
+
+            <div
+                class="video-player"
+                data-video="7l47kdmMsb0"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/7l47kdmMsb0/maxresdefault.jpg"
+                    alt="CodeDesign Superwide"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+
+            <div class="video-pair-label">
+
+                <span>
+                    Superwide
+                </span>
+
+                <span>
+                    01
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div
+                class="video-player"
+                data-video="lI4ghwNR4Zs"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/lI4ghwNR4Zs/maxresdefault.jpg"
+                    alt="CodeDesign 16 by 9"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+
+            <div class="video-pair-label">
+
+                <span>
+                    16:9
+                </span>
+
+                <span>
+                    02
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <p class="project-description">
+
+        A commercial product film created entirely
+        from stock footage.
+
+        <br><br>
+
+        Rather than listing features,
+        the concept was built around the perspective
+        of a business owner discovering what AI
+        could actually do for them.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     CWARMER
+
+     Split layout: video on one side, project details on the
+     other. The .project-split class is scoped to this section
+     only — every other project keeps its original full-width
+     treatment.
+========================================================= -->
+
+<section
+    class="project project-split"
+    id="cwarmer"
+>
+
+
+    <div class="project-split-media">
+
+        <div
+            class="video-player"
+            data-video="AXNF6n0_C6A"
+        >
+
+            <img
+                src="https://img.youtube.com/vi/AXNF6n0_C6A/maxresdefault.jpg"
+                alt="cWarmer"
+            >
+
+            <div class="video-play"></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="project-split-info">
+
+
+        <h3 class="project-title">
+
+            CWARMER
+
+        </h3>
+
+
+        <div class="project-meta-rows">
+
+
+            <div class="project-meta-row">
+
+                <span class="project-meta-label">Client</span>
+
+                <span class="project-meta-value">Codilar</span>
+
+            </div>
+
+
+            <div class="project-meta-row">
+
+                <span class="project-meta-label">Format</span>
+
+                <span class="project-meta-value">B2B SaaS Explainer</span>
+
+            </div>
+
+
+            <div class="project-meta-row">
+
+                <span class="project-meta-label">Role</span>
+
+                <span class="project-meta-value">Script / Narrative / Edit</span>
+
+            </div>
+
+
+        </div>
+
+
+        <p class="project-description">
+
+            A B2B SaaS explainer created for a product launch
+            and technology conference in Florida.
+
+            <br><br>
+
+            I wrote the script, shaped the narrative
+            and worked with a presenter who recorded
+            the performance in greenscreen.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STOCK FOOTAGE
+========================================================= -->
+
+<section class="stock">
+
+
+    <div class="stock-grid">
+
+
+        <div>
+
+            <div class="label">
+                ALSO / STOCK FOOTAGE
+            </div>
+
+
+            <h2 class="stock-title">
+
+                SHOT ONCE.<br>
+                LICENSED<br>
+                EVERYWHERE.
+
+            </h2>
+
+        </div>
+
+
+        <div class="stock-copy-col">
+
+            <p class="stock-copy">
+
+                Not everything I shoot belongs to a brief.
+                A lot of it goes up as stock — clips that get
+                licensed and used by people I'll never meet,
+                in films I'll probably never see.
+
+                <br><br>
+
+                It's a quieter kind of work, and a useful one.
+                It keeps me shooting between projects, and it
+                pays for the gear that shows up on the paid ones.
+
+            </p>
+
+
+            <!-- These can become real links to your portfolios —
+                 just wrap each in an <a href="..."> tag. -->
+
+            <div class="stock-markets">
+
+                <span class="client">Shutterstock</span>
+
+                <span class="client">Adobe Stock</span>
+
+                <span class="client">Getty Images</span>
+
+                <span class="client">Pond5</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==========================================================
+         STOCK COLLAGE
+
+         Full-width grid of screenshots from your stock portfolios.
+
+         RECOMMENDED SPEC:
+           Size   : 2400 x 900px (roughly 8:3, wide and short)
+           Format : JPG
+           Weight : around 400KB
+
+         Build it as a single flat image — a tight grid of your
+         clip thumbnails from Shutterstock / Adobe Stock — then
+         save it as  assets/stock-collage.jpg
+    ========================================================== -->
+
+    <div class="stock-collage">
+
+        <img
+            src="assets/stock-collage.jpg"
+            alt="Stock footage published across Shutterstock, Adobe Stock and other marketplaces"
+        >
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+========================================================= -->
+
+<section
+    class="about"
+    id="about"
+>
+
+
+    <div class="about-grid">
+
+
+        <div class="about-photo">
+
+            <img
+                src="assets/fasil-headshot.jpg"
+                alt="Fasil"
+            >
+
+        </div>
+
+
+        <div>
+
+
+            <div class="about-label">
+                05 / THE PERSON BEHIND IT
+            </div>
+
+
+            <h2 class="about-title">
+
+                COMPUTER<br>
+                SCIENCE.<br>
+
+                <span>CAMERAS.</span><br>
+
+                SOMEHOW<br>
+                THIS.
+
+            </h2>
+
+
+            <div class="about-copy">
+
+                I studied computer science.
+
+                I didn't go to film school.
+
+                <br><br>
+
+                I learned by making things,
+                breaking things,
+                watching people better than me,
+                and doing the job again.
+
+                <br><br>
+
+                Since then I've worked with brands,
+                startups, agencies and social-impact
+                organisations across different industries
+                and different parts of the world.
+
+                <br><br>
+
+                I'm happiest somewhere between
+                the strategy conversation and the timeline.
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRINCIPLES
+========================================================= -->
+
+<section class="principles">
+
+
+    <h2 class="principles-title">
+
+        HOW<br>
+        I WORK.
+
+    </h2>
+
+
+    <!-- ==========================================================
+         BEHIND THE SCENES
+
+         Each principle carries one working photo — paper planning,
+         scripting, the edit timeline, the grade. They sit muted and
+         grayscale until you hover the row, so they show the process
+         without pulling focus from the writing.
+
+         Drop these four into  assets/  with these exact filenames:
+           bts-01-planning.jpg    paper planning / flow sketches
+           bts-02-scripting.jpg   scriptwriting + flow setting
+           bts-03-timeline.jpg    editing timeline screenshot
+           bts-04-grading.jpg     colour grading suite
+
+         RECOMMENDED SPEC: 800 x 600px (4:3), JPG, around 150KB each.
+    ========================================================== -->
+
+
+    <div class="principle">
+
+        <div class="principle-number">
+            01
+        </div>
+
+        <div class="principle-name">
+            STORY FIRST.
+        </div>
+
+        <p class="principle-copy">
+
+            The edit shouldn't be trying to prove
+            how clever the editor is.
+
+            The audience should forget
+            there's an edit happening.
+
+        </p>
+
+
+        <figure class="principle-bts">
+
+            <img src="assets/bts-01-planning.jpg" alt="Paper flows before timelines">
+
+            <figcaption>Planning / paper</figcaption>
+
+        </figure>
+
+    </div>
+
+
+    <div class="principle">
+
+        <div class="principle-number">
+            02
+        </div>
+
+        <div class="principle-name">
+            CUT THE NOISE.
+        </div>
+
+        <p class="principle-copy">
+
+            More footage doesn't mean
+            more story.
+
+            Sometimes the best thing
+            you can do is remove things.
+
+        </p>
+
+
+        <figure class="principle-bts">
+
+            <img src="assets/bts-02-scripting.jpg" alt="Script and structure passes">
+
+            <figcaption>Script / structure</figcaption>
+
+        </figure>
+
+    </div>
+
+
+    <div class="principle">
+
+        <div class="principle-number">
+            03
+        </div>
+
+        <div class="principle-name">
+            DETAILS MATTER.
+        </div>
+
+        <p class="principle-copy">
+
+            Sound.
+
+            Colour.
+
+            A half-second.
+
+            The frame before someone speaks.
+
+            That's where a lot of the feeling lives.
+
+        </p>
+
+
+        <figure class="principle-bts">
+
+            <img src="assets/bts-03-timeline.jpg" alt="The timeline where it gets found">
+
+            <figcaption>Edit / timeline</figcaption>
+
+        </figure>
+
+    </div>
+
+
+    <div class="principle">
+
+        <div class="principle-number">
+            04
+        </div>
+
+        <div class="principle-name">
+            MAKE IT USEFUL.
+        </div>
+
+        <p class="principle-copy">
+
+            Beautiful is good.
+
+            But if the video doesn't solve
+            the actual problem,
+            we've made expensive wallpaper.
+
+        </p>
+
+
+        <figure class="principle-bts">
+
+            <img src="assets/bts-04-grading.jpg" alt="Grading for feel, not accuracy">
+
+            <figcaption>Colour / grade</figcaption>
+
+        </figure>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     TESTIMONIALS
+========================================================= -->
+
+<section class="testimonials">
+
+
+    <h2 class="testimonials-title">
+
+        PEOPLE<br>
+        WHO<br>
+        KNOW.
+
+    </h2>
+
+
+    <div class="testimonial">
+
+        <div class="testimonial-number">
+            01
+        </div>
+
+
+        <p class="testimonial-quote">
+
+            “Fasil delivered on our agreed project
+            and exceeded my expectations.”
+
+        </p>
+
+
+        <div class="testimonial-person">
+
+            Luke Risk
+
+            <span>
+                Founder / Forest to Fork
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="testimonial">
+
+        <div class="testimonial-number">
+            02
+        </div>
+
+
+        <p class="testimonial-quote">
+
+            “He listens to every detail but also
+            has great ideas to help with executing
+            the desired result.”
+
+        </p>
+
+
+        <div class="testimonial-person">
+
+            Andi K
+
+            <span>
+                Founder & Coach / Rally & Range
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="testimonial">
+
+        <div class="testimonial-number">
+            03
+        </div>
+
+
+        <p class="testimonial-quote">
+
+            “Reliable, works under tight deadlines.
+            I'll be coming back for future projects.”
+
+        </p>
+
+
+        <div class="testimonial-person">
+
+            Adarsh Lal
+
+            <span>
+                Founder / Anomaly Cybersecurity
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="testimonial">
+
+        <div class="testimonial-number">
+            04
+        </div>
+
+
+        <p class="testimonial-quote">
+
+            “Assisting us remotely with our digital
+            presence, media post-production frameworks,
+            and corporate messaging structure.”
+
+        </p>
+
+
+        <div class="testimonial-person">
+
+            Michael Malak
+
+            <span>
+                Managing Director / JAPM
+            </span>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     VIDEO TESTIMONIALS
+
+     Cards stay as thumbnails until clicked — they use the
+     same lazy YouTube embed as every other video on the page,
+     so none of these load a player until someone asks for one.
+
+     TO SWAP A VIDEO: change data-video to the YouTube ID and
+     update the thumbnail src to match. Vertical shorts need
+     data-vertical="true" so the card uses a 9:16 frame.
+
+     Then edit the three lines under each video: client name,
+     business type, and location.
+========================================================= -->
+
+<section class="video-testimonials">
+
+
+    <div class="label">
+        IN THEIR WORDS
+    </div>
+
+
+    <h2 class="vt-title">
+
+        WHAT CLIENTS<br>
+        ACTUALLY SAY.
+
+    </h2>
+
+
+    <div class="vt-grid">
+
+
+        <!-- Vertical short -->
+
+        <div class="vt-card vt-card-vertical">
+
+            <div
+                class="video-player"
+                data-video="G30FpHYPe58"
+                data-vertical="true"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/G30FpHYPe58/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Client Name</span>
+
+                <span class="vt-business">Business Type</span>
+
+                <span class="vt-location">City, Country</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 02 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Client Name</span>
+
+                <span class="vt-business">Business Type</span>
+
+                <span class="vt-location">City, Country</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 03 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Client Name</span>
+
+                <span class="vt-business">Business Type</span>
+
+                <span class="vt-location">City, Country</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 04 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Client Name</span>
+
+                <span class="vt-business">Business Type</span>
+
+                <span class="vt-location">City, Country</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 05 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Client Name</span>
+
+                <span class="vt-business">Business Type</span>
+
+                <span class="vt-location">City, Country</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     RECEIPTS
+========================================================= -->
+
+<section class="receipts">
+
+
+    <div class="receipts-head">
+
+
+        <h2 class="receipts-title">
+
+            THE<br>
+            RECEIPTS.
+
+        </h2>
+
+
+        <p class="receipts-copy">
+
+            Some things are easier to show
+            than explain.
+
+            <br><br>
+
+            Published work.
+            Client responses.
+            Audience reactions.
+
+            <br><br>
+
+            Just the evidence.
+
+        </p>
+
+
+    </div>
+
+
+    <div class="receipts-wall">
+
+
+        <div class="receipt-primary">
+
+            <img
+                src="assets/proof-01.jpg"
+                alt="Primary proof"
+            >
+
+
+            <div class="receipt-caption">
+
+                <span>
+                    Published
+                </span>
+
+                <span>
+                    Primary
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-card receipt-card-2">
+
+            <img
+                src="assets/proof-02.jpg"
+                alt="Client response"
+            >
+
+            <div class="receipt-caption">
+
+                <span>
+                    Response
+                </span>
+
+                <span>
+                    02
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-card receipt-card-3">
+
+            <img
+                src="assets/proof-03.jpg"
+                alt="Client response"
+            >
+
+            <div class="receipt-caption">
+
+                <span>
+                    Response
+                </span>
+
+                <span>
+                    03
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-card receipt-card-4">
+
+            <img
+                src="assets/proof-04.jpg"
+                alt="Client response"
+            >
+
+            <div class="receipt-caption">
+
+                <span>
+                    Response
+                </span>
+
+                <span>
+                    04
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-card receipt-card-5">
+
+            <img
+                src="assets/proof-05.jpg"
+                alt="Client response"
+            >
+
+            <div class="receipt-caption">
+
+                <span>
+                    Response
+                </span>
+
+                <span>
+                    05
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+========================================================= -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+
+    <div class="contact-bg">
+        F
+    </div>
+
+
+    <div class="contact-content">
+
+
+        <div class="contact-label">
+            06 / IF YOU'VE MADE IT THIS FAR
+        </div>
+
+
+        <h2 class="contact-title">
+
+            LET'S<br>
+            MAKE<br>
+            <span>SOMETHING</span><br>
+            GOOD.
+
+        </h2>
+
+
+        <a
+            href="mailto:fasil@fivesquare.co"
+            class="contact-email"
+        >
+
+            fasil@fivesquare.co ↗
+
+        </a>
+
+
+    </div>
+
+
+    <div class="contact-meta">
+
+        Bengaluru / India
+
+        <br>
+
+        Available globally
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     BACK TO INDEX BUTTON
+
+     Floats in the bottom-right corner, but only while you're
+     somewhere inside the work sections. Takes you back up to
+     the list of videos so you can pick another one without
+     scrolling all the way there by hand.
+========================================================= -->
+
+<a
+    href="#work"
+    class="back-to-index"
+    id="backToIndex"
+    aria-label="Back to the list of videos"
+>
+
+    <span class="bti-arrow">↑</span>
+
+    <span class="bti-text">All Videos</span>
+
+</a>
+
+
+<!-- =====================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div>
+        Fasil / FiveSquare
+    </div>
+
+
+    <div>
+        A world in frames
+    </div>
+
+
+    <div>
+        © 2026
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+(function() {
+
+    const loader =
+        document.getElementById("loader");
+
+    const progress =
+        document.getElementById("loaderProgress");
+
+    const percent =
+        document.getElementById("loaderPercent");
+
+
+    let value = 0;
+
+
+    const interval =
+        setInterval(function() {
+
+            value += Math.random() * 15;
+
+
+            if (value >= 100) {
+
+                value = 100;
+
+                clearInterval(interval);
+
+
+                setTimeout(function() {
+
+                    loader.classList.add("hide");
+
+                    document.body.classList.remove("loading");
+
+                }, 450);
+
+            }
+
+
+            progress.style.width =
+                value + "%";
+
+
+            percent.textContent =
+                Math.floor(value) + "%";
+
+
+        }, 70);
+
+})();
+
+
+/* =========================================================
+   HERO IMAGE ROTATION
+
+   Independent of the name. Cycles the background slides
+   and drives the counter + progress bar. Slide count is
+   read from the DOM, so adding or removing a .hero-image
+   div is all it takes to change the rotation.
+========================================================= */
+
+(function() {
+
+
+    const count =
+        document.getElementById("heroCount");
+
+    const progress =
+        document.getElementById("heroProgress");
+
+    const images =
+        document.querySelectorAll(".hero-image");
+
+
+    if (!images.length || !count || !progress) {
+        return;
+    }
+
+
+    const total = images.length;
+
+    const duration = 5000;
+
+    let current = 0;
+
+
+    function pad(value) {
+
+        return value < 10
+            ? "0" + value
+            : String(value);
+
+    }
+
+
+    function changeSlide() {
+
+
+        current =
+            (current + 1)
+            % total;
+
+
+        images.forEach(
+            function(image, index) {
+
+                image.classList.toggle(
+                    "active",
+                    index === current
+                );
+
+            }
+        );
+
+
+        count.textContent =
+            pad(current + 1) +
+            " / " +
+            pad(total);
+
+
+        progress.style.transition =
+            "none";
+
+        progress.style.width =
+            "0%";
+
+
+        requestAnimationFrame(
+            function() {
+
+                requestAnimationFrame(
+                    function() {
+
+                        progress.style.transition =
+                            "width " +
+                            duration +
+                            "ms linear";
+
+                        progress.style.width =
+                            "100%";
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    count.textContent =
+        pad(1) + " / " + pad(total);
+
+    progress.style.width = "100%";
+
+
+    setInterval(
+        changeSlide,
+        duration
+    );
+
+
+})();
+
+
+/* =========================================================
+   HERO NAME FLIP  —  split-flap board
+
+   Hover the name to shuffle it through other scripts,
+   airport-departure-board style, then land back on "Fasil".
+
+   TO ADD A LANGUAGE: drop another string into nameVariants
+   below. Any script works. If it uses a writing system not
+   already loaded, add its Noto font to the <link> tags in
+   the <head> or the glyphs will render as empty boxes.
+========================================================= */
+
+(function() {
+
+
+    const nameVariants = [
+
+        "Fasil",      /* English   */
+        "ഫാസിൽ",      /* Malayalam */
+        "फ़ासिल",      /* Hindi     */
+        "فاصل",       /* Arabic    */
+        "ಫಾಸಿಲ್",      /* Kannada   */
+        "ファシル",      /* Japanese  */
+        "파실",        /* Korean    */
+        "法西尔",       /* Chinese   */
+        "ฟาซิล",      /* Thai      */
+        "Фасиль"      /* Russian   */
+
+        /* ADD MORE HERE — one quoted string per line, comma separated */
+
+    ];
+
+
+    const name =
+        document.getElementById("heroName");
+
+
+    if (!name) {
+        return;
+    }
+
+
+    const settled = nameVariants[0];
+
+    const frameTime = 55;
+
+    let spinning = false;
+
+
+    const accent =
+        document.querySelector(".hero-name-accent");
+
+    const nameWrap =
+        document.querySelector(".hero-name-wrap");
+
+
+    /* Park the dot at the end of the SETTLED name and keep it
+       there. Without this it is anchored to the wrapper's
+       right edge, which grows and shrinks with every glyph
+       the board flips through — so the dot jitters sideways
+       through the whole animation. */
+
+    function pinAccent() {
+
+        if (!accent || !nameWrap || spinning) {
+            return;
+        }
+
+        const probe =
+            document.createElement("span");
+
+        probe.textContent = settled;
+
+        probe.style.cssText =
+            "position:absolute;visibility:hidden;" +
+            "white-space:pre;font:inherit;" +
+            "letter-spacing:inherit;";
+
+        name.appendChild(probe);
+
+        const width = probe.offsetWidth;
+
+        name.removeChild(probe);
+
+        nameWrap.style.setProperty(
+            "--accent-x",
+            width + "px"
+        );
+
+
+        /* How far can the dot fly before .hero clips it?
+           Measure the gap from the dot's resting edge to the
+           viewport edge, leave a 40px margin, and hand that
+           to the CSS clamp as --sling-room. */
+
+        const dotRect =
+            accent.getBoundingClientRect();
+
+        const room =
+            window.innerWidth - dotRect.right - 40;
+
+        accent.style.setProperty(
+            "--sling-room",
+            Math.max(0, room) + "px"
+        );
+
+    }
+
+
+    pinAccent();
+
+    window.addEventListener("resize", pinAccent);
+
+    if (document.fonts && document.fonts.ready) {
+
+        document.fonts.ready.then(pinAccent);
+
+    }
+
+
+    /* Every glyph used across all variants, so a flipping
+       character can land on something from any language. */
+
+    const glyphPool = nameVariants
+        .join("")
+        .split("")
+        .filter(
+            function(character) {
+                return character.trim() !== "";
+            }
+        );
+
+
+    function randomGlyph() {
+
+        return glyphPool[
+            Math.floor(Math.random() * glyphPool.length)
+        ];
+
+    }
+
+
+    function buildFlaps(text) {
+
+        name.textContent = "";
+
+        const flaps = [];
+
+        text.split("").forEach(
+            function(character) {
+
+                const flap =
+                    document.createElement("span");
+
+                flap.className = "flap";
+
+                flap.textContent = character;
+
+                name.appendChild(flap);
+
+                flaps.push(flap);
+
+            }
+        );
+
+        return flaps;
+
+    }
+
+
+    function runFlip() {
+
+
+        if (spinning) {
+            return;
+        }
+
+        spinning = true;
+
+
+        /* Widest variant decides the board width, so the
+           layout does not jump around mid-shuffle. */
+
+        let widest = settled.length;
+
+        nameVariants.forEach(
+            function(variant) {
+
+                if (variant.length > widest) {
+                    widest = variant.length;
+                }
+
+            }
+        );
+
+
+        const flaps = buildFlaps(
+            settled.padEnd(widest, " ")
+        );
+
+
+        let frame = 0;
+
+        /* Each flap locks in a little later than the one
+           before it, so the word lands left to right. */
+
+        const framesPerFlap = 3;
+
+        const totalFrames =
+            (flaps.length * framesPerFlap) + 8;
+
+
+        /* Fling the dot over exactly the same window the
+           board is shuffling for, so both land together. */
+
+        if (accent) {
+
+            const flipDuration =
+                totalFrames * frameTime;
+
+            accent.style.setProperty(
+                "--sling-duration",
+                flipDuration + "ms"
+            );
+
+            accent.classList.remove("is-slung");
+
+            /* Force a reflow so the animation restarts
+               cleanly on a repeat hover. */
+
+            void accent.offsetWidth;
+
+            accent.classList.add("is-slung");
+
+        }
+
+
+        const timer = setInterval(
+
+            function() {
+
+
+                frame = frame + 1;
+
+
+                flaps.forEach(
+                    function(flap, index) {
+
+
+                        const landsAt =
+                            8 + (index * framesPerFlap);
+
+
+                        if (frame < landsAt) {
+
+                            flap.textContent =
+                                randomGlyph();
+
+                            flap.classList.add("is-spinning");
+
+                        } else if (
+                            !flap.classList.contains("is-landed")
+                        ) {
+
+                            flap.classList.remove("is-spinning");
+
+                            flap.classList.add("is-landed");
+
+                            flap.textContent =
+                                settled[index] || "";
+
+                        }
+
+                    }
+                );
+
+
+                if (frame >= totalFrames) {
+
+                    clearInterval(timer);
+
+                    name.textContent = settled;
+
+                    spinning = false;
+
+                    if (accent) {
+
+                        accent.classList.remove("is-slung");
+
+                    }
+
+                    pinAccent();
+
+                }
+
+            },
+
+            frameTime
+
+        );
+
+    }
+
+
+    name.addEventListener("mouseenter", runFlip);
+
+
+})();
+
+
+/* =========================================================
+   VIDEO PLAYERS
+========================================================= */
+
+document
+    .querySelectorAll(".video-player")
+    .forEach(
+        function(player) {
+
+
+            player.addEventListener(
+                "click",
+                function() {
+
+
+                    const video =
+                        player.dataset.video;
+
+
+                    if (!video) {
+
+                        return;
+
+                    }
+
+
+                    const start =
+                        player.dataset.start || "0";
+
+
+                    const url =
+
+                        "https://www.youtube-nocookie.com/embed/" +
+
+                        video +
+
+                        "?autoplay=1" +
+
+                        "&rel=0" +
+
+                        "&start=" +
+
+                        start;
+
+
+                    player.innerHTML = `
+
+                        <iframe
+
+                            src="${url}"
+
+                            title="Fasil selected work"
+
+                            loading="lazy"
+
+                            referrerpolicy="strict-origin-when-cross-origin"
+
+                            allow="
+                                accelerometer;
+                                autoplay;
+                                clipboard-write;
+                                encrypted-media;
+                                gyroscope;
+                                picture-in-picture;
+                                web-share
+                            "
+
+                            allowfullscreen>
+
+                        </iframe>
+
+                    `;
+
+
+                }
+            );
+
+
+        }
+    );
+
+
+/* =========================================================
+   PHOTO INTERACTION
+========================================================= */
+
+(function() {
+
+
+    const stage =
+        document.getElementById("photoStage");
+
+
+    const cursor =
+        document.getElementById("photoCursor");
+
+
+    const cards =
+        document.querySelectorAll(".photo-card");
+
+
+    if (!stage) {
+
+        return;
+
+    }
+
+
+    stage.addEventListener(
+        "mouseenter",
+        function() {
+
+            if (
+                window.innerWidth > 900
+            ) {
+
+                stage.classList.add("active");
+
+            }
+
+        }
+    );
+
+
+    stage.addEventListener(
+        "mouseleave",
+        function() {
+
+            stage.classList.remove("active");
+
+
+            cards.forEach(
+                function(card) {
+
+                    card.style.marginLeft = "";
+
+                    card.style.marginTop = "";
+
+                }
+            );
+
+        }
+    );
+
+
+    stage.addEventListener(
+        "mousemove",
+        function(event) {
+
+
+            if (
+                window.innerWidth <= 900
+            ) {
+
+                return;
+
+            }
+
+
+            const rect =
+                stage.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            cursor.style.left =
+                x + "px";
+
+
+            cursor.style.top =
+                y + "px";
+
+
+            const centerX =
+                rect.width / 2;
+
+
+            const centerY =
+                rect.height / 2;
+
+
+            const relativeX =
+                (x - centerX)
+                / centerX;
+
+
+            const relativeY =
+                (y - centerY)
+                / centerY;
+
+
+            cards.forEach(
+                function(card, index) {
+
+
+                    if (
+                        card.matches(":hover")
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const movement =
+                        2 + (index % 4);
+
+
+                    card.style.marginLeft =
+                        relativeX *
+                        movement +
+                        "px";
+
+
+                    card.style.marginTop =
+                        relativeY *
+                        movement +
+                        "px";
+
+
+                }
+            );
+
+
+        }
+    );
+
+
+    cards.forEach(
+        function(card) {
+
+
+            card.addEventListener(
+                "mouseenter",
+                function() {
+
+
+                    cards.forEach(
+                        function(other) {
+
+
+                            if (
+                                other !== card
+                            ) {
+
+                                other.style.filter =
+                                    "brightness(.68)";
+
+                            }
+
+                        }
+                    );
+
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function() {
+
+
+                    cards.forEach(
+                        function(other) {
+
+                            other.style.filter =
+                                "";
+
+                        }
+                    );
+
+
+                }
+            );
+
+
+        }
+    );
+
+
+})();
+
+
+/* =========================================================
+   PANORAMA PARALLAX
+========================================================= */
+
+(function() {
+
+
+    const panorama =
+        document.querySelector(".panorama-frame img");
+
+
+    if (!panorama) {
+
+        return;
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        function() {
+
+
+            if (
+                window.innerWidth <= 900
+            ) {
+
+                return;
+
+            }
+
+
+            const rect =
+                panorama.getBoundingClientRect();
+
+
+            const viewport =
+                window.innerHeight;
+
+
+            if (
+                rect.bottom < 0 ||
+                rect.top > viewport
+            ) {
+
+                return;
+
+            }
+
+
+            const progress =
+                (
+                    viewport -
+                    rect.top
+                )
+                /
+                (
+                    viewport +
+                    rect.height
+                );
+
+
+            const movement =
+                (progress - .5) * 18;
+
+
+            panorama.style.transform =
+                "scale(1.025) translateY(" +
+                movement +
+                "px)";
+
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+})();
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+(function() {
+
+
+    const elements =
+        document.querySelectorAll(
+            ".chapter, .project, .about, .principle, .testimonial, " +
+            ".stock, .vt-card"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+            function(entries) {
+
+
+                entries.forEach(
+                    function(entry) {
+
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.style.opacity =
+                                "1";
+
+                            entry.target.style.transform =
+                                "translateY(0)";
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+
+            },
+            {
+                threshold: .08
+            }
+        );
+
+
+    elements.forEach(
+        function(element) {
+
+            element.style.opacity =
+                "0";
+
+            element.style.transform =
+                "translateY(25px)";
+
+            element.style.transition =
+                "opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1)";
+
+            observer.observe(element);
+
+        }
+    );
+
+
+})();
+
+
+/* =========================================================
+   INTRO PHOTO DRIFT
+
+   Each scattered photo moves at a slightly different rate
+   as you scroll, which keeps them reading as depth rather
+   than as flat stickers. Desktop only.
+========================================================= */
+
+(function() {
+
+
+    const photos =
+        document.querySelectorAll(".intro-photo");
+
+    const intro =
+        document.querySelector(".intro");
+
+
+    if (!photos.length || !intro) {
+
+        return;
+
+    }
+
+
+    /* Base rotations, so the drift adds to them instead of
+       wiping them out. Read straight from each element's
+       computed style rather than a hardcoded list — that way
+       adding or re-angling a photo in the CSS needs no
+       matching edit here. */
+
+    const rotations = Array.prototype.map.call(
+
+        photos,
+
+        function(photo) {
+
+            const matrix =
+                window.getComputedStyle(photo).transform;
+
+            if (!matrix || matrix === "none") {
+
+                return 0;
+
+            }
+
+            const parts =
+                matrix
+                    .replace(/matrix\(|\)/g, "")
+                    .split(",");
+
+            return Math.round(
+
+                Math.atan2(
+                    parseFloat(parts[1]),
+                    parseFloat(parts[0])
+                ) * (180 / Math.PI) * 10
+
+            ) / 10;
+
+        }
+
+    );
+
+
+    window.addEventListener(
+
+        "scroll",
+
+        function() {
+
+
+            if (window.innerWidth <= 900) {
+
+                return;
+
+            }
+
+
+            const rect =
+                intro.getBoundingClientRect();
+
+            const viewport =
+                window.innerHeight;
+
+
+            if (
+                rect.bottom < 0 ||
+                rect.top > viewport
+            ) {
+
+                return;
+
+            }
+
+
+            const progress =
+                (viewport - rect.top) /
+                (viewport + rect.height);
+
+
+            photos.forEach(
+                function(photo, index) {
+
+
+                    const depth =
+                        parseFloat(photo.dataset.depth) || 10;
+
+                    const movement =
+                        (progress - .5) * depth;
+
+
+                    photo.style.transform =
+                        "translateY(" +
+                        movement +
+                        "px) rotate(" +
+                        rotations[index] +
+                        "deg)";
+
+                }
+            );
+
+        },
+
+        { passive: true }
+
+    );
+
+
+})();
+
+
+/* =========================================================
+   BACK TO INDEX BUTTON
+
+   Shows the floating button only while the viewport is
+   somewhere between the first project and the last one.
+   The jump itself is handled by the href and the page's
+   native smooth scrolling — no scroll maths needed here.
+========================================================= */
+
+(function() {
+
+
+    const button =
+        document.getElementById("backToIndex");
+
+    const first =
+        document.getElementById("forest");
+
+    const last =
+        document.getElementById("cwarmer");
+
+
+    if (!button || !first || !last) {
+
+        return;
+
+    }
+
+
+    function updateButton() {
+
+
+        const viewport =
+            window.innerHeight;
+
+
+        const startsAt =
+            first.getBoundingClientRect().top;
+
+        const endsAt =
+            last.getBoundingClientRect().bottom;
+
+
+        /* Inside the work run when the first project has
+           scrolled past halfway up and the last one hasn't
+           finished leaving yet. */
+
+        const inWorkRun =
+            startsAt < (viewport * .5) &&
+            endsAt > 0;
+
+
+        button.classList.toggle(
+            "is-visible",
+            inWorkRun
+        );
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateButton,
+        { passive: true }
+    );
+
+
+    updateButton();
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>
