@@ -60,7 +60,7 @@
          #5a7000  deep chartreuse   4.95:1
     ===================================================== */
 
-    --acid-ink: #4f7d0a;
+    --acid-ink: #6c6c6c;
 
 
     /* ---------------------------------------------------
@@ -1372,7 +1372,7 @@ button {
 
 /* =========================================================
    WORLD INTRO
-========================================================= */
+========================================================= 
 
 .world {
 
@@ -1427,6 +1427,7 @@ button {
 
 }
 
+*/
 
 /* =========================================================
    HOW I SEE THINGS
@@ -2556,7 +2557,7 @@ button {
     padding:
         160px
         0
-        90px;
+        0px; /*  it was 90 earlier kuttuoos */
 
     overflow: hidden;
 
@@ -2636,7 +2637,7 @@ button {
            same value as the cream page and the glyph edges
            dissolved. This crop stays in the warm mid-tones. */
 
-        background-size: 400% auto;
+        background-size: 200% auto;
 
         background-position: 40% 66%;
 
@@ -2766,7 +2767,7 @@ button {
 
     position: absolute;
 
-    left: 8vw;
+    left: 5vw;
 
     bottom: 50px;
 
@@ -2811,9 +2812,10 @@ button {
 
     max-height: 900px;
 
-    overflow: hidden;
+    overflow: hidden; /* kuttoos it was hidden*/
 
     cursor: crosshair;
+
 
 }
 
@@ -2971,7 +2973,7 @@ button {
 
     width: 100%;
 
-    aspect-ratio: 4 / 3;
+      aspect-ratio: 4 / 3; /* kuttoos*/
 
     object-fit: cover;
 
@@ -3834,9 +3836,9 @@ button {
 
     left: 4%;
 
-    top: 25px;
+    top: 25px; 
 
-    width: 57%;
+    width: 77%;
 
     padding: 10px;
 
@@ -3920,6 +3922,7 @@ button {
     top: 30px;
 
     transform: rotate(6deg);
+    z-index: 11;
 
 }
 
@@ -3931,6 +3934,7 @@ button {
     top: 350px;
 
     transform: rotate(-5deg);
+    z-index: 10;
 
 }
 
@@ -5192,9 +5196,9 @@ button {
 
                 <br><br>
 
-                A collection of films, photographs,
+                A collection of edits, films,
                 places I've been, things I've built,
-                and a little bit of what goes on
+                <br>and a little bit of what goes on
                 between the finished pieces.
 
             </p>
@@ -5221,7 +5225,7 @@ button {
 
         <div class="hero-location">
 
-            Currently
+            Currently in
 
             <span>
                 Bengaluru
@@ -5279,41 +5283,41 @@ button {
              signs makes the group feel layered rather than flat. -->
 
         <div class="intro-photo intro-photo-1" data-depth="14">
-            <img src="assets/visual-02.jpg" alt="">
+            <img src="assets/fasilbts-03.png" alt="">
         </div>
 
         <div class="intro-photo intro-photo-2" data-depth="-20">
-            <img src="assets/visual-05.jpg" alt="">
+            <img src="assets/fasilbts-02.png" alt="">
         </div>
 
         <div class="intro-photo intro-photo-3" data-depth="9">
-            <img src="assets/visual-07.jpg" alt="">
+            <img src="assets/fasilbts-01.png" alt="">
         </div>
 
         <div class="intro-photo intro-photo-4" data-depth="-13">
             <img
-                src="assets/working-01.jpg"
+                src="assets/fasilbts-05.png"
                 onerror="this.src='assets/visual-01.jpg'"
                 alt="">
         </div>
 
         <div class="intro-photo intro-photo-5" data-depth="18">
             <img
-                src="assets/working-02.jpg"
+                src="assets/fasilbts-06.png"
                 onerror="this.src='assets/visual-04.jpg'"
                 alt="">
         </div>
 
         <div class="intro-photo intro-photo-6" data-depth="-9">
             <img
-                src="assets/working-03.jpg"
+                src="assets/fasilbts-07.png"
                 onerror="this.src='assets/visual-06.jpg'"
                 alt="">
         </div>
 
         <div class="intro-photo intro-photo-7" data-depth="22">
             <img
-                src="assets/working-04.jpg"
+                src="assets/fasilbts-08.png"
                 onerror="this.src='assets/proof-03.jpg'"
                 alt="">
         </div>
@@ -5326,21 +5330,16 @@ button {
 
         <h2 class="intro-title">
 
-            I've always been
-            more interested in
-            <span class="blue">
-                how things feel
-            </span>
-
-            than how they're
-            supposed to look.
+           I work somewhere
+            between the <span class="blue">story</span>
+            <br>and the <span class="blue">footage.</span>
+            
 
             <br><br>
 
             <span class="dim">
-                That's probably why I ended up
-                with a camera in one hand
-                and a timeline in the other.
+                But here, I'm in<br>
+                for <span class="blue">the edits.</span>
             </span>
 
         </h2>
@@ -5350,96 +5349,38 @@ button {
 
 </section>
 
-
 <!-- =====================================================
-     WORLD
-===================================================== -->
-
-<section class="world">
-
-
-    <div class="world-grid">
-
-
-        <h2 class="world-title">
-
-            THIS IS<br>
-            MY WORLD.
-
-        </h2>
-
-
-        <p class="world-copy">
-
-            I'm a media consultant, filmmaker,
-            editor and photographer.
-
-            <br><br>
-
-            Some days I'm sitting in front of
-            a timeline cutting a SaaS product film.
-
-            Other days I'm somewhere in the middle
-            of nowhere trying to make sense of
-            a few hours of footage.
-
-            <br><br>
-
-            The work changes.
-
-            The way I look at things doesn't.
-
-        </p>
-
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PHOTOGRAPHY
+     RECEIPTS
 ========================================================= -->
 
-<section
-    class="photography"
-    id="photography"
->
+<section class="receipts">
 
 
-    <div class="photo-header">
+    <div class="receipts-head">
 
 
-        <div>
+        <h2 class="receipts-title">
 
-            <div class="label">
-                01 / THE CAMERA ROLL
-            </div>
+            RESULTS<br>
+            FIRST.
 
-
-            <h2 class="photo-title">
-
-                HOW<br>
-                I <span>SEE.</span>
-
-            </h2>
-
-        </div>
+        </h2>
 
 
-        <p class="photo-copy">
+        <p class="receipts-copy">
 
-            This is probably the closest thing
-            to seeing the world through my eyes.
+            Some things are easier to show
+            than explain.
 
             <br><br>
 
-            Some of these became films.
+            Published work.
+            Client responses.
+            Audience reactions.
 
-            Some became memories.
+            <br><br>
 
-            Some just stayed on the hard drive
-            because I liked the frame.
+            Just the evidence.
 
         </p>
 
@@ -5447,79 +5388,43 @@ button {
     </div>
 
 
-    <!-- =================================================
-         PANORAMIC HERO PHOTO
-    ================================================= -->
-
-    <div class="panorama">
+    <div class="receipts-wall">
 
 
-        <div class="panorama-frame">
+        <div class="receipt-primary">
 
             <img
-                src="assets/visual-01.jpg"
-                alt="Fasil panoramic photograph"
+                src="assets/proof-01.jpg"
+                alt="Primary proof"
             >
 
 
-            <div class="panorama-overlay"></div>
+            <div class="receipt-caption">
 
+                <span>
+                    Published
+                </span>
 
-            <div class="panorama-note">
-
-                one frame<br>
-                worth keeping
+                <span>
+                    Primary
+                </span>
 
             </div>
 
         </div>
 
 
-        <div class="panorama-caption">
-
-            <span>
-                01 / PANORAMA
-            </span>
-
-            <span>
-                Shot by Fasil
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         SCATTERED REST OF ROLL
-    ================================================= -->
-
-    <div
-        class="photo-stage"
-        id="photoStage"
-    >
-
-
-        <div
-            class="photo-cursor"
-            id="photoCursor"
-        >
-            look<br>
-            closer
-        </div>
-
-
-        <article class="photo-card photo-1">
+        <div class="receipt-card receipt-card-2">
 
             <img
-                src="assets/visual-02.jpg"
-                alt="Photograph by Fasil"
+                src="assets/proof-02.jpg"
+                alt="Client response"
             >
 
-            <div class="photo-card-caption">
+            <div class="receipt-caption">
 
                 <span>
-                    Frame
+                    Response
                 </span>
 
                 <span>
@@ -5528,20 +5433,20 @@ button {
 
             </div>
 
-        </article>
+        </div>
 
 
-        <article class="photo-card photo-2">
+        <div class="receipt-card receipt-card-3">
 
             <img
-                src="assets/visual-03.webp"
-                alt="Photograph by Fasil"
+                src="assets/proof-03.jpg"
+                alt="Client response"
             >
 
-            <div class="photo-card-caption">
+            <div class="receipt-caption">
 
                 <span>
-                    Frame
+                    Response
                 </span>
 
                 <span>
@@ -5550,20 +5455,20 @@ button {
 
             </div>
 
-        </article>
+        </div>
 
 
-        <article class="photo-card photo-3">
+        <div class="receipt-card receipt-card-4">
 
             <img
-                src="assets/visual-04.jpg"
-                alt="Photograph by Fasil"
+                src="assets/proof-04.jpg"
+                alt="Client response"
             >
 
-            <div class="photo-card-caption">
+            <div class="receipt-caption">
 
                 <span>
-                    Frame
+                    Response
                 </span>
 
                 <span>
@@ -5572,20 +5477,20 @@ button {
 
             </div>
 
-        </article>
+        </div>
 
 
-        <article class="photo-card photo-4">
+        <div class="receipt-card receipt-card-5">
 
             <img
-                src="assets/visual-04b.jpg"
-                alt="Photograph by Fasil"
+                src="assets/proof-05.jpg"
+                alt="Client response"
             >
 
-            <div class="photo-card-caption">
+            <div class="receipt-caption">
 
                 <span>
-                    Frame
+                    Response
                 </span>
 
                 <span>
@@ -5594,100 +5499,15 @@ button {
 
             </div>
 
-        </article>
-
-
-        <article class="photo-card photo-5">
-
-            <img
-                src="assets/visual-05.jpg"
-                alt="Photograph by Fasil"
-            >
-
-            <div class="photo-card-caption">
-
-                <span>
-                    Frame
-                </span>
-
-                <span>
-                    06
-                </span>
-
-            </div>
-
-        </article>
-
-
-        <article class="photo-card photo-6">
-
-            <img
-                src="assets/visual-06.jpg"
-                alt="Photograph by Fasil"
-            >
-
-            <div class="photo-card-caption">
-
-                <span>
-                    Frame
-                </span>
-
-                <span>
-                    07
-                </span>
-
-            </div>
-
-        </article>
-
-
-        <article class="photo-card photo-7">
-
-            <img
-                src="assets/visual-07.jpg"
-                alt="Photograph by Fasil"
-            >
-
-            <div class="photo-card-caption">
-
-                <span>
-                    Frame
-                </span>
-
-                <span>
-                    08
-                </span>
-
-            </div>
-
-        </article>
-
-
-        <article class="photo-card photo-8">
-
-            <img
-                src="assets/visual-02.jpg"
-                alt="Photograph by Fasil"
-            >
-
-            <div class="photo-card-caption">
-
-                <span>
-                    Archive
-                </span>
-
-                <span>
-                    09
-                </span>
-
-            </div>
-
-        </article>
+        </div>
 
 
     </div>
 
 </section>
+
+
+
 
 
 <!-- =====================================================
@@ -5702,7 +5522,7 @@ button {
 
         <div class="clients-label">
 
-            Along the way
+            Some of the brands I've associated with
 
         </div>
 
@@ -5756,7 +5576,7 @@ button {
             </div>
 
             <div class="client-logo">
-                <img src="assets/logos/rally-range.png" alt="Rally &amp; Range">
+                <img src="assets/logos/rally-and-ranged.png" alt="Rally &amp; Range">
             </div>
 
             <div class="client-logo">
@@ -5781,15 +5601,15 @@ button {
 
 
     <div class="chapter-num">
-        02 / THINGS I'VE MADE
+        02 / WORKS & PERSONAL PROJECTS
     </div>
 
 
     <h2 class="chapter-title">
 
-        STORIES<br>
-        WORTH<br>
-        WATCHING.
+        PROJECT<br>
+        SHOWCASE<br>
+
 
     </h2>
 
@@ -5798,14 +5618,14 @@ button {
 
         <span class="copy-list">
             <span class="copy-item">Commercial films.</span>
-            <span class="copy-item">Social impact documentaries.</span>
-            <span class="copy-item">Product stories.</span>
+            <span class="copy-item">Social impact Projects.</span>
+            <span class="copy-item">Product Explainers.</span>
             <span class="copy-item">Personal films.</span>
         </span>
 
         <span class="copy-tail">
-            Sometimes carefully planned.
-            Sometimes discovered in the edit.
+            Below are a few edits and project.<br>
+            Click on the titles to play and explore.
         </span>
 
     </p>
@@ -5829,8 +5649,9 @@ button {
         </span>
 
         <span class="video-client">
-            Forest to Fork
+            Channel Trailer Video <br> Landing Page Video
         </span>
+        
 
         <span class="video-arrow">↗</span>
 
@@ -5846,7 +5667,7 @@ button {
         </span>
 
         <span class="video-client">
-            Diary of a Hunting Guide
+            Series - Diary of a Hunting Guide<br>
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5863,7 +5684,7 @@ button {
         </span>
 
         <span class="video-client">
-            Diary of a Hunting Guide
+            Series - Diary of a Hunting Guide<br>
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5880,7 +5701,7 @@ button {
         </span>
 
         <span class="video-client">
-            Personal Film
+            Personal Travel Film 
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5897,7 +5718,7 @@ button {
         </span>
 
         <span class="video-client">
-            Personal Film
+            Personal Travel Montage
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5914,7 +5735,7 @@ button {
         </span>
 
         <span class="video-client">
-            Western Ghats
+            Personal Travel Film
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5931,7 +5752,7 @@ button {
         </span>
 
         <span class="video-client">
-            Personal Film
+            Personal Travel Montage
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5948,7 +5769,7 @@ button {
         </span>
 
         <span class="video-client">
-            Siemens × Nasscom
+            Event Highlights Edit
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5965,7 +5786,7 @@ button {
         </span>
 
         <span class="video-client">
-            Product Film
+            SaaS Feature Video
         </span>
 
         <span class="video-arrow">↗</span>
@@ -5978,11 +5799,11 @@ button {
         <span class="video-number">10</span>
 
         <span class="video-name">
-            cWarmer
+            cWarmer Explainer
         </span>
 
         <span class="video-client">
-            Codilar
+            SaaS Explainer Video for Landing Page
         </span>
 
         <span class="video-arrow">↗</span>
@@ -6224,9 +6045,9 @@ button {
 
     <h2 class="chapter-title">
 
-        BEFORE<br>
-        IT WAS<br>
-        A JOB.
+        FROM MY<br>
+        TRAVEL<br>
+        FILMS.
 
     </h2>
 
@@ -6890,7 +6711,7 @@ button {
         <div>
 
             <div class="label">
-                ALSO / STOCK FOOTAGE
+               ALSO, I SELL STOCK FOOTAGE ONLINE AS WELL
             </div>
 
 
@@ -6932,7 +6753,7 @@ button {
 
                 <span class="client">Adobe Stock</span>
 
-                <span class="client">Getty Images</span>
+                <span class="client">Envato Elements</span>
 
                 <span class="client">Pond5</span>
 
@@ -6962,7 +6783,7 @@ button {
     <div class="stock-collage">
 
         <img
-            src="assets/stock-collage.jpg"
+            src="assets/stockgallery.png"
             alt="Stock footage published across Shutterstock, Adobe Stock and other marketplaces"
         >
 
@@ -6975,7 +6796,7 @@ button {
 <!-- =====================================================
      ABOUT
 ========================================================= -->
-
+<!--
 <section
     class="about"
     id="about"
@@ -7050,6 +6871,8 @@ button {
 
 </section>
 
+-->
+
 
 <!-- =====================================================
      PRINCIPLES
@@ -7060,8 +6883,8 @@ button {
 
     <h2 class="principles-title">
 
-        HOW<br>
-        I WORK.
+        THE<br>
+        PROCESS.
 
     </h2>
 
@@ -7218,6 +7041,204 @@ button {
 
 </section>
 
+<!-- =====================================================
+     VIDEO TESTIMONIALS
+
+     Cards stay as thumbnails until clicked — they use the
+     same lazy YouTube embed as every other video on the page,
+     so none of these load a player until someone asks for one.
+
+     TO SWAP A VIDEO: change data-video to the YouTube ID and
+     update the thumbnail src to match. Vertical shorts need
+     data-vertical="true" so the card uses a 9:16 frame.
+
+     Then edit the three lines under each video: client name,
+     business type, and location.
+========================================================= -->
+
+<section class="video-testimonials">
+
+
+    <div class="label">
+        IN THEIR WORDS
+    </div>
+
+
+    <h2 class="vt-title">
+
+        CLIENT<br>
+        REACTIONS.
+
+    </h2>
+
+
+    <div class="vt-grid">
+
+
+        <!-- Vertical short -->
+
+        <div class="vt-card vt-card-vertical">
+
+            <div
+                class="video-player"
+                data-video="G30FpHYPe58"
+                data-vertical="true"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/G30FpHYPe58/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Andi K</span>
+
+                <span class="vt-business">Rally & Range</span>
+
+                <span class="vt-location">Albury, AUS</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 02 
+        
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Michael Malak</span>
+
+                <span class="vt-business">JAPM [Construction Management]</span>
+
+                <span class="vt-location">Sydney, AUS</span>
+
+            </div>
+
+        </div>
+        -->
+
+        <!-- Horizontal 03 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="FIkVBTWzaNY"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/FIkVBTWzaNY/sddefault.jpg"
+                    alt="Client testimonial"
+                >
+
+  
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Luke Risk</span>
+
+                <span class="vt-business">Forest to Fork</span>
+
+                <span class="vt-location">NSW, AUS</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 04 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Avirup Mondal</span>
+
+                <span class="vt-business">Surgegrowth[SaaS]</span>
+
+                <span class="vt-location">Bengaluru, India</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Horizontal 05 -->
+
+        <div class="vt-card">
+
+            <div
+                class="video-player"
+                data-video="OcESDNo18HI"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
+                    alt="Client testimonial"
+                >
+
+                <div class="video-play"></div>
+
+            </div>
+
+            <div class="vt-meta">
+
+                <span class="vt-client">Salim Touma</span>
+
+                <span class="vt-business">Aeris Vodka</span>
+
+                <span class="vt-location">Sydney, AUS</span>
+
+            </div>
+
+        </div>
+        
+
+
+    </div>
+
+
+</section>
+
 
 <!-- =====================================================
      TESTIMONIALS
@@ -7351,235 +7372,42 @@ button {
 
 </section>
 
-
 <!-- =====================================================
-     VIDEO TESTIMONIALS
-
-     Cards stay as thumbnails until clicked — they use the
-     same lazy YouTube embed as every other video on the page,
-     so none of these load a player until someone asks for one.
-
-     TO SWAP A VIDEO: change data-video to the YouTube ID and
-     update the thumbnail src to match. Vertical shorts need
-     data-vertical="true" so the card uses a 9:16 frame.
-
-     Then edit the three lines under each video: client name,
-     business type, and location.
+     PHOTOGRAPHY
 ========================================================= -->
 
-<section class="video-testimonials">
+<section
+    class="photography"
+    id="photography"
+>
 
 
-    <div class="label">
-        IN THEIR WORDS
-    </div>
+    <div class="photo-header">
 
 
-    <h2 class="vt-title">
+        <div>
 
-        WHAT CLIENTS<br>
-        ACTUALLY SAY.
-
-    </h2>
-
-
-    <div class="vt-grid">
-
-
-        <!-- Vertical short -->
-
-        <div class="vt-card vt-card-vertical">
-
-            <div
-                class="video-player"
-                data-video="G30FpHYPe58"
-                data-vertical="true"
-            >
-
-                <img
-                    src="https://img.youtube.com/vi/G30FpHYPe58/maxresdefault.jpg"
-                    alt="Client testimonial"
-                >
-
-                <div class="video-play"></div>
-
+            <div class="label">
+                FASIL'S VISUAL LANGUAGE
             </div>
 
-            <div class="vt-meta">
 
-                <span class="vt-client">Client Name</span>
+            <h2 class="photo-title">
 
-                <span class="vt-business">Business Type</span>
+                VISUAL<br>
+                <span>LINGO.ㅤㅤ ㅤ</span>
 
-                <span class="vt-location">City, Country</span>
-
-            </div>
+            </h2>
 
         </div>
 
 
-        <!-- Horizontal 02 -->
+        <p class="photo-copy">
 
-        <div class="vt-card">
-
-            <div
-                class="video-player"
-                data-video="OcESDNo18HI"
-            >
-
-                <img
-                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
-                    alt="Client testimonial"
-                >
-
-                <div class="video-play"></div>
-
-            </div>
-
-            <div class="vt-meta">
-
-                <span class="vt-client">Client Name</span>
-
-                <span class="vt-business">Business Type</span>
-
-                <span class="vt-location">City, Country</span>
-
-            </div>
-
-        </div>
-
-
-        <!-- Horizontal 03 -->
-
-        <div class="vt-card">
-
-            <div
-                class="video-player"
-                data-video="OcESDNo18HI"
-            >
-
-                <img
-                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
-                    alt="Client testimonial"
-                >
-
-                <div class="video-play"></div>
-
-            </div>
-
-            <div class="vt-meta">
-
-                <span class="vt-client">Client Name</span>
-
-                <span class="vt-business">Business Type</span>
-
-                <span class="vt-location">City, Country</span>
-
-            </div>
-
-        </div>
-
-
-        <!-- Horizontal 04 -->
-
-        <div class="vt-card">
-
-            <div
-                class="video-player"
-                data-video="OcESDNo18HI"
-            >
-
-                <img
-                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
-                    alt="Client testimonial"
-                >
-
-                <div class="video-play"></div>
-
-            </div>
-
-            <div class="vt-meta">
-
-                <span class="vt-client">Client Name</span>
-
-                <span class="vt-business">Business Type</span>
-
-                <span class="vt-location">City, Country</span>
-
-            </div>
-
-        </div>
-
-
-        <!-- Horizontal 05 -->
-
-        <div class="vt-card">
-
-            <div
-                class="video-player"
-                data-video="OcESDNo18HI"
-            >
-
-                <img
-                    src="https://img.youtube.com/vi/OcESDNo18HI/maxresdefault.jpg"
-                    alt="Client testimonial"
-                >
-
-                <div class="video-play"></div>
-
-            </div>
-
-            <div class="vt-meta">
-
-                <span class="vt-client">Client Name</span>
-
-                <span class="vt-business">Business Type</span>
-
-                <span class="vt-location">City, Country</span>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-<!-- =====================================================
-     RECEIPTS
-========================================================= -->
-
-<section class="receipts">
-
-
-    <div class="receipts-head">
-
-
-        <h2 class="receipts-title">
-
-            THE<br>
-            RECEIPTS.
-
-        </h2>
-
-
-        <p class="receipts-copy">
-
-            Some things are easier to show
-            than explain.
-
+            A small collection of frames from my camera roll, travel and works. 
             <br><br>
+            Mostly here to show you how I see the world.
 
-            Published work.
-            Client responses.
-            Audience reactions.
-
-            <br><br>
-
-            Just the evidence.
 
         </p>
 
@@ -7587,118 +7415,242 @@ button {
     </div>
 
 
-    <div class="receipts-wall">
+    <!-- =================================================
+         PANORAMIC HERO PHOTO
+    ================================================= -->
+
+    <div class="panorama">
 
 
-        <div class="receipt-primary">
+        <div class="panorama-frame">
 
             <img
-                src="assets/proof-01.jpg"
-                alt="Primary proof"
+                src="assets/visual-01.jpg"
+                alt="Fasil panoramic photograph"
             >
 
 
-            <div class="receipt-caption">
+            <div class="panorama-overlay"></div>
 
-                <span>
-                    Published
-                </span>
 
-                <span>
-                    Primary
-                </span>
+            <div class="panorama-note">
+
+                those frames<br>
+                worth keeping
 
             </div>
 
         </div>
 
 
-        <div class="receipt-card receipt-card-2">
+        <div class="panorama-caption">
+
+            <span>
+                was so psyched with dune's colour grade,
+            </span>
+
+            <span>
+                So I graded this photo I shot when i was in Oman.
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SCATTERED REST OF ROLL
+    ================================================= -->
+
+    <div
+        class="photo-stage"
+        id="photoStage"
+    >
+
+
+        <div
+            class="photo-cursor"
+            id="photoCursor"
+        >
+            look<br>
+            closer
+        </div>
+
+
+        <article class="photo-card photo-1">
 
             <img
-                src="assets/proof-02.jpg"
-                alt="Client response"
+                src="assets/visual-08.jpg"
+                alt="Photograph by Fasil"
             >
 
-            <div class="receipt-caption">
+            <div class="photo-card-caption">
 
                 <span>
-                    Response
+                    One Stormy Morning
                 </span>
 
                 <span>
-                    02
+                    Lakshadweep Islands 2024
                 </span>
 
             </div>
 
-        </div>
+        </article>
 
 
-        <div class="receipt-card receipt-card-3">
+        <article class="photo-card photo-2">
 
             <img
-                src="assets/proof-03.jpg"
-                alt="Client response"
+                src="assets/visual-03.webp"
+                alt="Photograph by Fasil"
             >
 
-            <div class="receipt-caption">
+            <div class="photo-card-caption">
 
                 <span>
-                    Response
+                    Experimenting with shadows
                 </span>
 
                 <span>
-                    03
+                   CALICUT, INDIA
                 </span>
 
             </div>
 
-        </div>
+        </article>
 
 
-        <div class="receipt-card receipt-card-4">
+        <article class="photo-card photo-3">
 
             <img
-                src="assets/proof-04.jpg"
-                alt="Client response"
+                src="assets/visual-04.jpg"
+                alt="Photograph by Fasil"
             >
 
-            <div class="receipt-caption">
+            <div class="photo-card-caption">
 
                 <span>
-                    Response
+                    Old Monk Lady who hosted me
                 </span>
 
                 <span>
-                    04
+                    SPITI, THE HIMALAYAS
                 </span>
 
             </div>
 
-        </div>
+        </article>
 
 
-        <div class="receipt-card receipt-card-5">
+        <article class="photo-card photo-4">
 
             <img
-                src="assets/proof-05.jpg"
-                alt="Client response"
+                src="assets/visual-04b.jpg"
+                alt="Photograph by Fasil"
             >
 
-            <div class="receipt-caption">
+            <div class="photo-card-caption">
 
                 <span>
-                    Response
+                    TRAVELLING FOR WORK
                 </span>
 
                 <span>
-                    05
+                    RANDOM SUNRISE
                 </span>
 
             </div>
 
-        </div>
+        </article>
+
+
+        <article class="photo-card photo-5">
+
+            <img
+                src="assets/visual-05.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    THE NIGHT I WANT TO GO BACK TO
+                </span>
+
+                <span>
+                    WAYANAD, KERALA
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-6">
+
+            <img
+                src="assets/visual-06.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                   OFF THE GRID LIFE DURING THE GREAT FLOODS
+                </span>
+
+                <span>
+                    KERALA 2018
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-7">
+
+            <img
+                src="assets/visual-07.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    LOVED THIS ARABIAN MURAL
+                </span>
+
+                <span>
+                    AJMAN TRIP
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="photo-card photo-8">
+
+            <img
+                src="assets/visual-02.jpg"
+                alt="Photograph by Fasil"
+            >
+
+            <div class="photo-card-caption">
+
+                <span>
+                    DELHI ARCHIVES
+                </span>
+
+                <span>
+                    2023
+                </span>
+
+            </div>
+
+        </article>
 
 
     </div>
@@ -7725,7 +7677,7 @@ button {
 
 
         <div class="contact-label">
-            06 / IF YOU'VE MADE IT THIS FAR
+            06 / IF YOU'VE MADE IT THIS FAR, THANKS LEGEND!
         </div>
 
 
@@ -7758,7 +7710,7 @@ button {
 
         <br>
 
-        Available globally
+        Available for ANZ Timezones
 
     </div>
 
