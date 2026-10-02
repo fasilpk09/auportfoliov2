@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fivesquare — Film production and post for Australian and NZ businesses</title>
+<meta name="description" content="Fivesquare is a production and post-production studio for Australian and New Zealand businesses. Your crew shoots, we direct remotely, then edit, grade and deliver. Footage in by 5pm, edit on your desk by morning.">
+<meta property="og:title" content="Fivesquare — Good films for good businesses">
+<meta property="og:description" content="Remote direction, editing, colour and content systems for ANZ businesses. Fixed fees in AUD.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fivesquare.co/">
+<meta property="og:image" content="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f3f1e8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f3f1e8'/><rect x='8' y='8' width='13' height='13' rx='2' fill='%23070707'/><circle cx='24' cy='24' r='4.5' fill='%23d9ff3e' stroke='%23070707' stroke-width='1.5'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens ===== */
+:root{
+  --black:#070707;
+  --cream:#f3f1e8;
+  --acid:#d9ff3e;
+  --paper:#fbfaf5;          /* lifted cream for cards */
+  --sand:#e8e5d8;           /* deeper cream for bands */
+  --ink-2:#4a4a44;          /* body copy */
+  --ink-3:#6b6b64;          /* secondary */
+  --line:rgba(7,7,7,.12);
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:18px;                 /* friendly radius for media and cards */
+  --gutter:clamp(20px,5vw,64px);
+  --max:1280px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(84px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--cream);color:var(--black);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--acid);color:var(--black)}
+:focus-visible{outline:2px solid var(--black);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.muted{color:var(--ink-3)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* The signature: an acid highlighter stroke behind a phrase. Used sparingly. */
+.hl{background:linear-gradient(transparent 52%,var(--acid) 52%,var(--acid) 92%,transparent 92%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ===== Nav ===== */
+.bar{position:sticky;top:0;z-index:50;background:rgba(243,241,232,.88);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.bar.scrolled{border-bottom-color:var(--line)}
+.bar__in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-weight:600;letter-spacing:-.04em;font-size:22px;text-decoration:none}
+.logo i{width:12px;height:12px;border-radius:50%;background:var(--acid);border:1.5px solid var(--black);display:inline-block;transform:translateY(4px)}
+.nav{display:flex;align-items:center;gap:30px;font-weight:500;font-size:15px}
+.nav a{text-decoration:none}
+.nav a:not(.btn):hover{text-decoration:underline;text-underline-offset:5px}
+@media (max-width:820px){.nav a:not(.btn){display:none}}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--acid);color:var(--black);text-decoration:none;font-family:var(--body);font-weight:600;font-size:16px;padding:14px 22px;border:1.5px solid var(--black);border-radius:999px;cursor:pointer;box-shadow:3px 3px 0 var(--black);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--black)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--black)}
+.btn--sm{padding:9px 16px;font-size:14px;box-shadow:2px 2px 0 var(--black)}
+.btn--ghost{background:transparent;box-shadow:none}
+.btn--ghost:hover{background:var(--paper);box-shadow:none;transform:none}
+
+/* ===== Hero ===== */
+.hero{padding:clamp(48px,8vw,100px) 0 clamp(64px,9vw,120px)}
+.hero__eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 10px;font-size:14px;color:var(--ink-2);margin-bottom:28px}
+.hero__eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acid);border:1px solid var(--black)}
+.hero h1{font-family:var(--display);font-weight:600;letter-spacing:-.055em;line-height:.95;font-size:clamp(52px,9.2vw,138px);margin:0;max-width:13ch}
+.hero__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(32px,5vw,72px);align-items:end;margin-top:clamp(36px,5vw,56px)}
+.hero__lead{font-size:clamp(19px,1.7vw,22px);line-height:1.5;color:var(--ink-2);margin:0 0 30px;max-width:34ch}
+.hero__lead b{color:var(--black);font-weight:600}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero__media{position:relative;display:block;text-decoration:none}
+.hero__media img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r);background:var(--sand)}
+.hero__cap{position:absolute;left:16px;bottom:16px;background:var(--cream);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:500}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:var(--acid);border:1.5px solid var(--black);display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.play svg{width:20px;margin-left:4px}
+a:hover > .play{transform:translate(-50%,-50%) scale(1.07)}
+.sticker{position:absolute;right:-18px;top:-30px;width:128px;height:128px;border-radius:50%;background:var(--black);color:var(--cream);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-weight:600;font-size:15px;line-height:1.15;letter-spacing:-.02em;transform:rotate(9deg);padding:14px}
+.sticker b{color:var(--acid);font-weight:600}
+@media (max-width:900px){.hero__row{grid-template-columns:1fr}.sticker{right:10px;width:108px;height:108px;font-size:13px}}
+
+/* ===== Logos strip ===== */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+.trust__in{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center}
+.trust__logos{display:flex;flex-wrap:wrap;align-items:center;gap:18px 40px}
+/* Logo PNGs are light-on-dark from the portfolio; invert so they read on cream. Replace with dark versions when self-hosting. */
+.trust__logos img{height:28px;width:auto;filter:invert(1) grayscale(1);opacity:.7}
+@media (max-width:820px){.trust__in{grid-template-columns:1fr}}
+
+/* ===== Sections ===== */
+.sec{padding:clamp(88px,12vw,150px) 0}
+.sec--sand{background:var(--sand)}
+.head{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,80px);align-items:end;margin-bottom:clamp(44px,6vw,72px)}
+.kicker{display:block;color:var(--ink-3);margin-bottom:16px}
+.h2{font-family:var(--display);font-weight:600;letter-spacing:-.05em;line-height:.98;font-size:clamp(42px,6.4vw,88px);margin:0}
+.head p{color:var(--ink-2);margin:0 0 14px;max-width:44ch;font-size:18px}
+@media (max-width:900px){.head{grid-template-columns:1fr}}
+
+/* Statement */
+.statement{padding:clamp(88px,12vw,150px) 0 clamp(40px,6vw,70px)}
+.statement p{font-family:var(--display);font-weight:500;letter-spacing:-.04em;line-height:1.08;font-size:clamp(32px,4.6vw,64px);margin:0;max-width:20ch}
+.statement .soft{color:#9a988d}
+
+/* ===== Proof ===== */
+.proof{display:grid;grid-template-columns:repeat(12,1fr);gap:22px;align-items:start}
+.snap{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 10px 12px;box-shadow:0 18px 40px -22px rgba(7,7,7,.35)}
+.snap img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;background:var(--sand)}
+.snap figcaption{display:flex;justify-content:space-between;margin-top:9px;color:var(--ink-3)}
+.s1{grid-column:1 / span 3;transform:rotate(-2.5deg);margin-top:30px}
+.s2{grid-column:4 / span 3;transform:rotate(1.5deg)}
+.s3{grid-column:7 / span 3;transform:rotate(-1deg);margin-top:46px}
+.s4{grid-column:10 / span 3;transform:rotate(2deg);margin-top:10px}
+.stat{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+.stat div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.stat b{display:block;font-family:var(--display);font-weight:600;letter-spacing:-.05em;font-size:clamp(44px,5vw,68px);line-height:1}
+.stat span{color:var(--ink-2);font-size:15px}
+@media (max-width:900px){.s1,.s2,.s3,.s4{grid-column:span 6;margin-top:0}.stat{grid-template-columns:1fr}}
+@media (max-width:520px){.s1,.s2,.s3,.s4{grid-column:1 / -1}}
+
+/* ===== How it works ===== */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px 28px}
+.steps .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--acid);border:1.5px solid var(--black);font-family:var(--display);font-weight:600;font-size:15px;margin-bottom:22px}
+.steps h3{font-family:var(--display);font-weight:600;letter-spacing:-.03em;font-size:26px;line-height:1.05;margin:0 0 10px}
+.steps p{color:var(--ink-2);margin:0;font-size:16px}
+@media (max-width:980px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.overnight{margin-top:22px;display:grid;grid-template-columns:auto 1fr auto;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(28px,4vw,44px);background:var(--black);color:var(--cream);border-radius:var(--r)}
+.overnight strong{font-family:var(--display);font-weight:600;letter-spacing:-.05em;font-size:clamp(34px,4.4vw,60px);line-height:.95;display:block}
+.overnight strong em{font-style:normal;color:var(--acid)}
+.overnight p{margin:0;max-width:46ch;color:#cfcdc3}
+@media (max-width:900px){.overnight{grid-template-columns:1fr}}
+
+/* ===== Services ===== */
+.services{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.svc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px 30px 28px;display:flex;flex-direction:column}
+.svc--lead{grid-column:1 / -1;background:var(--acid);border:1.5px solid var(--black);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.svc__top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.pill{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:500}
+.svc h3{font-family:var(--display);font-weight:600;letter-spacing:-.04em;font-size:clamp(28px,2.8vw,38px);line-height:1;margin:0 0 14px}
+.svc--lead h3{font-size:clamp(38px,4.6vw,64px)}
+.svc p{color:var(--ink-2);margin:0 0 12px}
+.svc--lead p{color:var(--black)}
+.svc .fit{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-3)}
+.svc--lead .fit{border-top-color:rgba(7,7,7,.25);color:var(--black)}
+@media (max-width:820px){.services{grid-template-columns:1fr}.svc--lead{grid-template-columns:1fr;gap:10px}}
+
+/* ===== Work ===== */
+.case{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;margin-bottom:clamp(48px,6vw,72px)}
+.case__media{position:relative;display:block}
+.case__media img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);background:var(--sand)}
+.case h3{font-family:var(--display);font-weight:600;letter-spacing:-.045em;line-height:1;font-size:clamp(34px,3.8vw,52px);margin:10px 0 18px}
+.case__copy{color:var(--ink-2)}
+.case__copy p{margin:0 0 14px}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.reel{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.film{text-decoration:none;display:block}
+.film__img{position:relative}
+.film img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;background:var(--sand);transition:transform .3s}
+.film:hover img{transform:scale(1.015)}
+.film h4{font-family:var(--display);font-weight:600;letter-spacing:-.03em;font-size:21px;line-height:1.15;margin:14px 0 4px}
+.film:hover h4{text-decoration:underline;text-underline-offset:4px}
+.reel__more{margin-top:36px;text-align:center}
+@media (max-width:900px){.reel{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.reel{grid-template-columns:1fr}}
+
+/* ===== Testimonials ===== */
+.words{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.word{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:32px;display:flex;flex-direction:column}
+.word blockquote{margin:0 0 26px;font-family:var(--display);font-weight:500;letter-spacing:-.03em;font-size:clamp(22px,2.2vw,29px);line-height:1.2}
+.word figcaption{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.word cite{font-style:normal;font-size:15px;color:var(--ink-3);line-height:1.45}
+.word cite b{display:block;color:var(--black);font-weight:600}
+.word a{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--acid)}
+@media (max-width:820px){.words{grid-template-columns:1fr}}
+
+/* ===== Studio ===== */
+.studio{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,90px);align-items:start}
+.studio__note p{margin:0 0 18px;max-width:52ch;font-size:19px;color:var(--ink-2)}
+.studio__note p:first-child{font-family:var(--display);font-weight:500;letter-spacing:-.035em;font-size:clamp(26px,2.6vw,36px);line-height:1.15;color:var(--black)}
+.sig{margin-top:28px;display:flex;align-items:center;gap:14px}
+.sig img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--sand)}
+.sig b{display:block;font-weight:600}
+.team{list-style:none;margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.team li{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.team li:last-child{border-bottom:0}
+.team img{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--sand)}
+.team b{display:block;font-weight:600;font-size:17px;line-height:1.2}
+.team span span{font-size:14px;color:var(--ink-3)}
+.partners{margin-top:clamp(56px,7vw,90px)}
+.partners__list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.partners__list a{display:block;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none;transition:border-color .2s}
+.partners__list a:hover{border-color:var(--black)}
+.partners__list b{display:block;font-family:var(--display);font-weight:600;letter-spacing:-.03em;font-size:24px;margin-bottom:4px}
+.partners__list span{color:var(--ink-3);font-size:15px}
+@media (max-width:900px){.studio{grid-template-columns:1fr}.partners__list{grid-template-columns:1fr}}
+
+/* ===== Contact ===== */
+.contact{background:var(--acid);border-top:1.5px solid var(--black)}
+.contact .h2{font-size:clamp(52px,9vw,128px);letter-spacing:-.055em;line-height:.92}
+.contact__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,90px);margin-top:clamp(44px,6vw,72px)}
+.contact__direct p{font-size:19px;max-width:38ch;margin:0 0 26px}
+.contact__direct .btn{background:var(--black);color:var(--cream);box-shadow:3px 3px 0 rgba(7,7,7,.25)}
+.contact__lines{margin-top:30px;font-size:16px;line-height:1.9}
+.contact__lines a{font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--black)}
+form{display:grid;gap:14px;background:var(--cream);border:1.5px solid var(--black);border-radius:var(--r);padding:clamp(22px,3vw,32px)}
+label{display:grid;gap:6px;font-size:14px;font-weight:500;color:var(--ink-2)}
+input,textarea,select{font:inherit;font-size:17px;color:var(--black);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+select{appearance:none;background:var(--paper) url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23070707' fill='none' stroke-width='1.5'/></svg>") right 14px center no-repeat}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--black);box-shadow:0 0 0 3px var(--acid)}
+textarea{resize:vertical;min-height:100px}
+.form__status{min-height:1.4em;margin:0;font-size:15px;font-weight:500}
+@media (max-width:900px){.contact__grid{grid-template-columns:1fr}}
+
+footer{background:var(--black);color:#bdbab0;padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;font-size:14px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--acid)}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="wrap bar__in">
+    <a class="logo" href="#top" aria-label="Fivesquare home">fivesquare<i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#studio">About</a>
+      <a class="btn btn--sm" href="#contact">Book a chat</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <span class="hero__eyebrow"><i aria-hidden="true"></i>Production &amp; post for Australian and NZ businesses</span>
+    <h1 id="hero-title">Good films for <span class="hl">good businesses.</span></h1>
+    <div class="hero__row">
+      <div>
+        <p class="hero__lead">Your team or a local crew films. <b>We plan it, direct it and finish it</b>: edit, colour, sound and every cut-down you need. Fixed fees, no timesheets.</p>
+        <div class="hero__ctas">
+          <a class="btn" href="#contact">Book a 30-minute chat</a>
+          <a class="btn btn--ghost" href="#work">See the work</a>
+        </div>
+      </div>
+      <a class="hero__media" href="https://www.youtube.com/watch?v=temqJ2R7SfU" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg" alt="Still from Living the Hunter Lifestyle, made for Forest to Fork">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 20 22"><path d="M0 0l20 11L0 22z" fill="#070707"/></svg></span>
+        <span class="hero__cap">Forest to Fork, NSW</span>
+        <span class="sticker" aria-hidden="true"><span>Footage in by 5pm. <b>Edit by morning.</b></span></span>
+        <span class="sr-only">Watch the Forest to Fork channel trailer on YouTube</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<div class="trust">
+  <div class="wrap trust__in">
+    <p class="mono muted" style="margin:0">Trusted by</p>
+    <div class="trust__logos">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/forest-to-fork.png" alt="Forest to Fork" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/japm.png" alt="JAPM" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/rally-and-ranged.png" alt="Rally &amp; Range" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/siemens.png" alt="Siemens" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/adobe.png" alt="Adobe" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/sp-global.png" alt="S&amp;P Global" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/nasscom.png" alt="Nasscom Foundation" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/codilar.png" alt="Codilar" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATEMENT ===== -->
+<section class="statement">
+  <div class="wrap">
+    <p>You already know your trade, and you probably have the footage. <span class="soft">We find the story in it, then set things up so the next one comes easier.</span></p>
+  </div>
+</section>
+
+<!-- ===== PROOF ===== -->
+<section class="sec" style="padding-top:clamp(40px,6vw,70px)" aria-labelledby="proof-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">The proof</span><h2 class="h2" id="proof-title">Easier to show than explain.</h2></div>
+      <p>Real messages from clients after delivery, and what the work did once it went live.</p>
+    </div>
+    <div class="proof">
+      <figure class="snap s1"><img src="https://fasil-peekz.onrender.com/assets/proof-02.jpg" alt="Client message: very good feedback, everyone loves it" loading="lazy"><figcaption class="mono"><span>Client reply</span><span>01</span></figcaption></figure>
+      <figure class="snap s2"><img src="https://fasil-peekz.onrender.com/assets/proof-03.jpg" alt="Client message: this is perfect, you did so good" loading="lazy"><figcaption class="mono"><span>Client reply</span><span>02</span></figcaption></figure>
+      <figure class="snap s3"><img src="https://fasil-peekz.onrender.com/assets/proof-04.jpg" alt="Australian client message praising the direction" loading="lazy"><figcaption class="mono"><span>Client reply</span><span>03</span></figcaption></figure>
+      <figure class="snap s4"><img src="https://fasil-peekz.onrender.com/assets/proof-05.jpg" alt="Client message: very happy with what you've produced, go ahead with the other videos" loading="lazy"><figcaption class="mono"><span>Client reply</span><span>04</span></figcaption></figure>
+      <div class="stat">
+        <div><b>270k</b><span>views on a single coaching clip for Rally &amp; Range, Albury</span></div>
+        <div><b>207k</b><span>views on another from the same series</span></div>
+        <div><b>96k</b><span>views on a third from the series</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="sec sec--sand" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">How it works</span><h2 class="h2" id="how-title">Filmed where you are. Finished by us.</h2></div>
+      <p>The studio is in Bengaluru, so your edit keeps moving after you've knocked off. You deal with one person the whole way through.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Plan</h3><p>Brief, shot list and script structure, agreed in writing before anyone presses record.</p></li>
+      <li><span class="n">2</span><h3>Shoot local</h3><p>Your team or a Sydney crew we brief. We direct live on the call so nothing gets missed.</p></li>
+      <li><span class="n">3</span><h3>Finish</h3><p>Edit, colour, sound and every cut-down you need, on a timeline you can plan around.</p></li>
+      <li><span class="n">4</span><h3>Report</h3><p>A one-page monthly report: what shipped, what it did, what's next.</p></li>
+    </ol>
+    <div class="overnight">
+      <strong>Same day.<br><em>Overnight.</em></strong>
+      <p>Send footage before close of business in Sydney and the first cut is waiting the next morning. Changes go back the same way. No waiting a week for a slot.</p>
+      <a class="btn" href="#contact">Try it on a project</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="sec" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">Services</span><h2 class="h2" id="services-title">Pick what fits. Know the price upfront.</h2></div>
+      <p>Every option is a fixed fee in AUD. If the budget moves, we change the scope, not the quality.</p>
+    </div>
+    <div class="services">
+      <article class="svc svc--lead">
+        <div>
+          <div class="svc__top"><span class="pill">Most people start here</span></div>
+          <h3>Business Story Film</h3>
+        </div>
+        <div>
+          <p>One film that explains who you are and why people should pick you. Filmed by your team or a local crew, directed by us, then cut down for your website, socials and sales conversations.</p>
+          <p class="fit">For owner-run businesses that are great at the work and quiet online. Fixed project fee.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="pill">Monthly</span></div>
+        <h3>Post-Production Core</h3>
+        <p>Ongoing editing, colour, sound and monthly asset delivery for brands that already have a content rhythm. One flat monthly fee, no time tracking.</p>
+        <p class="fit">For businesses already filming who need a dependable finishing team.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="pill">Monthly</span></div>
+        <h3>Growth Infrastructure</h3>
+        <p>Post-Production Core plus the systems layer: playbooks, shot lists and script structure that fix footage problems before they reach the edit.</p>
+        <p class="fit">For teams filming plenty and getting less out of it than they should.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="pill">Fixed project</span></div>
+        <h3>Launch Builds</h3>
+        <p>One-off builds for new launches: identity, e-commerce setup and launch content, on a fixed timeline with our technology and branding partners.</p>
+        <p class="fit">For new brands and product lines with a date to hit.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="pill">Fixed fee</span></div>
+        <h3>Process Audit</h3>
+        <p>We look at how your team captures and publishes content, then tighten the workflow. Faster turnaround, less back and forth, better footage going in.</p>
+        <p class="fit">A good first step if you're not sure where things are breaking.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORK ===== -->
+<section class="sec sec--sand" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">Selected work</span><h2 class="h2" id="work-title">A few we're proud of.</h2></div>
+      <p>Brand films, series, product explainers and event coverage. Click any of them to watch.</p>
+    </div>
+    <div class="case">
+      <a class="case__media" href="https://www.youtube.com/watch?v=temqJ2R7SfU" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg" alt="Living the Hunter Lifestyle — Forest to Fork channel trailer" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 20 22"><path d="M0 0l20 11L0 22z" fill="#070707"/></svg></span>
+        <span class="sr-only">Watch on YouTube</span>
+      </a>
+      <div>
+        <span class="mono muted">Forest to Fork, NSW · Edit, story, remote direction</span>
+        <h3>Living the hunter lifestyle</h3>
+        <div class="case__copy">
+          <p>Years of footage. Different cameras, different resolutions, no obvious narrative.</p>
+          <p>We went through the archive, found the story, then directed a new performance remotely to give the film its opening.</p>
+          <p>The goal wasn't an outfitter montage. It was letting someone who'd never met Luke understand what a few days with him actually feel like.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reel">
+      <a class="film" href="https://www.youtube.com/watch?v=AfLIuyh_7Vg" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/AfLIuyh_7Vg/maxresdefault.jpg" alt="" loading="lazy"></div><h4>Bow Hunting in State Forest</h4><span class="mono muted">Series · Forest to Fork</span></a>
+      <a class="film" href="https://www.youtube.com/watch?v=9TbWkg43MzE" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/9TbWkg43MzE/maxresdefault.jpg" alt="" loading="lazy"></div><h4>2 Fallow Deer in 1 Arvo</h4><span class="mono muted">Series · Forest to Fork</span></a>
+      <a class="film" href="https://www.youtube.com/watch?v=bZUmqKFzAyc" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/bZUmqKFzAyc/maxresdefault.jpg" alt="" loading="lazy"></div><h4>Siemens Hackathon</h4><span class="mono muted">Event film · Siemens × Nasscom</span></a>
+      <a class="film" href="https://www.youtube.com/watch?v=7l47kdmMsb0" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/7l47kdmMsb0/sddefault.jpg" alt="" loading="lazy"></div><h4>CodeDesign.ai</h4><span class="mono muted">Product film · SaaS</span></a>
+      <a class="film" href="https://www.youtube.com/watch?v=AXNF6n0_C6A" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/AXNF6n0_C6A/maxresdefault.jpg" alt="" loading="lazy"></div><h4>cWarmer</h4><span class="mono muted">B2B explainer · Codilar</span></a>
+      <a class="film" href="https://www.youtube.com/watch?v=G30FpHYPe58" target="_blank" rel="noopener"><div class="film__img"><img src="https://img.youtube.com/vi/G30FpHYPe58/maxresdefault.jpg" alt="" loading="lazy"></div><h4>Rally &amp; Range</h4><span class="mono muted">Coaching content · Albury</span></a>
+    </div>
+    <div class="reel__more"><a class="btn btn--ghost" href="https://vimeo.com/fivesquare" target="_blank" rel="noopener">Full archive on Vimeo ↗</a></div>
+  </div>
+</section>
+
+<!-- ===== WORDS ===== -->
+<section class="sec" aria-labelledby="words-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">In their words</span><h2 class="h2" id="words-title">What clients say.</h2></div>
+      <p>Don't take our word for it. Two of these come with a video.</p>
+    </div>
+    <div class="words">
+      <figure class="word">
+        <blockquote>“Delivered on our agreed project and exceeded my expectations.”</blockquote>
+        <figcaption><cite><b>Luke Risk</b>Founder, Forest to Fork, NSW</cite><a href="https://www.youtube.com/watch?v=FIkVBTWzaNY" target="_blank" rel="noopener">Watch Luke ↗</a></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“He listens to every detail but also has great ideas to help with executing the desired result.”</blockquote>
+        <figcaption><cite><b>Andi K</b>Founder &amp; Coach, Rally &amp; Range, Albury</cite><a href="https://www.youtube.com/watch?v=G30FpHYPe58" target="_blank" rel="noopener">Watch Andi ↗</a></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“Assisting us remotely with our digital presence, media post-production frameworks and corporate messaging structure.”</blockquote>
+        <figcaption><cite><b>Michael Malak</b>Managing Director, JAPM, Sydney</cite></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“Reliable, works under tight deadlines. I'll be coming back for future projects.”</blockquote>
+        <figcaption><cite><b>Adarsh Lal</b>Founder, Anomaly Cybersecurity</cite></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDIO ===== -->
+<section class="sec sec--sand" id="studio" aria-labelledby="studio-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">About</span><h2 class="h2" id="studio-title">Small on purpose.</h2></div>
+    </div>
+    <div class="studio">
+      <div class="studio__note">
+        <p>Good content isn't about volume. It's about knowing exactly what you're trying to say, and saying it well.</p>
+        <p>I run Fivesquare as a boutique studio so every project gets my direct attention, not a rotating account team. Over the past decade I've worked with global brands, not-for-profits and owner-run businesses. All of them had real expertise and real assets. Few had a system to turn that into content that works.</p>
+        <p>So the job isn't only cutting footage. It's working out why the content isn't landing, fixing it upstream, and leaving you with something your team can keep running.</p>
+        <div class="sig">
+          <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-ef2a49455519" alt="Muhammed Fasil" loading="lazy">
+          <div><b>Muhammed Fasil</b><span class="muted">Founder &amp; lead producer</span></div>
+        </div>
+      </div>
+      <ul class="team" aria-label="Core team">
+        <li><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-43298fa444fb" alt="" loading="lazy"><span><b>Sreerag</b><span>Post-production</span></span></li>
+        <li><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-1aceb77bfed5" alt="" loading="lazy"><span><b>Vinduja</b><span>Concept, art &amp; design</span></span></li>
+        <li><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-bf3c3a73" alt="" loading="lazy"><span><b>Mufasil Faizal</b><span>Tech &amp; brand</span></span></li>
+        <li><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-2b7badb5981e" alt="" loading="lazy"><span><b>Muhammed Sahil</b><span>Accounts &amp; finance</span></span></li>
+      </ul>
+    </div>
+    <div class="partners">
+      <span class="kicker mono">Partners, for work beyond film</span>
+      <div class="partners__list">
+        <a href="https://growthfather.com/" target="_blank" rel="noopener"><b>Growthfather ↗</b><span>Performance marketing</span></a>
+        <a href="https://credot.co/" target="_blank" rel="noopener"><b>Credot ↗</b><span>Technology &amp; branding</span></a>
+        <a href="https://www.pelagoconsultants.com/" target="_blank" rel="noopener"><b>Pelago ↗</b><span>Finance &amp; taxation</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="sec contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="h2" id="contact-title">Let's make something good.</h2>
+    <div class="contact__grid">
+      <div class="contact__direct">
+        <p>Thirty minutes, in Sydney time. Tell us what you're trying to say and we'll tell you how we'd film it and what it costs. No pitch deck.</p>
+        <a class="btn" href="https://calendly.com/fasil-fivesquare/30min" target="_blank" rel="noopener">Book a 30-minute chat ↗</a>
+        <div class="contact__lines">
+          Rather email? <a href="mailto:hello@fivesquare.co">hello@fivesquare.co</a><br>
+          We reply within one Sydney business day.
+        </div>
+      </div>
+      <!-- Set FORM_ENDPOINT in the script below (Formspree, Basin or your own handler). Without it, the form opens the visitor's email app. -->
+      <form id="enquiry" novalidate>
+        <label>Your name<input name="name" autocomplete="name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Business<input name="company" autocomplete="organization"></label>
+        <label>What are you after?
+          <select name="service">
+            <option>Business Story Film</option>
+            <option>Post-Production Core</option>
+            <option>Growth Infrastructure</option>
+            <option>Launch Build</option>
+            <option>Process Audit</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label>Anything we should know?<textarea name="message"></textarea></label>
+        <div><button class="btn" type="submit">Send enquiry</button></div>
+        <p class="form__status" id="status" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Fivesquare · HSR Layout, Bengaluru</span>
+    <span>Working with Australian &amp; NZ businesses</span>
+    <a href="tel:+919447800418">+91 94478 00418</a>
+    <span>© <span id="yr">2026</span> Fivesquare</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var bar=document.getElementById('bar');
+addEventListener('scroll',function(){bar.classList.toggle('scrolled',scrollY>8)},{passive:true});
+
+var FORM_ENDPOINT=''; // e.g. 'https://formspree.io/f/xxxxxxx'
+document.getElementById('enquiry').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target, s=document.getElementById('status');
+  if(!f.name.value.trim()||!f.email.value.trim()||!f.email.checkValidity()){s.textContent='Add your name and a valid email so we can reply.';return}
+  var d=new FormData(f);
+  if(!FORM_ENDPOINT){
+    var body='Name: '+d.get('name')+'\nBusiness: '+(d.get('company')||'')+'\nAfter: '+d.get('service')+'\n\n'+(d.get('message')||'');
+    location.href='mailto:hello@fivesquare.co?subject='+encodeURIComponent('Enquiry: '+d.get('service'))+'&body='+encodeURIComponent(body);
+    return;
+  }
+  s.textContent='Sending…';
+  fetch(FORM_ENDPOINT,{method:'POST',body:d,headers:{Accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw 0;f.reset();s.textContent='Sent. You\'ll hear back within one Sydney business day.'})
+    .catch(function(){s.textContent='That didn\'t send. Email hello@fivesquare.co directly.'});
+});
+</script>
+</body>
+</html>
