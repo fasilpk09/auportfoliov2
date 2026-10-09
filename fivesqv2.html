@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fivesquare | Film production and post for Australian and NZ businesses</title>
+<meta name="description" content="Fivesquare is a production and post-production studio for Australian and New Zealand businesses. Your team or a local crew films, we direct remotely, then edit, grade and deliver. Footage in by 5pm, edit on your desk by morning. Fixed fees in AUD.">
+<meta property="og:title" content="Fivesquare | Good films for good businesses">
+<meta property="og:description" content="Remote direction, editing, colour and content systems for Australian and NZ businesses. Fixed fees in AUD.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fivesquare.co/">
+<meta property="og:image" content="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f3f1e8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='3' fill='%23f3f1e8'/><rect x='7' y='7' width='14' height='14' rx='2' fill='%23070707'/><circle cx='23.5' cy='23.5' r='4.5' fill='%23c2d24a' stroke='%23070707' stroke-width='1.5'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens =====
+   Black and cream from the portfolio. The acid green is toned down to a
+   grounded lime so it keeps the energy without reading as neon. */
+:root{
+  --ink:#070707;
+  --cream:#f3f1e8;          /* page background, never pure white */
+  --paper:#fbfaf4;          /* cards */
+  --sand:#e8e5d8;           /* bands */
+  --sand-2:#dcd8c6;         /* skeleton pulse */
+  --lime:#c2d24a;           /* the accent */
+  --moss:#4a5a1e;           /* accent for text on cream */
+  --ink-2:#45443e;
+  --ink-3:#6b6a62;
+  --line:rgba(7,7,7,.14);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:4px;                  /* crisp, barely-there corners */
+  --gutter:clamp(20px,5vw,64px);
+  --max:1280px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-underline-offset:4px}
+::selection{background:var(--lime);color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.muted{color:var(--ink-3)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.display{font-family:var(--display);font-stretch:88%;font-weight:700;letter-spacing:-.03em}
+
+/* Signature: a lime marker bar behind a phrase. A solid block, no gradient. */
+.hl{position:relative;z-index:0;white-space:nowrap}
+.hl::after{content:"";position:absolute;z-index:-1;left:-.06em;right:-.06em;bottom:.06em;height:.34em;background:var(--lime)}
+
+/* ===== Skeleton loaders ===== */
+.sk{position:relative;display:block;background:var(--sand);overflow:hidden}
+.sk::after{content:"";position:absolute;inset:0;background:var(--sand-2);animation:sk 1.3s ease-in-out infinite}
+.sk img{opacity:0}
+.sk.is-loaded::after,.sk.is-broken::after{display:none}
+.sk.is-loaded img{opacity:1}
+@keyframes sk{0%,100%{opacity:0}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.sk::after{animation:none;opacity:.5}}
+
+/* ===== Nav ===== */
+.bar{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line)}
+.bar__in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-stretch:95%;font-weight:700;letter-spacing:-.035em;font-size:23px;text-decoration:none}
+.logo i{width:12px;height:12px;border-radius:50%;background:var(--lime);border:1.5px solid var(--ink);display:inline-block;position:relative;top:4px}
+.nav{display:flex;align-items:center;gap:30px;font-weight:500;font-size:15px}
+.nav a{text-decoration:none}
+.nav a:not(.btn):hover{text-decoration:underline}
+@media (max-width:820px){.nav a:not(.btn){display:none}}
+
+/* ===== Buttons: flat, no shadow, colour change only ===== */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--ink);text-decoration:none;font-family:var(--body);font-weight:600;font-size:16px;padding:14px 22px;border:1.5px solid var(--ink);border-radius:var(--r);cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--cream)}
+.btn--sm{padding:9px 16px;font-size:14px}
+.btn--ghost{background:transparent}
+.btn--ghost:hover{background:var(--ink);color:var(--cream)}
+.btn--dark{background:var(--ink);color:var(--cream)}
+.btn--dark:hover{background:var(--cream);color:var(--ink)}
+
+/* ===== Player: films play on the page ===== */
+.player{position:relative;aspect-ratio:16/9;background:var(--ink);border-radius:var(--r);overflow:hidden}
+.player__btn{all:unset;position:absolute;inset:0;cursor:pointer;display:block}
+.player__btn .sk{position:absolute;inset:0}
+.player__btn img{width:100%;height:100%;object-fit:cover}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play{position:absolute;left:50%;top:50%;margin:-34px 0 0 -34px;width:68px;height:68px;border-radius:50%;background:var(--lime);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.play svg{width:18px;margin-left:4px}
+.player__btn:hover .play,.player__btn:focus-visible .play{background:var(--cream)}
+.player__btn:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
+.film .play{width:54px;height:54px;margin:-27px 0 0 -27px}
+.film .play svg{width:14px}
+
+/* ===== Hero ===== */
+.hero{padding:clamp(44px,7vw,92px) 0 clamp(60px,8vw,104px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:7px 14px 7px 11px;font-size:14px;color:var(--ink-2);margin:0 0 28px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--lime);border:1px solid var(--ink)}
+.hero h1{font-size:clamp(54px,9.4vw,140px);line-height:.92;margin:0;max-width:12ch}
+.hero__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(32px,5vw,72px);align-items:end;margin-top:clamp(36px,5vw,56px)}
+.hero__lead{font-size:clamp(19px,1.7vw,22px);line-height:1.5;color:var(--ink-2);margin:0 0 30px;max-width:34ch}
+.hero__lead b{color:var(--ink);font-weight:600}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero__media{position:relative}
+.hero__cap{display:flex;justify-content:space-between;margin-top:10px;color:var(--ink-3)}
+.sticker{position:absolute;z-index:2;right:-16px;top:-34px;width:124px;height:124px;border-radius:50%;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-stretch:90%;font-weight:700;font-size:15px;line-height:1.15;transform:rotate(9deg);padding:14px;pointer-events:none}
+.sticker b{color:var(--lime);font-weight:700}
+@media (max-width:900px){.hero__row{grid-template-columns:1fr}.sticker{right:8px;width:104px;height:104px;font-size:13px}}
+
+/* ===== Logos ===== */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
+.trust__in{display:grid;grid-template-columns:180px 1fr;gap:30px;align-items:center}
+.trust__logos{display:flex;flex-wrap:wrap;align-items:center;gap:18px 40px}
+/* Portfolio logo PNGs are light-on-dark; inverted so they read on cream. Swap for dark versions when self-hosting. */
+.trust__logos img{height:26px;width:auto;filter:invert(1) grayscale(1);opacity:.7}
+@media (max-width:820px){.trust__in{grid-template-columns:1fr}}
+
+/* ===== Sections ===== */
+.sec{padding:clamp(84px,11vw,140px) 0}
+.sec--sand{background:var(--sand)}
+.head{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,68px)}
+.kicker{display:block;color:var(--ink-3);margin-bottom:14px}
+.h2{font-size:clamp(42px,6.4vw,88px);line-height:.95;margin:0}
+.head p{color:var(--ink-2);margin:0 0 10px;max-width:44ch;font-size:18px}
+@media (max-width:900px){.head{grid-template-columns:1fr}}
+
+.statement{padding:clamp(84px,11vw,140px) 0 clamp(32px,5vw,56px)}
+.statement p{font-family:var(--display);font-stretch:92%;font-weight:600;letter-spacing:-.03em;line-height:1.1;font-size:clamp(30px,4.4vw,60px);margin:0;max-width:21ch}
+.statement .soft{color:#98968a}
+
+/* ===== Proof ===== */
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:start}
+.snap{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 10px 12px}
+.snap .sk{aspect-ratio:4/3;border-radius:2px}
+.snap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.snap figcaption{display:flex;justify-content:space-between;margin-top:9px;color:var(--ink-3)}
+.snap:nth-child(1){transform:rotate(-2deg);margin-top:28px}
+.snap:nth-child(2){transform:rotate(1.4deg)}
+.snap:nth-child(3){transform:rotate(-1deg);margin-top:40px}
+.snap:nth-child(4){transform:rotate(1.8deg);margin-top:8px}
+.results{margin:clamp(48px,6vw,72px) 0 0;border-top:1.5px solid var(--ink)}
+.results div{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr) auto;gap:24px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.results dt{font-family:var(--display);font-stretch:88%;font-weight:700;letter-spacing:-.04em;font-size:clamp(44px,5vw,72px);line-height:1}
+.results dd{margin:0;color:var(--ink-2)}
+@media (max-width:900px){.proof{grid-template-columns:1fr 1fr}.snap:nth-child(n){margin-top:0}}
+@media (max-width:640px){.results div{grid-template-columns:1fr;gap:2px}}
+
+/* ===== How it works ===== */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px 26px;display:flex;flex-direction:column}
+.steps .n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--lime);border:1.5px solid var(--ink);font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:20px}
+.steps h3{font-family:var(--display);font-stretch:90%;font-weight:700;letter-spacing:-.025em;font-size:26px;line-height:1.05;margin:0 0 10px}
+.steps p{color:var(--ink-2);margin:0 0 16px;font-size:16px}
+.steps .get{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-3)}
+@media (max-width:980px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+
+.overnight{margin-top:16px;background:var(--ink);color:var(--cream);border-radius:var(--r);padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(28px,5vw,64px)}
+.overnight h3{font-family:var(--display);font-stretch:88%;font-weight:700;letter-spacing:-.04em;font-size:clamp(36px,4.4vw,60px);line-height:.95;margin:0 0 16px}
+.overnight h3 em{font-style:normal;color:var(--lime)}
+.overnight > div > p{margin:0 0 26px;color:#c9c7bc;max-width:36ch}
+.tl{list-style:none;margin:0;padding:0;border-top:1px solid rgba(243,241,232,.25)}
+.tl li{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid rgba(243,241,232,.15)}
+.tl time{font-family:var(--mono);font-size:13px;color:var(--lime)}
+.tl p{margin:0;color:#e4e2d8}
+.overnight small{display:block;margin-top:12px;color:#9c9a8f;font-family:var(--mono);font-size:12px}
+@media (max-width:900px){.overnight{grid-template-columns:1fr}.tl li{grid-template-columns:1fr;gap:2px}}
+
+/* ===== Services ===== */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.svc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px 28px 26px;display:flex;flex-direction:column}
+.svc--lead{grid-column:1 / -1;background:var(--lime);border:1.5px solid var(--ink);display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:end;padding:clamp(28px,4vw,44px)}
+.svc__top{margin-bottom:16px}
+.tag{display:inline-block;border:1px solid currentColor;border-radius:var(--r);padding:3px 10px;font-size:12px;font-weight:500}
+.svc h3{font-family:var(--display);font-stretch:90%;font-weight:700;letter-spacing:-.03em;font-size:clamp(26px,2.6vw,34px);line-height:1.02;margin:0 0 12px}
+.svc--lead h3{font-size:clamp(40px,5vw,68px);font-stretch:85%;margin:0}
+.svc p{color:var(--ink-2);margin:0 0 12px}
+.svc--lead p{color:var(--ink)}
+.svc .fit{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-3)}
+.svc--lead .fit{border-top-color:rgba(7,7,7,.25);color:var(--ink);margin-bottom:20px}
+@media (max-width:820px){.services{grid-template-columns:1fr}.svc--lead{grid-template-columns:1fr;gap:12px}}
+
+/* ===== Work ===== */
+.case{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center;margin-bottom:clamp(48px,6vw,72px)}
+.case h3{font-family:var(--display);font-stretch:88%;font-weight:700;letter-spacing:-.035em;line-height:1;font-size:clamp(34px,3.8vw,52px);margin:10px 0 18px}
+.case__copy p{margin:0 0 14px;color:var(--ink-2)}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.films{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,40px) 22px}
+.film h4{font-family:var(--display);font-stretch:92%;font-weight:700;letter-spacing:-.02em;font-size:22px;line-height:1.15;margin:14px 0 4px}
+.films__more{margin-top:40px;text-align:center}
+@media (max-width:620px){.films{grid-template-columns:1fr}}
+
+/* ===== Testimonials ===== */
+.words{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.word{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px;display:flex;flex-direction:column}
+.word blockquote{margin:0 0 24px;font-family:var(--display);font-stretch:95%;font-weight:600;letter-spacing:-.02em;font-size:clamp(21px,2vw,27px);line-height:1.25}
+.word figcaption{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.word cite{font-style:normal;font-size:15px;color:var(--ink-3);line-height:1.45}
+.word cite b{display:block;color:var(--ink);font-weight:600}
+.word a{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--lime)}
+.word a:hover{border-bottom-color:var(--ink)}
+@media (max-width:820px){.words{grid-template-columns:1fr}}
+
+/* ===== Studio ===== */
+.studio{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,90px);align-items:start}
+.studio__note p{margin:0 0 18px;max-width:52ch;font-size:18px;color:var(--ink-2)}
+.studio__note p:first-child{font-family:var(--display);font-stretch:92%;font-weight:600;letter-spacing:-.025em;font-size:clamp(25px,2.5vw,34px);line-height:1.18;color:var(--ink)}
+.sig{margin-top:28px;display:flex;align-items:center;gap:14px}
+.sig .sk,.sig img{width:56px;height:56px;border-radius:50%}
+.sig img{object-fit:cover}
+.sig b{display:block;font-weight:600}
+.team-label{color:var(--ink-3);margin:0 0 10px}
+.team{list-style:none;margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.team li{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.team li:last-child{border-bottom:0}
+.team .sk,.team img{width:52px;height:52px;border-radius:50%}
+.team img{object-fit:cover}
+.team b{display:block;font-weight:600;font-size:17px;line-height:1.2}
+.team span span{font-size:14px;color:var(--ink-3)}
+.partners{margin-top:clamp(56px,7vw,90px)}
+.partners ul{list-style:none;margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.partners li + li{border-top:1px solid var(--line)}
+.partners a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) auto;gap:24px;align-items:baseline;padding:18px 22px;text-decoration:none}
+.partners a:hover b{text-decoration:underline}
+.partners b{font-family:var(--display);font-stretch:92%;font-weight:700;letter-spacing:-.02em;font-size:22px}
+.partners span{color:var(--ink-2)}
+@media (max-width:900px){.studio{grid-template-columns:1fr}.partners a{grid-template-columns:1fr;gap:2px}.partners .mono{display:none}}
+
+/* ===== Contact ===== */
+.contact{background:var(--lime);border-top:1.5px solid var(--ink)}
+.contact .h2{font-size:clamp(52px,9vw,128px);line-height:.92}
+.contact__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,90px);margin-top:clamp(40px,6vw,68px)}
+.contact__direct p{font-size:19px;max-width:38ch;margin:0 0 26px}
+.contact__lines{margin-top:30px;font-size:16px;line-height:1.9}
+.contact__lines a{font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--ink)}
+form{display:grid;gap:14px;background:var(--cream);border:1.5px solid var(--ink);border-radius:var(--r);padding:clamp(22px,3vw,32px)}
+label{display:grid;gap:6px;font-size:14px;font-weight:500;color:var(--ink-2)}
+input,textarea,select{font:inherit;font-size:17px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;width:100%}
+select{appearance:none;-webkit-appearance:none;background:var(--paper) url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23070707' fill='none' stroke-width='1.5'/></svg>") right 14px center no-repeat}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--ink);outline-offset:0;border-color:var(--ink)}
+textarea{resize:vertical;min-height:100px}
+.form__note{margin:0;font-size:14px;color:var(--ink-3)}
+.form__status{min-height:1.4em;margin:0;font-size:15px;font-weight:600}
+@media (max-width:900px){.contact__grid{grid-template-columns:1fr}}
+
+footer{background:var(--ink);color:#bdbab0;padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;font-size:14px}
+.foot nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--lime);text-decoration:underline}
+</style>
+<noscript><style>.sk img{opacity:1}.sk::after{display:none}</style></noscript>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="logo" href="#top" aria-label="Fivesquare home">fivesquare<i aria-hidden="true"></i></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#studio">About</a>
+      <a class="btn btn--sm" href="#contact">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <p class="eyebrow"><i aria-hidden="true"></i>Production and post for Australian and NZ businesses</p>
+    <h1 class="display" id="hero-title">Good films for <span class="hl">good businesses.</span></h1>
+    <div class="hero__row">
+      <div>
+        <p class="hero__lead">Your team or a local crew films. <b>We plan it, direct it and finish it</b>: edit, colour, sound and every cut-down you need. One producer the whole way through, on a fixed fee in AUD.</p>
+        <div class="hero__ctas">
+          <a class="btn" href="#contact">Book a 30 minute call</a>
+          <a class="btn btn--ghost" href="#work">See the work</a>
+        </div>
+      </div>
+      <div class="hero__media">
+        <span class="sticker" aria-hidden="true"><span>Footage in by 5pm. <b>Edit by morning.</b></span></span>
+        <div class="player" data-yt="temqJ2R7SfU" data-title="Living the Hunter Lifestyle, Forest to Fork channel trailer">
+          <button class="player__btn" type="button" aria-label="Play Living the Hunter Lifestyle, made for Forest to Fork">
+            <span class="sk"><img src="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg" alt="Still from Living the Hunter Lifestyle, made for Forest to Fork"></span>
+            <span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span>
+          </button>
+        </div>
+        <p class="hero__cap mono"><span>Forest to Fork, NSW</span><span>Channel trailer, plays here</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<div class="trust">
+  <div class="wrap trust__in">
+    <p class="mono muted" style="margin:0">Trusted by</p>
+    <div class="trust__logos">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/forest-to-fork.png" alt="Forest to Fork" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/japm.png" alt="JAPM" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/rally-and-ranged.png" alt="Rally &amp; Range" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/siemens.png" alt="Siemens" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/adobe.png" alt="Adobe" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/sp-global.png" alt="S&amp;P Global" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/nasscom.png" alt="Nasscom Foundation" loading="lazy">
+      <img src="https://fasil-peekz.onrender.com/assets/logos/codilar.png" alt="Codilar" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATEMENT ===== -->
+<section class="statement">
+  <div class="wrap">
+    <p>You already know your trade, and you probably have the footage. <span class="soft">We find the story in it, then set things up so the next one comes easier.</span></p>
+  </div>
+</section>
+
+<!-- ===== PROOF ===== -->
+<section class="sec" style="padding-top:clamp(40px,6vw,70px)" aria-labelledby="proof-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">The proof</span><h2 class="h2 display" id="proof-title">Easier to show than explain.</h2></div>
+      <p>Real messages from clients after delivery, and what the work did once it went live. Screenshots are unedited.</p>
+    </div>
+    <div class="proof">
+      <figure class="snap"><span class="sk"><img src="https://fasil-peekz.onrender.com/assets/proof-02.jpg" alt="Client message: very good feedback, everyone loves it" loading="lazy"></span><figcaption class="mono"><span>Client reply</span><span>01</span></figcaption></figure>
+      <figure class="snap"><span class="sk"><img src="https://fasil-peekz.onrender.com/assets/proof-03.jpg" alt="Client message: this is perfect, you did so good" loading="lazy"></span><figcaption class="mono"><span>Client reply</span><span>02</span></figcaption></figure>
+      <figure class="snap"><span class="sk"><img src="https://fasil-peekz.onrender.com/assets/proof-04.jpg" alt="Australian client message praising the direction" loading="lazy"></span><figcaption class="mono"><span>Client reply</span><span>03</span></figcaption></figure>
+      <figure class="snap"><span class="sk"><img src="https://fasil-peekz.onrender.com/assets/proof-05.jpg" alt="Client message: very happy with what you've produced, go ahead with the other videos" loading="lazy"></span><figcaption class="mono"><span>Client reply</span><span>04</span></figcaption></figure>
+    </div>
+    <dl class="results">
+      <div><dt>270k</dt><dd>views on a single coaching clip</dd><dd class="mono muted">Rally &amp; Range, Albury</dd></div>
+      <div><dt>207k</dt><dd>views on another clip from the same series</dd><dd class="mono muted">Rally &amp; Range, Albury</dd></div>
+      <div><dt>96k</dt><dd>views on a third from the series</dd><dd class="mono muted">Rally &amp; Range, Albury</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="sec sec--sand" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">How it works</span><h2 class="h2 display" id="how-title">Filmed where you are. Finished by us.</h2></div>
+      <p>The studio is in Bengaluru, a few hours behind Sydney, so your edit keeps moving after your working day ends. You deal with one producer the whole way through.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Plan</h3><p>Brief, shot list and script structure, agreed in writing before anyone presses record.</p><span class="get">Proposal, signed scope, onboarding pack</span></li>
+      <li><span class="n">2</span><h3>Shoot local</h3><p>Your team or a local crew we brief. We direct live on a video call so nothing gets missed.</p><span class="get">Shot list and live direction on the day</span></li>
+      <li><span class="n">3</span><h3>Finish</h3><p>Edit, colour, sound and every cut-down you need, on dates you can plan around.</p><span class="get">Master film plus web, social and sales cuts</span></li>
+      <li><span class="n">4</span><h3>Report</h3><p>One page each month on what shipped, what it did and what's next.</p><span class="get">Monthly one-page report</span></li>
+    </ol>
+    <div class="overnight">
+      <div>
+        <h3>Same day.<br><em>Overnight.</em></h3>
+        <p>Send footage before close of business and the first cut is waiting the next morning. Changes go back the same way, so a round of edits takes a day.</p>
+        <a class="btn" href="#contact">Try it on a project</a>
+      </div>
+      <div>
+        <ol class="tl">
+          <li><time>Tue 4:45pm AEDT</time><p>Footage uploaded from site, with a short note on what matters most.</p></li>
+          <li><time>Wed 8:30am AEDT</time><p>First cut in your inbox, with notes on what we kept and why.</p></li>
+          <li><time>Wed 2:00pm AEDT</time><p>Your changes come back in one email or a shared review link.</p></li>
+          <li><time>Thu 8:30am AEDT</time><p>Revised cut ready, plus the cut-downs for socials and the website.</p></li>
+        </ol>
+        <small>Example timeline. All times in Sydney time.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="sec" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">Services</span><h2 class="h2 display" id="services-title">Pick what fits. Know the fee upfront.</h2></div>
+      <p>Every option is a fixed fee in AUD, quoted after a 30 minute call. If the budget changes, we adjust the scope and keep the standard of work where it is.</p>
+    </div>
+    <div class="services">
+      <article class="svc svc--lead">
+        <div>
+          <div class="svc__top"><span class="tag">Most people start here</span></div>
+          <h3>Business Story Film</h3>
+        </div>
+        <div>
+          <p>One film that explains who you are and why people should pick you. Filmed by your team or a local crew, directed by us, then cut down for your website, socials and sales conversations.</p>
+          <p class="fit">For owner-run businesses that are great at the work and quiet online: trades, construction, property, hospitality and outdoor operators. Fixed project fee.</p>
+          <a class="btn btn--dark" href="#contact">Ask about a story film</a>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="tag">Monthly</span></div>
+        <h3>Post-Production Core</h3>
+        <p>Ongoing editing, colour, sound and monthly asset delivery for brands that already film regularly. One flat monthly fee, no time tracking.</p>
+        <p class="fit">For businesses already filming who need a dependable finishing team.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="tag">Monthly</span></div>
+        <h3>Growth Infrastructure</h3>
+        <p>Post-Production Core plus the systems around it: playbooks, shot lists and script structure that fix footage problems before they reach the edit.</p>
+        <p class="fit">For teams filming plenty and getting less out of it than they should.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="tag">Fixed project</span></div>
+        <h3>Launch Builds</h3>
+        <p>Identity, e-commerce setup and launch content for a new brand or product line, on a fixed timeline with our technology and branding partners.</p>
+        <p class="fit">For launches with a date to hit.</p>
+      </article>
+      <article class="svc">
+        <div class="svc__top"><span class="tag">Fixed fee</span></div>
+        <h3>Process Audit</h3>
+        <p>We look at how your team captures and publishes content, then tighten the workflow: faster turnaround, fewer rounds of changes, better footage going in.</p>
+        <p class="fit">A good first step if you're unsure where things are breaking.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORK ===== -->
+<section class="sec sec--sand" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">Selected work</span><h2 class="h2 display" id="work-title">A few we're proud of.</h2></div>
+      <p>Brand films, series, product explainers and event coverage. Every film here plays right on the page.</p>
+    </div>
+    <div class="case">
+      <div class="player" data-yt="temqJ2R7SfU" data-title="Living the Hunter Lifestyle">
+        <button class="player__btn" type="button" aria-label="Play Living the Hunter Lifestyle">
+          <span class="sk"><img src="https://img.youtube.com/vi/temqJ2R7SfU/maxresdefault.jpg" alt="Living the Hunter Lifestyle, Forest to Fork channel trailer" loading="lazy"></span>
+          <span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span>
+        </button>
+      </div>
+      <div>
+        <span class="mono muted">Forest to Fork, NSW · Edit, story, remote direction</span>
+        <h3>Living the hunter lifestyle</h3>
+        <div class="case__copy">
+          <p>Years of footage. Different cameras, different resolutions, no obvious narrative.</p>
+          <p>We went through the archive, found the story, then directed a new performance remotely to give the film its opening.</p>
+          <p>The aim was simple: someone who has never met Luke should finish the film knowing what a few days out with him actually feel like.</p>
+        </div>
+      </div>
+    </div>
+    <div class="films">
+      <div class="film">
+        <div class="player" data-yt="AfLIuyh_7Vg" data-title="Bow Hunting in State Forest"><button class="player__btn" type="button" aria-label="Play Bow Hunting in State Forest"><span class="sk"><img src="https://img.youtube.com/vi/AfLIuyh_7Vg/maxresdefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>Bow Hunting in State Forest</h4><span class="mono muted">Series · Forest to Fork</span>
+      </div>
+      <div class="film">
+        <div class="player" data-yt="9TbWkg43MzE" data-title="2 Fallow Deer in 1 Arvo"><button class="player__btn" type="button" aria-label="Play 2 Fallow Deer in 1 Arvo"><span class="sk"><img src="https://img.youtube.com/vi/9TbWkg43MzE/maxresdefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>2 Fallow Deer in 1 Arvo</h4><span class="mono muted">Series · Forest to Fork</span>
+      </div>
+      <div class="film">
+        <div class="player" data-yt="G30FpHYPe58" data-title="Rally and Range"><button class="player__btn" type="button" aria-label="Play Rally and Range coaching film"><span class="sk"><img src="https://img.youtube.com/vi/G30FpHYPe58/maxresdefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>Rally &amp; Range</h4><span class="mono muted">Coaching content · Albury</span>
+      </div>
+      <div class="film">
+        <div class="player" data-yt="bZUmqKFzAyc" data-title="Siemens Hackathon"><button class="player__btn" type="button" aria-label="Play Siemens Hackathon event film"><span class="sk"><img src="https://img.youtube.com/vi/bZUmqKFzAyc/maxresdefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>Siemens Hackathon</h4><span class="mono muted">Event film · Siemens × Nasscom</span>
+      </div>
+      <div class="film">
+        <div class="player" data-yt="AXNF6n0_C6A" data-title="cWarmer"><button class="player__btn" type="button" aria-label="Play cWarmer explainer"><span class="sk"><img src="https://img.youtube.com/vi/AXNF6n0_C6A/maxresdefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>cWarmer</h4><span class="mono muted">B2B explainer · Codilar</span>
+      </div>
+      <div class="film">
+        <div class="player" data-yt="7l47kdmMsb0" data-title="CodeDesign.ai"><button class="player__btn" type="button" aria-label="Play CodeDesign.ai product film"><span class="sk"><img src="https://img.youtube.com/vi/7l47kdmMsb0/sddefault.jpg" alt="" loading="lazy"></span><span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0l20 11L0 22z" fill="currentColor"/></svg></span></button></div>
+        <h4>CodeDesign.ai</h4><span class="mono muted">Product film · SaaS</span>
+      </div>
+    </div>
+    <div class="films__more"><a class="btn btn--ghost" href="https://vimeo.com/fivesquare" target="_blank" rel="noopener">Full archive on Vimeo</a></div>
+  </div>
+</section>
+
+<!-- ===== WORDS ===== -->
+<section class="sec" aria-labelledby="words-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">In their words</span><h2 class="h2 display" id="words-title">What clients say.</h2></div>
+      <p>Named clients, quoted as they said it. Two of them also said it on camera.</p>
+    </div>
+    <div class="words">
+      <figure class="word">
+        <blockquote>“Delivered on our agreed project and exceeded my expectations.”</blockquote>
+        <figcaption><cite><b>Luke Risk</b>Founder, Forest to Fork, NSW</cite><a href="https://www.youtube.com/watch?v=FIkVBTWzaNY" target="_blank" rel="noopener">Watch Luke</a></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“He listens to every detail but also has great ideas to help with executing the desired result.”</blockquote>
+        <figcaption><cite><b>Andi K</b>Founder and coach, Rally &amp; Range, Albury</cite><a href="https://www.youtube.com/watch?v=G30FpHYPe58" target="_blank" rel="noopener">Watch Andi</a></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“Assisting us remotely with our digital presence, media post-production frameworks and corporate messaging structure.”</blockquote>
+        <figcaption><cite><b>Michael Malak</b>Managing Director, JAPM, Sydney</cite></figcaption>
+      </figure>
+      <figure class="word">
+        <blockquote>“Reliable, works under tight deadlines. I'll be coming back for future projects.”</blockquote>
+        <figcaption><cite><b>Adarsh Lal</b>Founder, Anomaly Cybersecurity</cite></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDIO ===== -->
+<section class="sec sec--sand" id="studio" aria-labelledby="studio-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker mono">About</span><h2 class="h2 display" id="studio-title">Small on purpose.</h2></div>
+    </div>
+    <div class="studio">
+      <div class="studio__note">
+        <p>Good content comes from knowing exactly what you're trying to say, and saying it well.</p>
+        <p>I run Fivesquare as a boutique studio so I'm directly involved in every project, from the first call to the final export. Over the past decade I've worked with global brands, not-for-profits and owner-run businesses. Most had real expertise and good footage. Few had a system for turning it into content that works.</p>
+        <p>So alongside the edit, I work out why the content isn't landing, fix it before the next shoot, and leave your team with a process they can keep running.</p>
+        <div class="sig">
+          <span class="sk"><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-ef2a49455519" alt="Muhammed Fasil" loading="lazy"></span>
+          <div><b>Muhammed Fasil</b><span class="muted">Founder and lead producer</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="team-label mono">Specialists on the work</p>
+        <ul class="team">
+          <li><span class="sk"><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-43298fa444fb" alt="" loading="lazy"></span><span><b>Sreerag</b><span>Post-production</span></span></li>
+          <li><span class="sk"><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-1aceb77bfed5" alt="" loading="lazy"></span><span><b>Vinduja</b><span>Concept, art and design</span></span></li>
+          <li><span class="sk"><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-bf3c3a73" alt="" loading="lazy"></span><span><b>Mufasil Faizal</b><span>Tech and brand</span></span></li>
+          <li><span class="sk"><img src="https://assets-v2.codedesign.ai/storage/v1/object/public/64283edd7c82ccc6d2925cf4_f3dea83f/asset-2b7badb5981e" alt="" loading="lazy"></span><span><b>Muhammed Sahil</b><span>Accounts and finance</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="partners">
+      <span class="kicker mono">Partners, for work beyond film</span>
+      <ul>
+        <li><a href="https://growthfather.com/" target="_blank" rel="noopener"><b>Growthfather</b><span>Performance marketing</span><span class="mono muted">growthfather.com</span></a></li>
+        <li><a href="https://credot.co/" target="_blank" rel="noopener"><b>Credot</b><span>Technology and branding</span><span class="mono muted">credot.co</span></a></li>
+        <li><a href="https://www.pelagoconsultants.com/" target="_blank" rel="noopener"><b>Pelago</b><span>Finance and taxation</span><span class="mono muted">pelagoconsultants.com</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="sec contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="h2 display" id="contact-title">Let's make something good.</h2>
+    <div class="contact__grid">
+      <div class="contact__direct">
+        <p>Thirty minutes, booked in Sydney time. Tell us what you're trying to say and we'll tell you how we'd film it and what it costs. No pitch deck.</p>
+        <a class="btn btn--dark" href="https://calendly.com/fasil-fivesquare/30min" target="_blank" rel="noopener">Book a 30 minute call</a>
+        <div class="contact__lines">
+          Rather email? <a href="mailto:hello@fivesquare.co">hello@fivesquare.co</a><br>
+          We reply within one Sydney business day.
+        </div>
+      </div>
+      <!-- Set FORM_ENDPOINT in the script below (Formspree, Basin or your own handler). Without it, the form opens the visitor's email app. -->
+      <form id="enquiry" novalidate>
+        <label>Your name<input name="name" autocomplete="name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Business<input name="company" autocomplete="organization"></label>
+        <label>What are you after?
+          <select name="service">
+            <option>Business Story Film</option>
+            <option>Post-Production Core</option>
+            <option>Growth Infrastructure</option>
+            <option>Launch Build</option>
+            <option>Process Audit</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label>Anything we should know?<textarea name="message"></textarea></label>
+        <p class="form__note">We use these details only to reply to your enquiry. See the <a href="privacy.html">privacy policy</a>.</p>
+        <div><button class="btn" type="submit">Send enquiry</button></div>
+        <p class="form__status" id="status" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Fivesquare · HSR Layout, Bengaluru</span>
+    <nav aria-label="Footer">
+      <a href="mailto:hello@fivesquare.co">hello@fivesquare.co</a>
+      <a href="tel:+919447800418">+91 94478 00418</a>
+      <a href="terms.html">Terms of use</a>
+      <a href="privacy.html">Privacy policy</a>
+    </nav>
+    <span>© <span id="yr">2026</span> Fivesquare</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// Skeleton loaders: clear each placeholder once its image has loaded (or failed).
+document.querySelectorAll('.sk').forEach(function(w){
+  var img=w.querySelector('img'); if(!img) return;
+  function done(){w.classList.add('is-loaded')}
+  function fail(){w.classList.add('is-broken')}
+  if(img.complete && img.naturalWidth) done();
+  else { img.addEventListener('load',done); img.addEventListener('error',fail); }
+});
+
+// Films play inline. YouTube only loads after a click, from the no-cookie domain.
+document.querySelectorAll('.player').forEach(function(p){
+  var b=p.querySelector('.player__btn');
+  b.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+p.dataset.yt+'?autoplay=1&rel=0&modestbranding=1';
+    f.title=p.dataset.title||'Fivesquare film';
+    f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    f.allowFullscreen=true;
+    p.replaceChild(f,b);
+    f.focus();
+  });
+});
+
+var FORM_ENDPOINT=''; // e.g. 'https://formspree.io/f/xxxxxxx'
+document.getElementById('enquiry').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target, s=document.getElementById('status');
+  if(!f.name.value.trim()||!f.email.value.trim()||!f.email.checkValidity()){s.textContent='Add your name and a valid email so we can reply.';return}
+  var d=new FormData(f);
+  if(!FORM_ENDPOINT){
+    var body='Name: '+d.get('name')+'\nBusiness: '+(d.get('company')||'')+'\nAfter: '+d.get('service')+'\n\n'+(d.get('message')||'');
+    location.href='mailto:hello@fivesquare.co?subject='+encodeURIComponent('Enquiry: '+d.get('service'))+'&body='+encodeURIComponent(body);
+    return;
+  }
+  s.textContent='Sending...';
+  fetch(FORM_ENDPOINT,{method:'POST',body:d,headers:{Accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw 0;f.reset();s.textContent='Sent. You\'ll hear back within one Sydney business day.'})
+    .catch(function(){s.textContent='That didn\'t send. Email hello@fivesquare.co directly.'});
+});
+</script>
+</body>
+</html>
