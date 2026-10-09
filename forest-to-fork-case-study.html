@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forest to Fork case study | Fivesquare</title>
+<meta name="description" content="How Fivesquare built a content and website system for Forest to Fork, a NSW hunting guide, from a studio in Bengaluru. 4.7 times more people found the website in the same seven months, year on year.">
+<meta property="og:title" content="Forest to Fork case study | Fivesquare">
+<meta property="og:description" content="A hunting guide in the NSW bush, a studio in Bengaluru, and 4.7 times more people finding him.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bush: #1E2A21;
+    --bush-2: #25332A;
+    --bone: #ECE8DC;
+    --lichen: #A3B19C;
+    --blaze: #FF6A13;
+    --rule: rgba(236, 232, 220, 0.18);
+    --measure: 40rem;
+    --wide: 60rem;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bush);
+    color: var(--bone);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    font-optical-sizing: auto;
+  }
+  a { color: var(--bone); text-decoration-color: var(--blaze); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:focus-visible, iframe:focus-visible { outline: 3px solid var(--blaze); outline-offset: 3px; }
+  .wrap { width: 100%; max-width: var(--wide); margin: 0 auto; padding: 0 1.25rem; }
+  .text { max-width: var(--measure); }
+
+  header.site { display: flex; justify-content: space-between; align-items: baseline; padding: 1.5rem 0; border-bottom: 1px solid var(--rule); font-family: Archivo, sans-serif; font-size: 0.95rem; }
+  header.site a { text-decoration: none; font-weight: 700; font-stretch: 112%; letter-spacing: 0.01em; }
+  header.site span { color: var(--lichen); }
+
+  .hero { padding: 4.5rem 0 0; }
+  .hero h1 {
+    font-family: Archivo, sans-serif;
+    font-weight: 850;
+    font-stretch: 68%;
+    font-size: clamp(2.75rem, 8.5vw, 6.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.75rem;
+    max-width: 14ch;
+  }
+  .hero .standfirst { font-size: 1.3rem; line-height: 1.55; max-width: 36rem; margin: 0; }
+  .contour { display: block; width: 100%; height: clamp(160px, 26vw, 320px); margin-top: 2.5rem; }
+  .contour-note { font-family: Archivo, sans-serif; font-size: 0.85rem; color: var(--lichen); margin: 0.5rem 0 0; }
+
+  dl.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 3rem 0 0; padding: 1.5rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  dl.facts dt { font-family: Archivo, sans-serif; font-size: 0.85rem; color: var(--lichen); margin-bottom: 0.25rem; }
+  dl.facts dd { margin: 0; font-size: 1rem; line-height: 1.45; }
+
+  section { padding: 4.5rem 0 0; }
+  h2 { font-family: Archivo, sans-serif; font-weight: 800; font-stretch: 75%; font-size: clamp(1.9rem, 4.5vw, 2.75rem); line-height: 1.05; margin: 0 0 1.25rem; }
+  h3 { font-family: Archivo, sans-serif; font-weight: 700; font-stretch: 100%; font-size: 1.2rem; line-height: 1.3; margin: 2.25rem 0 0.5rem; }
+  p { margin: 0 0 1.1rem; }
+
+  ol.figures { list-style: none; margin: 0; padding: 0; }
+  ol.figures li { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; align-items: baseline; padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+  ol.figures li:last-child { border-bottom: 1px solid var(--rule); }
+  ol.figures b { font-family: Archivo, sans-serif; font-weight: 850; font-stretch: 68%; font-size: 3rem; line-height: 1; color: var(--blaze); }
+  ol.figures span { max-width: 32rem; }
+
+  ol.steps { margin: 0; padding-left: 1.4rem; max-width: var(--measure); }
+  ol.steps li { padding-left: 0.4rem; margin-bottom: 0.9rem; }
+  ol.steps li::marker { font-family: Archivo, sans-serif; font-weight: 800; color: var(--blaze); }
+
+  figure { margin: 2rem 0 0; }
+  figure svg { display: block; width: 100%; height: auto; }
+  figcaption { font-family: Archivo, sans-serif; font-size: 0.85rem; color: var(--lichen); margin-top: 0.75rem; max-width: var(--measure); }
+  svg text { font-family: Archivo, sans-serif; }
+  .grid { stroke: var(--rule); stroke-width: 1; }
+  .axis { stroke: var(--lichen); stroke-width: 1; }
+  .tick { fill: var(--lichen); font-size: 13px; }
+  .val { fill: var(--bone); font-size: 14px; font-weight: 700; }
+  .plabel { fill: var(--bone); font-size: 16px; font-weight: 700; }
+  .line { fill: none; stroke: var(--blaze); stroke-width: 2.5; }
+  .dot { fill: var(--blaze); }
+  .mile { stroke: var(--bone); stroke-opacity: 0.35; stroke-dasharray: 3 4; }
+  .mtext { fill: var(--bone); font-size: 13px; }
+  .bar-new { fill: var(--blaze); }
+  .bar-ret { fill: var(--lichen); }
+  .blabel { fill: var(--bone); font-size: 13px; font-weight: 700; }
+
+  .table-scroll { overflow-x: auto; margin-top: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.45; min-width: 36rem; }
+  th { font-family: Archivo, sans-serif; font-weight: 700; font-size: 0.9rem; text-align: left; color: var(--lichen); padding: 0 1rem 0.6rem 0; border-bottom: 1px solid var(--lichen); }
+  td { vertical-align: top; padding: 0.85rem 1rem 0.85rem 0; border-bottom: 1px solid var(--rule); }
+  td:first-child { font-family: Archivo, sans-serif; white-space: nowrap; color: var(--lichen); font-size: 0.95rem; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .videos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.75rem; }
+  .video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: var(--bush-2); }
+  .video p { font-family: Archivo, sans-serif; font-size: 0.95rem; margin: 0.6rem 0 0; }
+  .video p span { display: block; color: var(--lichen); font-size: 0.85rem; }
+
+  blockquote { margin: 0; padding: 0 0 0 1.5rem; border-left: 4px solid var(--blaze); max-width: var(--measure); }
+  blockquote p { font-size: 1.6rem; line-height: 1.35; margin: 0 0 0.75rem; }
+  blockquote footer { font-family: Archivo, sans-serif; color: var(--lichen); font-size: 0.95rem; }
+
+  .contact { margin-top: 5rem; padding: 3rem 0 4rem; border-top: 1px solid var(--rule); }
+  .contact h2 { max-width: 18ch; }
+  .contact a.mail { font-family: Archivo, sans-serif; font-weight: 800; font-stretch: 75%; font-size: clamp(1.6rem, 5vw, 2.5rem); color: var(--blaze); text-decoration: none; border-bottom: 3px solid var(--blaze); }
+  .data-note { font-family: Archivo, sans-serif; font-size: 0.85rem; color: var(--lichen); max-width: var(--measure); margin-top: 3rem; }
+
+  @media (max-width: 760px) {
+    body { font-size: 1.0625rem; }
+    dl.facts { grid-template-columns: 1fr 1fr; }
+    ol.figures li { grid-template-columns: 1fr; gap: 0.35rem; }
+    ol.figures b { font-size: 2.6rem; }
+    .videos { grid-template-columns: 1fr; }
+    blockquote p { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a href="https://fivesquare.co">Fivesquare</a>
+    <span>Case study: Forest to Fork</span>
+  </header>
+
+  <div class="hero">
+    <h1>A hunting guide in the NSW bush, a studio in Bengaluru, and 4.7 times more people finding him</h1>
+    <p class="standfirst">Luke Risk runs Forest to Fork, guiding people through their first public land hunts in New South Wales. He works in the bush, often out of reception, with no time to film, edit or run a website. Since December 2024 Fivesquare has done that part for him.</p>
+    <svg class="contour" viewBox="0 0 1200 420" preserveAspectRatio="none" role="img" aria-label="Forest to Fork website new visitors per month, January 2025 to September 2026, rising from 54 to a peak of 413"><path d="M0.0,361.4 L60.0,360.7 L120.0,354.3 L180.0,367.1 L240.0,342.9 L300.0,336.4 L360.0,327.9 L420.0,270.0 L480.0,279.3 L540.0,257.1 L600.0,259.3 L660.0,190.0 L720.0,152.9 L780.0,260.7 L840.0,251.4 L900.0,131.4 L960.0,105.0 L1020.0,111.4 L1080.0,144.3 L1140.0,140.7 L1200.0,187.1" fill="none" stroke="var(--blaze)" stroke-width="3" stroke-opacity="1" vector-effect="non-scaling-stroke"/><path d="M0.0,359.7 L60.0,359.0 L120.0,353.3 L180.0,364.8 L240.0,343.1 L300.0,337.4 L360.0,329.8 L420.0,278.3 L480.0,286.6 L540.0,266.9 L600.0,268.8 L660.0,207.1 L720.0,174.0 L780.0,270.0 L840.0,261.8 L900.0,155.0 L960.0,131.4 L1020.0,137.2 L1080.0,166.4 L1140.0,163.2 L1200.0,204.6" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,357.9 L60.0,357.4 L120.0,352.3 L180.0,362.4 L240.0,343.4 L300.0,338.4 L360.0,331.7 L420.0,286.6 L480.0,293.8 L540.0,276.6 L600.0,278.2 L660.0,224.2 L720.0,195.2 L780.0,279.4 L840.0,272.1 L900.0,178.5 L960.0,157.9 L1020.0,162.9 L1080.0,188.5 L1140.0,185.8 L1200.0,222.0" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,356.2 L60.0,355.7 L120.0,351.4 L180.0,360.0 L240.0,343.7 L300.0,339.4 L360.0,333.7 L420.0,294.9 L480.0,301.1 L540.0,286.3 L600.0,287.7 L660.0,241.3 L720.0,216.4 L780.0,288.7 L840.0,282.5 L900.0,202.1 L960.0,184.4 L1020.0,188.7 L1080.0,210.7 L1140.0,208.3 L1200.0,239.4" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,354.4 L60.0,354.0 L120.0,350.4 L180.0,357.6 L240.0,344.0 L300.0,340.4 L360.0,335.6 L420.0,303.2 L480.0,308.4 L540.0,296.0 L600.0,297.2 L660.0,258.4 L720.0,237.6 L780.0,298.0 L840.0,292.8 L900.0,225.6 L960.0,210.8 L1020.0,214.4 L1080.0,232.8 L1140.0,230.8 L1200.0,256.8" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,352.6 L60.0,352.3 L120.0,349.4 L180.0,355.2 L240.0,344.3 L300.0,341.4 L360.0,337.5 L420.0,311.5 L480.0,315.7 L540.0,305.7 L600.0,306.7 L660.0,275.5 L720.0,258.8 L780.0,307.3 L840.0,303.1 L900.0,249.1 L960.0,237.2 L1020.0,240.1 L1080.0,254.9 L1140.0,253.3 L1200.0,274.2" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,350.9 L60.0,350.6 L120.0,348.5 L180.0,352.8 L240.0,344.6 L300.0,342.4 L360.0,339.5 L420.0,319.8 L480.0,323.0 L540.0,315.4 L600.0,316.2 L660.0,292.6 L720.0,280.0 L780.0,316.6 L840.0,313.5 L900.0,272.7 L960.0,263.7 L1020.0,265.9 L1080.0,277.1 L1140.0,275.8 L1200.0,291.6" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,349.1 L60.0,349.0 L120.0,347.5 L180.0,350.4 L240.0,344.9 L300.0,343.4 L360.0,341.4 L420.0,328.1 L480.0,330.2 L540.0,325.1 L600.0,325.6 L660.0,309.7 L720.0,301.2 L780.0,326.0 L840.0,323.8 L900.0,296.2 L960.0,290.1 L1020.0,291.6 L1080.0,299.2 L1140.0,298.4 L1200.0,309.0" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/><path d="M0.0,347.4 L60.0,347.3 L120.0,346.5 L180.0,348.1 L240.0,345.1 L300.0,344.4 L360.0,343.3 L420.0,336.4 L480.0,337.5 L540.0,334.9 L600.0,335.1 L660.0,326.8 L720.0,322.3 L780.0,335.3 L840.0,334.2 L900.0,319.8 L960.0,316.6 L1020.0,317.4 L1080.0,321.3 L1140.0,320.9 L1200.0,326.5" fill="none" stroke="var(--bone)" stroke-width="1" stroke-opacity="0.28" vector-effect="non-scaling-stroke"/></svg>
+    <p class="contour-note">Website new visitors a month, January 2025 to September 2026: from 54 to a peak of 413.</p>
+
+    <dl class="facts">
+      <div><dt>Client</dt><dd>Forest to Fork, guided public land hunting</dd></div>
+      <div><dt>Where</dt><dd>NSW, Australia. Directed and produced remotely</dd></div>
+      <div><dt>What we did</dt><dd>Remote direction, editing, colour, brand, YouTube, socials, website and SEO</dd></div>
+      <div><dt>Period</dt><dd>December 2024 to now, on a monthly retainer</dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <h2>The short version</h2>
+    <ol class="figures">
+      <li><b>4.7x</b><span>more new visitors to foresttofork.com.au from 1 January to 1 August 2026 than in the same months of 2025 (2,315 against 493).</span></li>
+      <li><b>3 to 12</b><span>new visitors on a typical day, from mid 2025 to the April to June 2026 season.</span></li>
+      <li><b>5.7x</b><span>more returning visitors: 0.4 a day before we took over the channel, 2.2 a day now.</span></li>
+      <li><b>801</b><span>hours of YouTube watch time and 29,827 views, on a channel that had two videos and about a hundred engaged views in its first six months.</span></li>
+      <li><b>1 day</b><span>for the latest diary episode to reach 1,000 engaged views. An episode in May took 72 days to get there.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>Where it started</h2>
+      <p>The first job was a single edit: 48 minutes of footage from a sambar hunt, cut down to a 27-minute film. Luke had shot it for himself, not for a camera crew, and said so. The channel had two short videos on it.</p>
+      <p>The footage was honest and the hunting was good. What was missing was a way to turn a working guide's weekends into a steady stream of content without asking him to become a filmmaker.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>How the work runs</h2>
+      <p>Luke is in the NSW bush and we are a long way from it. The system below is how a hunt becomes a published episode without anyone getting on a plane.</p>
+    </div>
+    <ol class="steps">
+      <li>Before a hunt, Luke gets a shot list with reference frames: the walk in, glassing, camp, the stalk, the carry out. He films on his phone, a GoPro and a drone.</li>
+      <li>After the hunt, he uploads the footage and sends a voice-note recap of what happened, morning by morning. That recap becomes the spine of the edit.</li>
+      <li>We cut, grade and subtitle the episode, and Luke checks every cut for ethics. Anything that shows a poor shot or invites the wrong reading comes out.</li>
+      <li>Captions and descriptions are drafted in Luke's voice and he corrects them in his own words. Nothing goes out sounding like an agency.</li>
+      <li>Episodes publish on a fixed calendar, with thumbnails tested by YouTube against each other. When Luke is out of reception, the calendar still holds.</li>
+    </ol>
+    <div class="text">
+      <p>Alongside the videos we rebuilt the brand basics: one handle across every platform, a cleaned-up logo and tagline (A Timeless Pursuit), his licensed-guide credentials on the site, and a brand film for the homepage. Clients became guests in every piece of copy.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>What changed</h2>
+      <p>The website stepped up after we took over the channel in August 2025 and again once the brand film went on the homepage. YouTube only took off once the diary series gave it a steady release calendar in March 2026. From August 2025 to February 2026 the channel published 7 videos, two of them long-form. From March to early October 2026 it published 15, eleven of them long-form.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 960 600" role="img" aria-label="Monthly website new visitors and YouTube engaged views, January 2025 to September 2026"><line x1="361.0" x2="361.0" y1="44" y2="560" class="mile"/><text x="367.0" y="56" class="mtext">Channel and socials taken over</text><line x1="447.0" x2="447.0" y1="62" y2="560" class="mile"/><text x="453.0" y="74" class="mtext">Brand film on the homepage</text><line x1="662.0" x2="662.0" y1="44" y2="560" class="mile"/><text x="668.0" y="56" class="mtext">Diary series begins</text><line x1="60" x2="920" y1="290.0" y2="290.0" class="grid"/><text x="50" y="294.0" class="tick" text-anchor="end">0</text><line x1="60" x2="920" y1="205.0" y2="205.0" class="grid"/><text x="50" y="209.0" class="tick" text-anchor="end">250</text><line x1="60" x2="920" y1="120.0" y2="120.0" class="grid"/><text x="50" y="124.0" class="tick" text-anchor="end">500</text><path d="M60.0,271.6 L103.0,271.3 L146.0,268.2 L189.0,274.4 L232.0,262.8 L275.0,259.7 L318.0,255.7 L361.0,228.1 L404.0,232.5 L447.0,222.0 L490.0,223.0 L533.0,190.0 L576.0,172.4 L619.0,223.7 L662.0,219.3 L705.0,162.2 L748.0,149.6 L791.0,152.6 L834.0,168.3 L877.0,166.6 L920.0,188.7" class="line"/><circle cx="60.0" cy="271.6" r="3" class="dot"><title>Jan 25: 54 new visitors</title></circle><circle cx="103.0" cy="271.3" r="3" class="dot"><title>Feb 25: 55 new visitors</title></circle><circle cx="146.0" cy="268.2" r="3" class="dot"><title>Mar 25: 64 new visitors</title></circle><circle cx="189.0" cy="274.4" r="3" class="dot"><title>Apr 25: 46 new visitors</title></circle><circle cx="232.0" cy="262.8" r="3" class="dot"><title>May 25: 80 new visitors</title></circle><circle cx="275.0" cy="259.7" r="3" class="dot"><title>Jun 25: 89 new visitors</title></circle><circle cx="318.0" cy="255.7" r="3" class="dot"><title>Jul 25: 101 new visitors</title></circle><circle cx="361.0" cy="228.1" r="3" class="dot"><title>Aug 25: 182 new visitors</title></circle><circle cx="404.0" cy="232.5" r="3" class="dot"><title>Sep 25: 169 new visitors</title></circle><circle cx="447.0" cy="222.0" r="3" class="dot"><title>Oct 25: 200 new visitors</title></circle><circle cx="490.0" cy="223.0" r="3" class="dot"><title>Nov 25: 197 new visitors</title></circle><circle cx="533.0" cy="190.0" r="3" class="dot"><title>Dec 25: 294 new visitors</title></circle><circle cx="576.0" cy="172.4" r="3" class="dot"><title>Jan 26: 346 new visitors</title></circle><circle cx="619.0" cy="223.7" r="3" class="dot"><title>Feb 26: 195 new visitors</title></circle><circle cx="662.0" cy="219.3" r="3" class="dot"><title>Mar 26: 208 new visitors</title></circle><circle cx="705.0" cy="162.2" r="3" class="dot"><title>Apr 26: 376 new visitors</title></circle><circle cx="748.0" cy="149.6" r="3" class="dot"><title>May 26: 413 new visitors</title></circle><circle cx="791.0" cy="152.6" r="3" class="dot"><title>Jun 26: 404 new visitors</title></circle><circle cx="834.0" cy="168.3" r="3" class="dot"><title>Jul 26: 358 new visitors</title></circle><circle cx="877.0" cy="166.6" r="3" class="dot"><title>Aug 26: 363 new visitors</title></circle><circle cx="920.0" cy="188.7" r="3" class="dot"><title>Sep 26: 298 new visitors</title></circle><text x="748.0" y="139.6" class="val" text-anchor="middle">413</text><text x="920.0" y="178.7" class="val" text-anchor="middle">298</text><text x="60.0" y="261.6" class="val" text-anchor="middle">54</text><text x="60" y="106" class="plabel">Website new visitors a month</text><line x1="60" x2="920" y1="540.0" y2="540.0" class="grid"/><text x="50" y="544.0" class="tick" text-anchor="end">0</text><line x1="60" x2="920" y1="460.3" y2="460.3" class="grid"/><text x="50" y="464.3" class="tick" text-anchor="end">1,500</text><line x1="60" x2="920" y1="380.6" y2="380.6" class="grid"/><text x="50" y="384.6" class="tick" text-anchor="end">3,000</text><path d="M60.0,505.2 L103.0,503.3 L146.0,499.8 L189.0,522.0 L232.0,526.2 L275.0,523.6 L318.0,523.9 L361.0,531.3 L404.0,533.1 L447.0,523.1 L490.0,523.3 L533.0,517.3 L576.0,493.2 L619.0,518.6 L662.0,500.3 L705.0,456.3 L748.0,439.5 L791.0,384.4 L834.0,464.1 L877.0,484.0 L920.0,428.8" class="line"/><circle cx="60.0" cy="505.2" r="3" class="dot"><title>Jan 25: 655 engaged views</title></circle><circle cx="103.0" cy="503.3" r="3" class="dot"><title>Feb 25: 691 engaged views</title></circle><circle cx="146.0" cy="499.8" r="3" class="dot"><title>Mar 25: 756 engaged views</title></circle><circle cx="189.0" cy="522.0" r="3" class="dot"><title>Apr 25: 339 engaged views</title></circle><circle cx="232.0" cy="526.2" r="3" class="dot"><title>May 25: 260 engaged views</title></circle><circle cx="275.0" cy="523.6" r="3" class="dot"><title>Jun 25: 308 engaged views</title></circle><circle cx="318.0" cy="523.9" r="3" class="dot"><title>Jul 25: 304 engaged views</title></circle><circle cx="361.0" cy="531.3" r="3" class="dot"><title>Aug 25: 163 engaged views</title></circle><circle cx="404.0" cy="533.1" r="3" class="dot"><title>Sep 25: 130 engaged views</title></circle><circle cx="447.0" cy="523.1" r="3" class="dot"><title>Oct 25: 318 engaged views</title></circle><circle cx="490.0" cy="523.3" r="3" class="dot"><title>Nov 25: 314 engaged views</title></circle><circle cx="533.0" cy="517.3" r="3" class="dot"><title>Dec 25: 428 engaged views</title></circle><circle cx="576.0" cy="493.2" r="3" class="dot"><title>Jan 26: 880 engaged views</title></circle><circle cx="619.0" cy="518.6" r="3" class="dot"><title>Feb 26: 403 engaged views</title></circle><circle cx="662.0" cy="500.3" r="3" class="dot"><title>Mar 26: 748 engaged views</title></circle><circle cx="705.0" cy="456.3" r="3" class="dot"><title>Apr 26: 1,576 engaged views</title></circle><circle cx="748.0" cy="439.5" r="3" class="dot"><title>May 26: 1,891 engaged views</title></circle><circle cx="791.0" cy="384.4" r="3" class="dot"><title>Jun 26: 2,928 engaged views</title></circle><circle cx="834.0" cy="464.1" r="3" class="dot"><title>Jul 26: 1,429 engaged views</title></circle><circle cx="877.0" cy="484.0" r="3" class="dot"><title>Aug 26: 1,055 engaged views</title></circle><circle cx="920.0" cy="428.8" r="3" class="dot"><title>Sep 26: 2,094 engaged views</title></circle><text x="791.0" y="374.4" class="val" text-anchor="middle">2,928</text><text x="920.0" y="418.8" class="val" text-anchor="middle">2,094</text><text x="60.0" y="495.2" class="val" text-anchor="middle">655</text><text x="60" y="356" class="plabel">YouTube engaged views a month</text><text x="60.0" y="586" class="tick" text-anchor="middle">Jan 25</text><text x="189.0" y="586" class="tick" text-anchor="middle">Apr 25</text><text x="318.0" y="586" class="tick" text-anchor="middle">Jul 25</text><text x="447.0" y="586" class="tick" text-anchor="middle">Oct 25</text><text x="576.0" y="586" class="tick" text-anchor="middle">Jan 26</text><text x="705.0" y="586" class="tick" text-anchor="middle">Apr 26</text><text x="834.0" y="586" class="tick" text-anchor="middle">Jul 26</text><text x="920.0" y="586" class="tick" text-anchor="middle">Sep 26</text></svg>
+      <figcaption>Google Analytics 4 new users for foresttofork.com.au and YouTube Studio engaged views, January 2025 to September 2026. October 2026 is already the channel's best month and is left off because it is partial.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>What moved the website</h2>
+      <p>Not everything we did brought more people. Some of it changed what visitors did once they arrived. Each result below compares the four weeks before with the four weeks after.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>When</th><th>What we did</th><th>What happened</th></tr></thead>
+        <tbody>
+          <tr><td>Aug 2025</td><td>Took over the YouTube channel and socials, with new thumbnails and regular posting</td><td>A typical day went from 3 to 6 new visitors and stayed there</td></tr>
+          <tr><td>Sep 2025</td><td>Logo, credentials badge, one handle everywhere</td><td>Same traffic, but visitors stayed longer: 75 to 86 seconds each</td></tr>
+          <tr><td>Oct 2025</td><td>Brand film live on the homepage and as the channel trailer</td><td>Page views doubled for a month and returning visitors doubled</td></tr>
+          <tr><td>Oct 2025</td><td>WhatsApp chat button that tells Luke which page a visitor came from</td><td>41 people have started a chat this way, a route that did not exist before</td></tr>
+          <tr><td>Oct 2025</td><td>Keyword and competitor research, page and image optimisation</td><td>Slow by design. Google search now brings 57% of new visitors, and they engage at 70%</td></tr>
+          <tr><td>Apr 2026</td><td>Gear and education videos alongside the hunt diaries</td><td>The rifle review is the channel's widest-reaching video and still pulls hundreds of views a month six months on</td></tr>
+          <tr><td>Jun 2026</td><td>Link-in-bio page for Instagram, and a check of every form submission</td><td>Found the contact form had stopped reaching Luke's inbox. Fixed, and the missed enquiries recovered</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>A typical day on the site</h2>
+      <p>The cleanest sign that this is building something is the returning visitor line. It went up at every stage, including the quiet ones.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 960 360" role="img" aria-label="A typical day on the Forest to Fork website went from 3 to 12 new visitors, and returning visitors rose at every stage from 0.4 to 2.2 a day"><rect x="77.0" y="249.2" width="36" height="50.8" class="bar-new"><title>Before, Jul 2025: 3 new visitors on a typical day</title></rect><text x="95.0" y="241.2" class="val" text-anchor="middle">3</text><rect x="117.0" y="293.2" width="36" height="6.8" class="bar-ret"><title>Before, Jul 2025: 0.4 returning visitors a day</title></rect><text x="135.0" y="285.2" class="val" text-anchor="middle">0.4</text><text x="115.0" y="324" class="blabel" text-anchor="middle">Before</text><text x="115.0" y="342" class="tick" text-anchor="middle">Jul 2025</text><rect x="227.0" y="198.5" width="36" height="101.5" class="bar-new"><title>Takeover, Aug to Oct 2025: 6 new visitors on a typical day</title></rect><text x="245.0" y="190.5" class="val" text-anchor="middle">6</text><rect x="267.0" y="283.1" width="36" height="16.9" class="bar-ret"><title>Takeover, Aug to Oct 2025: 1.0 returning visitors a day</title></rect><text x="285.0" y="275.1" class="val" text-anchor="middle">1.0</text><text x="265.0" y="324" class="blabel" text-anchor="middle">Takeover</text><text x="265.0" y="342" class="tick" text-anchor="middle">Aug to Oct 2025</text><rect x="377.0" y="181.5" width="36" height="118.5" class="bar-new"><title>Brand film, Oct to Dec 2025: 7 new visitors on a typical day</title></rect><text x="395.0" y="173.5" class="val" text-anchor="middle">7</text><rect x="417.0" y="279.7" width="36" height="20.3" class="bar-ret"><title>Brand film, Oct to Dec 2025: 1.2 returning visitors a day</title></rect><text x="435.0" y="271.7" class="val" text-anchor="middle">1.2</text><text x="415.0" y="324" class="blabel" text-anchor="middle">Brand film</text><text x="415.0" y="342" class="tick" text-anchor="middle">Oct to Dec 2025</text><rect x="527.0" y="181.5" width="36" height="118.5" class="bar-new"><title>Challenge, blog, Jan to Mar 2026: 7 new visitors on a typical day</title></rect><text x="545.0" y="173.5" class="val" text-anchor="middle">7</text><rect x="567.0" y="272.9" width="36" height="27.1" class="bar-ret"><title>Challenge, blog, Jan to Mar 2026: 1.6 returning visitors a day</title></rect><text x="585.0" y="264.9" class="val" text-anchor="middle">1.6</text><text x="565.0" y="324" class="blabel" text-anchor="middle">Challenge, blog</text><text x="565.0" y="342" class="tick" text-anchor="middle">Jan to Mar 2026</text><rect x="677.0" y="96.9" width="36" height="203.1" class="bar-new"><title>Series, gear, Apr to Jun 2026: 12 new visitors on a typical day</title></rect><text x="695.0" y="88.9" class="val" text-anchor="middle">12</text><rect x="717.0" y="266.2" width="36" height="33.8" class="bar-ret"><title>Series, gear, Apr to Jun 2026: 2.0 returning visitors a day</title></rect><text x="735.0" y="258.2" class="val" text-anchor="middle">2.0</text><text x="715.0" y="324" class="blabel" text-anchor="middle">Series, gear</text><text x="715.0" y="342" class="tick" text-anchor="middle">Apr to Jun 2026</text><rect x="827.0" y="130.8" width="36" height="169.2" class="bar-new"><title>Steady calendar, Jul to Sep 2026: 10 new visitors on a typical day</title></rect><text x="845.0" y="122.8" class="val" text-anchor="middle">10</text><rect x="867.0" y="262.8" width="36" height="37.2" class="bar-ret"><title>Steady calendar, Jul to Sep 2026: 2.2 returning visitors a day</title></rect><text x="885.0" y="254.8" class="val" text-anchor="middle">2.2</text><text x="865.0" y="324" class="blabel" text-anchor="middle">Steady calendar</text><text x="865.0" y="342" class="tick" text-anchor="middle">Jul to Sep 2026</text><line x1="40" x2="940" y1="300" y2="300" class="axis"/><rect x="40" y="20" width="14" height="14" class="bar-new"/><text x="62" y="32" class="tick">New visitors on a typical day</text><rect x="300" y="20" width="14" height="14" class="bar-ret"/><text x="322" y="32" class="tick">Returning visitors a day</text></svg>
+      <figcaption>New visitors on the median day and average returning visitors a day, by period. Google Analytics 4, July 2025 to September 2026.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>What we learned</h2>
+      <h3>Honest hunts outperform polished ones</h3>
+      <p>The best episodes lead with what went wrong. "2 Days, 1 Clean Miss, 1 Heart Shot" is the most watched diary episode. "Close Encounter", a bow hunt that ended without a harvest, is close behind. "I Broke My Own Rule", where Luke owns a shot he should not have taken, is the fastest video the channel has had. Hunters can tell when a video is sanding the edges off.</p>
+      <h3>Consistency builds a floor</h3>
+      <p>The median day on the channel went from 5 engaged views to 63. The back catalogue now earns between releases, so each new episode starts from a higher base.</p>
+      <h3>Every format has a job</h3>
+      <p>Hunt diaries hold the existing audience and earn the watch time. Gear and education videos bring in people searching for answers. Shorts buy reach, but they are 14 of the channel's 33 videos and only 5% of its watch time. The brand film converts viewers to subscribers better than anything else.</p>
+      <h3>Google books the hunts, YouTube earns the trust</h3>
+      <p>YouTube sends almost nobody straight to the website. People watch Luke guide, then search for him later. One guest found Forest to Fork through a diary episode, booked a bow hunt, and became an episode himself. That loop is the whole idea.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Watch the work</h2>
+    <div class="videos">
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/temqJ2R7SfU" title="Living the Hunter Lifestyle, Forest to Fork brand film" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Living the Hunter Lifestyle<span>Brand film, built from seven years of Luke's own footage</span></p>
+      </div>
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/9fdPgFxwfhE?start=533" title="I Broke My Own Rule, Diary of a Hunting Guide episode 9" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>I Broke My Own Rule<span>Diary of a Hunting Guide, episode 9</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="text">
+      <h2>What comes next</h2>
+      <p>More people now find Forest to Fork than ever, but visits have grown faster than bookings. Most people who start the enquiry form do not finish it, and committing to a multi-day hunt is a big first step. The next phase is conversion: an easier first step than "book a hunt", a rebuilt website, a wall of guests with their harvests and their own words, and more Google reviews.</p>
+    </div>
+  </section>
+
+  <!-- Quote pending Luke's written approval before publishing. -->
+  <section>
+    <blockquote>
+      <p>Mate, I trust you entirely.</p>
+      <footer>Luke Risk, Forest to Fork</footer>
+    </blockquote>
+  </section>
+
+  <div class="contact">
+    <h2>Got a business with a story nobody has filmed properly yet?</h2>
+    <p class="text">Fivesquare works with a small number of Australian and New Zealand businesses at a time, directing, editing and running content on Sydney time.</p>
+    <a class="mail" href="mailto:fasil@fivesquare.co">fasil@fivesquare.co</a>
+    <p class="data-note">Figures from Google Analytics 4 for foresttofork.com.au (January 2025 to October 2026) and YouTube Studio for the Forest to Fork channel (July 2024 to October 2026), exported 9 October 2026. Typical-day figures use medians, so one-off spikes and bot bursts do not distort them.</p>
+  </div>
+</div>
+</body>
+</html>
